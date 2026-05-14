@@ -3,596 +3,511 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>ORACLE // GOLDEN EYE</title>
+<title>ORACLE // PHASE 7</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-/* ══════════════════════════════════════════════════
-   ORACLE v5.0 — GOLDEN EYE
-   Vapor-Coffee HUD · Athletic Sync · Heartbeat Fixed
-══════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   ORACLE v7.0 — VAPOR-COFFEE HUD
+   Final Calibration · Nadya Update · Vitality Score
+═══════════════════════════════════════════════════ */
 :root {
-  --bg:        #1B1715;
-  --bg-r:      #221E1B;
-  --bg-c:      #261F1C;
-  --bg-m:      #181210;
-  --acc:       #F4C2C2;
-  --acc-dim:   #9E6E6E;
-  --acc-deep:  #4A2828;
-  --frm:       #C0A080;
-  --frm-dim:   #5C4A35;
-  --frm-deep:  #2E2218;
-  --txt:       #FFFFFF;
-  --txt-d:     #B8A090;
-  --txt-f:     #5C4A40;
-  --grn:       #88FFBB;
-  --grn-dim:   #1E4A32;
-  --red:       #FF6666;
-  --gld:       #FFD97A;
-  --wrn:       #E8A840;
-  --blu:       #99BBFF;
-  --tel:       #66DDCC;
-  --off:       #5A6655;
-  --prj:       #C8A8FF;
-  --prj-deep:  #2A1840;
-  --kbg:       #1E1A18;
-
+  --bg:       #1B1715;
+  --bg-r:     #221E1B;
+  --bg-c:     #261F1C;
+  --bg-m:     #181210;
+  --acc:      #F4C2C2;
+  --acc-dim:  #9E6E6E;
+  --acc-deep: #4A2828;
+  --frm:      #C0A080;
+  --frm-d:    #5C4A35;
+  --frm-dp:   #2E2218;
+  --txt:      #FFFFFF;
+  --txt-d:    #B8A090;
+  --txt-f:    #5C4A40;
+  --grn:      #88FFBB;
+  --grn-d:    #1E4A32;
+  --red:      #FF6666;
+  --gld:      #FFD97A;
+  --wrn:      #E8A840;
+  --wrn-d:    #4A3010;
+  --blu:      #99BBFF;
+  --tel:      #66DDCC;
+  --off:      #5A6655;
+  --prj:      #C8A8FF;
+  --prj-d:    #2A1840;
+  --kbg:      #1E1A18;
   --font: 'Inter', system-ui, sans-serif;
   --mono: 'Courier New', monospace;
-  --b1:   1.5px solid var(--frm-dim);
-  --ba:   1.5px solid var(--acc);
-  --bg2:  1.5px solid var(--gld);
-  --bf:   1.5px solid var(--frm);
-  --bp:   1.5px solid var(--prj);
-  --bt:   1.5px solid var(--tel);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  background-image:radial-gradient(ellipse at 50% 0%,#241C18 0%,#1B1715 60%);
+  color:var(--txt);font-family:var(--font);min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  padding:14px 10px calc(env(safe-area-inset-bottom,20px) + 35px);
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background:repeating-linear-gradient(0deg,transparent 0px,transparent 2px,rgba(0,0,0,.065) 2px,rgba(0,0,0,.065) 3px);
 }
 
-*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; }
-html,body { height:100%; }
-
-body {
-  background: var(--bg);
-  background-image: radial-gradient(ellipse at 50% 0%, #241C18 0%, #1B1715 60%);
-  color: var(--txt);
-  font-family: var(--font);
-  min-height: 100vh;
-  display: flex; flex-direction: column; align-items: center;
-  padding: 14px 10px calc(env(safe-area-inset-bottom, 20px) + 35px);
-  overflow-x: hidden;
+/* ── BUTTON TACTILE FEEDBACK ─────────────────────── */
+button{
+  cursor:pointer;
+  transition:opacity .15s,transform .1s,background-color .2s,border-color .2s,color .2s,box-shadow .2s;
+  font-family:var(--font);
 }
+button:active{transform:scale(.94);opacity:.82}
 
-/* Scanlines */
-body::before {
-  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
-  background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,0,0,0.065) 2px, rgba(0,0,0,0.065) 3px);
-}
+/* ── MODAL OVERLAY ───────────────────────────────── */
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:8000;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .2s ease}
+.ov.open{display:flex}
+.ov.vis{opacity:1}
+.mbox{background:var(--bg-m);border:1.5px solid var(--acc);width:100%;max-width:400px;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(10px);transition:transform .2s ease}
+.ov.vis .mbox{transform:translateY(0)}
+.mhdr{position:sticky;top:0;background:var(--bg-m);display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--frm-dp);z-index:1}
+.mtitle{font-size:.68rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:var(--acc)}
+.mbody{padding:16px}
+.btn-mc{background:none;border:1px solid var(--frm-dp);color:var(--txt-f);font-size:.9rem;width:28px;height:28px;display:flex;align-items:center;justify-content:center}
+.btn-mc:hover{border-color:var(--acc);color:var(--acc)}
+.tabs{display:flex;border-bottom:1px solid var(--frm-dp);margin-bottom:16px}
+.tab{flex:1;padding:8px 4px;font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;color:var(--txt-f);border:none;background:none;border-bottom:2px solid transparent;min-height:38px;transition:color .2s,border-color .2s}
+.tab.on{color:var(--acc);border-bottom-color:var(--acc)}
+.pane{display:none}
+.pane.on{display:block}
+.mf{margin-bottom:12px}
+.ml{display:block;font-size:.62rem;letter-spacing:2px;color:var(--txt-f);margin-bottom:5px;text-transform:uppercase}
+.ms,.mi{width:100%;background:var(--bg-r);border:1px solid var(--frm-d);border-left:3px solid var(--frm-d);color:var(--txt);font-family:var(--font);font-size:.9rem;font-weight:700;padding:9px 10px;outline:none;min-height:44px;transition:border-color .2s,border-left-color .2s}
+.ms:focus,.mi:focus{border-color:var(--acc);border-left-color:var(--acc)}
+.mi-lg{font-size:1.4rem}
+.mi-lg::placeholder{color:var(--txt-f);font-weight:400;font-size:1rem}
+.merr{font-size:.65rem;color:var(--red);font-weight:700;margin-top:6px;display:none;letter-spacing:1px}
+.msub{width:100%;background:var(--acc);color:var(--bg);border:none;font-family:var(--font);font-size:.72rem;letter-spacing:3px;font-weight:900;height:46px;text-transform:uppercase;margin-top:6px}
+.mdiv{border:none;border-top:1px dashed var(--frm-dp);margin:14px 0}
+.msect{font-size:.6rem;letter-spacing:3px;font-weight:700;color:var(--txt-f);text-transform:uppercase;margin-bottom:10px}
+.mgr{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.mgrl{font-size:.62rem;letter-spacing:1px;color:var(--txt-f);min-width:100px;text-transform:uppercase}
+.mgri{flex:1;background:transparent;border:none;border-bottom:1.5px solid var(--frm);color:var(--txt);font-family:var(--font);font-size:.9rem;font-weight:700;padding:6px 4px;outline:none;min-height:38px;border-radius:0;transition:border-bottom-color .2s}
+.mgri:focus{border-bottom-color:var(--acc)}
+.mgrb{background:none;border:1px solid var(--frm-d);color:var(--frm);font-family:var(--font);font-size:.6rem;letter-spacing:2px;font-weight:700;padding:0 10px;min-height:38px;text-transform:uppercase;transition:border-color .2s,color .2s}
+.mgrb:hover{border-color:var(--acc);color:var(--acc)}
 
-/* ── WRAP ─────────────────────────────────── */
-.wrap { width:100%; max-width:440px; display:flex; flex-direction:column; gap:6px; }
-.wrap > .card-a { margin-bottom:24px; }
+/* ── WRAP ────────────────────────────────────────── */
+.wrap{width:100%;max-width:440px;display:flex;flex-direction:column;gap:6px}
+.wrap>.card-a{margin-bottom:24px}
 
-/* ── MODAL OVERLAY ───────────────────────── */
-.modal-overlay {
-  display:none; position:fixed; inset:0;
-  background:rgba(0,0,0,0.78); z-index:8000;
-  align-items:center; justify-content:center; padding:16px;
-  opacity:0; transition:opacity .2s ease;
-}
-.modal-overlay.open { display:flex; }
-.modal-overlay.visible { opacity:1; }
+/* ── TYPOGRAPHY ──────────────────────────────────── */
+.t-h{font-weight:900;font-size:.65rem;letter-spacing:5px;text-transform:uppercase;color:var(--acc);text-shadow:0 0 10px rgba(244,194,194,.3)}
+.t-l{font-weight:400;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt-d)}
+.t-v{font-weight:700;font-size:1.2rem;color:var(--txt);line-height:1.1}
+.t-xl{font-weight:900;font-size:3.2rem;letter-spacing:3px;text-transform:uppercase;color:var(--acc);line-height:1;transition:color .3s}
+.t-xl.off{color:var(--off);letter-spacing:5px}
+.t-xl.vac{color:var(--tel);letter-spacing:4px}
+.t-cur{font-weight:700;font-size:1.4rem;color:var(--txt);line-height:1.1}
 
-.modal-box {
-  background:var(--bg-m); border:var(--ba);
-  width:100%; max-width:400px; max-height:88vh;
-  overflow-y:auto; -webkit-overflow-scrolling:touch;
-  transform:translateY(10px); transition:transform .2s ease;
-}
-.modal-overlay.visible .modal-box { transform:translateY(0); }
+/* ── CARDS ───────────────────────────────────────── */
+.card{border:1.5px solid var(--frm-d);background:var(--bg-c);position:relative}
+.card-a{border:1.5px solid var(--acc)}
+.card-g{border:1.5px solid var(--gld)}
+.card-p{border:1.5px solid var(--prj)}
+.card-t{border:1.5px solid var(--tel)}
+.ctab{position:absolute;top:0;left:14px;transform:translateY(-50%);background:var(--bg);padding:0 8px;font-weight:900;font-size:.58rem;letter-spacing:3px;text-transform:uppercase;white-space:nowrap;color:var(--frm-d)}
+.ctab.b{color:var(--frm)}.ctab.a{color:var(--acc)}.ctab.g{color:var(--gld)}.ctab.w{color:var(--wrn)}.ctab.p{color:var(--prj)}.ctab.t{color:var(--tel)}
+.hdiv{border-top:1px solid var(--frm-dp)}
+.hdsh{border-top:1px dashed var(--frm-dp)}
 
-.modal-hdr {
-  position:sticky; top:0; background:var(--bg-m);
-  display:flex; justify-content:space-between; align-items:center;
-  padding:12px 16px; border-bottom:1px solid var(--frm-deep); z-index:1;
-}
-.modal-title { font-size:.68rem; font-weight:900; letter-spacing:3px; text-transform:uppercase; color:var(--acc); }
-.modal-body  { padding:16px; }
-.btn-mc { background:none; border:1px solid var(--frm-deep); color:var(--txt-f); font-size:.9rem; width:28px; height:28px; min-height:28px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-.btn-mc:hover { border-color:var(--acc); color:var(--acc); }
+/* ── HEADER ──────────────────────────────────────── */
+.hdr{display:flex;align-items:stretch;border:1.5px solid var(--frm);background:var(--bg-c);margin-bottom:3px}
+.hbr{padding:10px 16px;border-right:1px solid var(--frm-d)}
+.hlogo{font-weight:900;font-size:1.5rem;letter-spacing:8px;color:var(--frm);line-height:1}
+.hsub{font-size:.6rem;letter-spacing:3px;color:var(--txt-d);margin-top:5px}
+.hmeta{flex:1;padding:8px 12px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.hmr{display:flex;justify-content:space-between;align-items:center}
+.hmk{font-size:.62rem;letter-spacing:2px;color:var(--txt-f)}
+.hmv{font-size:.72rem;letter-spacing:1px;font-weight:700;color:var(--frm)}
+.hlv{display:flex;flex-direction:column;align-items:center;justify-content:center;border-left:1px solid var(--frm-d);padding:8px 12px;gap:5px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 6px var(--acc),0 0 12px rgba(244,194,194,.3);animation:pb 1.6s step-end infinite}
+@keyframes pb{0%,100%{opacity:1}50%{opacity:.08}}
 
-.tab-row { display:flex; border-bottom:1px solid var(--frm-deep); margin-bottom:16px; }
-.tab-btn { flex:1; padding:8px 4px; font-size:.6rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-align:center; color:var(--txt-f); cursor:pointer; border:none; background:none; border-bottom:2px solid transparent; min-height:38px; transition:color .2s,border-color .2s; }
-.tab-btn.active { color:var(--acc); border-bottom-color:var(--acc); }
-.m-pane { display:none; }
-.m-pane.active { display:block; }
+/* ── L1 STATUS ───────────────────────────────────── */
+.duo{display:grid;grid-template-columns:1fr 1fr}
+.dc{padding:18px 16px 15px}
+.dc:first-child{border-right:1px solid var(--frm-dp)}
+.dwho{font-size:.6rem;letter-spacing:3px;font-weight:900;text-transform:uppercase;color:var(--txt-d);margin-bottom:8px}
+.ssub{font-size:.72rem;font-weight:400;letter-spacing:1px;color:var(--txt-d);margin-top:6px}
+.ssub .hi{color:var(--txt);font-weight:700}
+.nb{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:2px;padding:4px 10px;border:1.5px solid;margin-bottom:7px}
+.n-off{color:var(--off);border-color:var(--off)}
+.n-office{color:var(--blu);border-color:var(--blu);background:rgba(153,187,255,.06)}
+.n-home{color:var(--tel);border-color:var(--tel);background:rgba(102,221,204,.06)}
+.ndet{font-size:.7rem;color:var(--txt-d);line-height:1.7}
+.ndet .hi{color:var(--txt);font-weight:700}
+.ndet .road{color:var(--acc-dim);font-size:.65rem}
 
-/* ── TYPOGRAPHY ──────────────────────────── */
-.t-hdr { font-weight:900; font-size:.65rem; letter-spacing:5px; text-transform:uppercase; color:var(--acc); text-shadow:0 0 10px rgba(244,194,194,.3),0 0 24px rgba(244,194,194,.1); }
-.t-lbl { font-weight:400; font-size:.7rem;  letter-spacing:1.5px; text-transform:uppercase; color:var(--txt-d); }
-.t-val { font-weight:700; font-size:1.2rem; color:var(--txt); line-height:1.1; }
-.t-xl  { font-weight:900; font-size:3.2rem; letter-spacing:3px; text-transform:uppercase; color:var(--acc); line-height:1; transition:color .3s; }
-.t-xl.is-off { color:var(--off); letter-spacing:5px; }
-.t-cur { font-weight:700; font-size:1.4rem; color:var(--txt); line-height:1.1; }
+/* SHIFT ADJUST BUTTON */
+.adj-row{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.btn-adj{background:none;border:1px solid var(--frm-d);color:var(--txt-f);font-size:.58rem;font-weight:700;letter-spacing:2px;padding:0 10px;min-height:30px;text-transform:uppercase;display:flex;align-items:center;gap:4px}
+.btn-adj:hover{border-color:var(--acc);color:var(--acc)}
+.btn-adj.ov-active{border-color:var(--wrn);color:var(--wrn)}
 
-/* ── CARDS ───────────────────────────────── */
-.card   { border:var(--b1); background:var(--bg-c); position:relative; }
-.card-a { border:var(--ba); }
-.card-f { border:var(--bf); }
-.card-g { border:var(--bg2); }
-.card-p { border:var(--bp); }
-.card-t { border:var(--bt); }
+/* Shift override menu */
+.smenu{display:none;flex-wrap:wrap;gap:5px;padding:10px 16px 12px;background:var(--bg-r);border-top:1px dashed var(--frm-dp);border-bottom:1px dashed var(--frm-dp);animation:fi .15s ease}
+.smenu.open{display:flex}
+.btn-sopt{background:none;border:1px solid var(--frm-d);color:var(--txt-d);font-size:.65rem;font-weight:700;letter-spacing:2px;padding:0 14px;min-height:38px;text-transform:uppercase;touch-action:manipulation}
+.btn-sopt:hover,.btn-sopt.sel{border-color:var(--acc);color:var(--acc);background:rgba(244,194,194,.06)}
+.btn-sopt.sel-off{border-color:var(--off);color:var(--off);background:rgba(90,102,85,.06)}
+.btn-sopt.sel-vac{border-color:var(--tel);color:var(--tel);background:rgba(102,221,204,.06)}
+.ovr-banner{font-size:.6rem;letter-spacing:2px;font-weight:700;color:var(--wrn);display:none;padding:6px 16px 4px;text-transform:uppercase}
+.ovr-banner.vis{display:block}
 
-.c-tab {
-  position:absolute; top:0; left:14px; transform:translateY(-50%);
-  background:var(--bg); padding:0 8px;
-  font-weight:900; font-size:.58rem; letter-spacing:3px; text-transform:uppercase; white-space:nowrap;
-  color:var(--frm-dim);
-}
-.c-tab.bright { color:var(--frm); }
-.c-tab.acc    { color:var(--acc); }
-.c-tab.gld    { color:var(--gld); }
-.c-tab.wrn    { color:var(--wrn); }
-.c-tab.prj    { color:var(--prj); }
-.c-tab.tel    { color:var(--tel); }
+/* CLOCK */
+.crow{display:flex;align-items:center;justify-content:space-between;padding:10px 16px}
+.cmain{display:flex;align-items:flex-end;gap:2px}
+.chm{font-weight:900;font-size:2rem;color:var(--txt);letter-spacing:2px;line-height:1;text-shadow:0 0 10px var(--acc),0 0 20px rgba(244,194,194,.12)}
+.cs{font-size:1rem;color:var(--txt-d);margin-bottom:2px}
+.cmeta{text-align:right;display:flex;flex-direction:column;gap:2px}
+.cday{font-size:.62rem;letter-spacing:3px;color:var(--txt-f)}
+.cdate{font-size:.85rem;letter-spacing:1px;color:var(--frm);font-weight:700}
 
-.hdiv  { border-top:1px solid var(--frm-deep); }
-.hdash { border-top:1px dashed var(--frm-deep); }
+/* META STRIP */
+.mstrip{display:grid;grid-template-columns:repeat(4,1fr)}
+.mc{padding:10px 10px 9px;border-right:1px solid var(--frm-dp)}
+.mc:last-child{border-right:none}
 
-/* ── GLOBAL BUTTON FEEL ──────────────────── */
-button { transition:opacity .3s, transform .15s, background-color .3s, border-color .3s, color .3s; }
-button:active { transform:scale(.96); opacity:.8; }
+/* PROGRESS BAR */
+.pw{padding:11px 16px 14px}
+.ph{display:flex;justify-content:space-between;margin-bottom:7px}
+.pt{height:6px;background:var(--frm-dp);border:1px solid var(--frm-d);overflow:hidden;position:relative}
+.pf{height:100%;background:var(--frm);transition:width .8s cubic-bezier(.4,0,.2,1);position:relative}
+.pf::after{content:'';position:absolute;right:0;top:0;bottom:0;width:2px;background:var(--acc)}
 
-/* ══════════════════════════════════════════════
-   HEADER BAR
-══════════════════════════════════════════════ */
-.hdr { display:flex; align-items:stretch; border:var(--bf); background:var(--bg-c); margin-bottom:3px; }
-.hdr-brand { padding:10px 16px; border-right:1px solid var(--frm-dim); }
-.hdr-logo  { font-weight:900; font-size:1.5rem; letter-spacing:8px; color:var(--frm); line-height:1; }
-.hdr-sub   { font-size:.6rem; letter-spacing:3px; font-weight:400; color:var(--txt-d); margin-top:5px; }
-.hdr-meta  { flex:1; padding:8px 12px; display:flex; flex-direction:column; justify-content:center; gap:4px; }
-.hdr-row   { display:flex; justify-content:space-between; align-items:center; }
-.hdr-key   { font-size:.62rem; letter-spacing:2px; font-weight:400; color:var(--txt-f); }
-.hdr-val   { font-size:.72rem; letter-spacing:1px; font-weight:700; color:var(--frm); }
-.hdr-live  { display:flex; flex-direction:column; align-items:center; justify-content:center; border-left:1px solid var(--frm-dim); padding:8px 12px; gap:5px; }
-.pulse     { width:7px; height:7px; border-radius:50%; background:var(--acc); box-shadow:0 0 6px var(--acc),0 0 12px rgba(244,194,194,.3); animation:pulse-b 1.6s step-end infinite; }
-@keyframes pulse-b { 0%,100%{opacity:1} 50%{opacity:.08} }
+/* BLOCK PILLS */
+.bpills{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:0 16px 16px}
+.bp{border:1px solid var(--frm-dp);padding:7px 4px;text-align:center;position:relative;overflow:hidden;transition:border-color .3s}
+.bp.on{border-color:var(--acc);background:rgba(244,194,194,.04)}
+.bp.on::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--acc)}
+.bp.dn{opacity:.4}
+.bpn{font-size:.6rem;letter-spacing:2px;font-weight:700;color:var(--txt-f);margin-bottom:3px;display:block;text-transform:uppercase}
+.bp.on .bpn{color:var(--acc)}
+.bpt{font-size:.72rem;color:var(--txt-f)}
+.bp.on .bpt{color:var(--txt);font-weight:700}
 
-/* ══════════════════════════════════════════════
-   L1 — SYSTEM STATUS
-══════════════════════════════════════════════ */
-.duo-row { display:grid; grid-template-columns:1fr 1fr; }
-.duo-col { padding:18px 16px 15px; }
-.duo-col:first-child { border-right:1px solid var(--frm-deep); }
-.duo-who { font-size:.6rem; letter-spacing:3px; font-weight:900; text-transform:uppercase; color:var(--txt-d); margin-bottom:8px; }
-.shift-sub { font-size:.72rem; font-weight:400; letter-spacing:1px; color:var(--txt-d); margin-top:6px; }
-.shift-sub .hi { color:var(--txt); font-weight:700; }
-.n-badge  { display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:2px; padding:4px 10px; border:1.5px solid; margin-bottom:7px; }
-.n-off    { color:var(--off); border-color:var(--off); }
-.n-office { color:var(--blu); border-color:var(--blu); background:rgba(153,187,255,.06); }
-.n-remote { color:var(--tel); border-color:var(--tel); background:rgba(102,221,204,.06); }
-.n-det    { font-size:.7rem; font-weight:400; color:var(--txt-d); line-height:1.7; }
-.n-det .hi   { color:var(--txt); font-weight:700; }
-.n-det .road { color:var(--acc-dim); font-size:.65rem; }
+/* ── L2 PANEL ────────────────────────────────────── */
+.l2w{border:1.5px solid var(--frm-d);background:var(--bg-c);position:relative}
+.l2b{width:100%;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border:none;background:none;min-height:44px;touch-action:manipulation;border-bottom:1px solid var(--frm-dp)}
+.l2bl{font-size:.62rem;font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--txt-d)}
+.l2cv{font-size:.65rem;color:var(--txt-f);transition:transform .22s}
+.l2cv.open{transform:rotate(180deg)}
+.l2body{display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.l2body.open{display:block}
 
-/* Clock — heartbeat */
-.clock-row  { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; }
-.clock-main { display:flex; align-items:flex-end; gap:2px; }
-.clock-hm   { font-weight:900; font-size:2rem; color:var(--txt); letter-spacing:2px; line-height:1;
-               text-shadow:0 0 10px var(--acc),0 0 20px rgba(244,194,194,.15); }
-.clock-s    { font-size:1rem; font-weight:400; color:var(--txt-d); margin-bottom:2px; }
-.clock-meta { text-align:right; display:flex; flex-direction:column; gap:2px; }
-.clock-day  { font-size:.62rem; letter-spacing:3px; color:var(--txt-f); font-weight:400; }
-.clock-date { font-size:.85rem; letter-spacing:1px; color:var(--frm); font-weight:700; }
+/* ── GOLDEN EYE ──────────────────────────────────── */
+.eyebox{padding:16px;border-bottom:1px solid var(--frm-dp)}
+.eyehdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.eyepanel{border:1.5px solid var(--acc);padding:14px 16px;position:relative;overflow:hidden;background:rgba(244,194,194,.03)}
+.eyepanel.asyn::before{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(244,194,194,.07),transparent);animation:gs 2.5s ease-in-out infinite}
+@keyframes gs{0%{left:-60%}100%{left:120%}}
+.eyepanel.tpulse{border-color:var(--tel);animation:tb 1.8s ease-in-out infinite}
+@keyframes tb{0%,100%{box-shadow:0 0 0 0 rgba(102,221,204,0)}50%{box-shadow:0 0 0 5px rgba(102,221,204,.12)}}
+.eyest{font-weight:900;font-size:.65rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:6px;transition:color .3s}
+.eyest.on{color:var(--acc)}.eyest.off{color:var(--txt-f)}.eyest.ten{color:var(--tel)}
+.eyewin{font-weight:900;font-size:1.8rem;letter-spacing:2px;line-height:1;margin-bottom:6px;color:var(--acc);text-shadow:0 0 14px rgba(244,194,194,.4)}
+.eyewin.off{color:var(--txt-f);font-size:1rem;letter-spacing:1px;font-weight:700;text-shadow:none}
+.eyewin.ten{color:var(--tel);text-shadow:0 0 14px rgba(102,221,204,.4)}
+.eyedur{font-size:.72rem;color:var(--txt-d)}
+.eyedur .hi{font-weight:700;color:var(--gld)}
+.eyersn{font-size:.68rem;color:var(--txt-f);margin-top:8px;letter-spacing:1px}
 
-.meta-strip { display:grid; grid-template-columns:repeat(4,1fr); }
-.mc { padding:10px 10px 9px; border-right:1px solid var(--frm-deep); }
-.mc:last-child { border-right:none; }
+/* ── GASTRONOMY ──────────────────────────────────── */
+.gasbox{padding:16px;border-bottom:1px solid var(--frm-dp)}
+.gashdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.gaspnl{border:1.5px solid var(--acc);padding:14px 16px}
+.gaspri{font-size:.6rem;letter-spacing:3px;font-weight:700;color:var(--txt-f);margin-bottom:5px;text-transform:uppercase}
+.gasrec{font-weight:900;font-size:1.15rem;letter-spacing:2px;text-transform:uppercase;color:var(--acc);line-height:1.15;margin-bottom:6px}
+.gasrsn{font-size:.7rem;color:var(--txt-d);line-height:1.6}
 
-.prog-wrap { padding:11px 16px 14px; }
-.prog-hdr  { display:flex; justify-content:space-between; margin-bottom:7px; }
-.prog-track{ height:6px; background:var(--frm-deep); border:1px solid var(--frm-dim); overflow:hidden; }
-.prog-fill { height:100%; background:var(--frm); transition:width .8s cubic-bezier(.4,0,.2,1); }
-.prog-fill::after { content:''; position:absolute; right:0; top:0; bottom:0; width:2px; background:var(--acc); }
+/* ── KITCHEN ─────────────────────────────────────── */
+.kitbox{padding:16px;border-bottom:1px solid var(--frm-dp);background:var(--kbg);display:none}
+.kitbox.vis{display:block}
+.kithdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.rgrid{display:flex;flex-direction:column;gap:0}
+.rcard{border:1px dashed var(--frm-d);padding:12px 14px;margin-bottom:1px;position:relative;transition:border-color .2s}
+.rcard:hover{border-color:var(--acc);background:rgba(244,194,194,.03)}
+.rtag{position:absolute;top:8px;right:10px;font-size:.55rem;letter-spacing:2px;font-weight:700;text-transform:uppercase;padding:2px 6px;border:1px solid}
+.tp{color:var(--grn);border-color:var(--grn)}.tg{color:var(--gld);border-color:var(--gld)}.te{color:var(--tel);border-color:var(--tel)}
+.rname{font-weight:700;font-size:.95rem;letter-spacing:1px;color:var(--txt);margin-bottom:4px;text-transform:uppercase}
+.rmeta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.rdesc{font-size:.68rem;color:var(--txt-d)}
+.rsep{color:var(--frm-dp);font-size:.65rem}
+.rbadge{font-size:.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:1px 5px;background:rgba(244,194,194,.08);color:var(--acc-dim)}
 
-.bpills { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; padding:0 16px 16px; }
-.bp { border:1px solid var(--frm-deep); padding:7px 4px; text-align:center; position:relative; overflow:hidden; transition:border-color .3s; }
-.bp.active { border-color:var(--acc); background:rgba(244,194,194,.04); }
-.bp.active::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--acc); }
-.bp.done { opacity:.4; }
-.bp-n { font-size:.6rem; letter-spacing:2px; font-weight:700; color:var(--txt-f); margin-bottom:3px; display:block; text-transform:uppercase; }
-.bp.active .bp-n { color:var(--acc); }
-.bp-t { font-size:.72rem; color:var(--txt-f); }
-.bp.active .bp-t { color:var(--txt); font-weight:700; }
+/* Cheat toggle */
+.cheat-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0 0;margin-top:10px;border-top:1px dashed var(--frm-dp)}
+.cheat-lbl{font-size:.65rem;letter-spacing:2px;font-weight:700;color:var(--txt-d);text-transform:uppercase}
+.csw{position:relative;width:46px;height:24px;flex-shrink:0}
+.csw input{opacity:0;width:0;height:0}
+.csl{position:absolute;inset:0;cursor:pointer;background:var(--frm-dp);border:1.5px solid var(--frm-d);transition:background .3s,border-color .3s}
+.csl::before{content:'';position:absolute;width:16px;height:16px;left:3px;top:2px;background:var(--txt-f);transition:transform .3s,background .3s}
+.csw input:checked+.csl{background:var(--acc-deep);border-color:var(--acc)}
+.csw input:checked+.csl::before{transform:translateX(22px);background:var(--acc)}
+.cheat-msg{font-size:.65rem;letter-spacing:2px;font-weight:700;color:var(--acc);text-align:center;padding:8px 0 0;display:none;text-transform:uppercase;text-shadow:0 0 8px rgba(244,194,194,.3)}
+.cheat-msg.vis{display:block}
 
-/* ══════════════════════════════════════════════
-   L2 TOGGLE PANEL
-══════════════════════════════════════════════ */
-.l2-wrap { border:var(--b1); background:var(--bg-c); position:relative; }
-.l2-btn  { width:100%; display:flex; justify-content:space-between; align-items:center; padding:10px 14px; border:none; background:none; cursor:pointer; min-height:44px; touch-action:manipulation; border-bottom:1px solid var(--frm-deep); }
-.l2-lbl  { font-size:.62rem; font-weight:900; letter-spacing:4px; text-transform:uppercase; color:var(--txt-d); }
-.l2-chev { font-size:.65rem; color:var(--txt-f); transition:transform .22s; }
-.l2-chev.open { transform:rotate(180deg); }
-.l2-body { display:none; overflow-y:auto; -webkit-overflow-scrolling:touch; }
-.l2-body.open { display:block; }
+/* ── SPORT ENGINE ────────────────────────────────── */
+.spbox{padding:16px;border-bottom:1px solid var(--frm-dp)}
+.sphdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.talert{display:none;align-items:center;gap:8px;padding:9px 12px;margin-bottom:12px;border:1.5px solid var(--tel);background:rgba(102,221,204,.07)}
+.talert.vis{display:flex}
+.ttxt{font-size:.7rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:var(--tel)}
+.tsub{font-size:.6rem;letter-spacing:1px;color:var(--txt-f);margin-top:2px}
+.spduo{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--frm-dp);margin-bottom:12px}
+.spcol{padding:12px}
+.spcol:first-child{border-right:1px solid var(--frm-dp)}
+.spwho{font-size:.58rem;letter-spacing:3px;font-weight:900;text-transform:uppercase;color:var(--txt-f);margin-bottom:7px}
+.spbdg{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:1.5px;padding:3px 8px;border:1px solid;text-transform:uppercase;margin-bottom:6px}
+.sp-rst{color:var(--off);border-color:var(--off)}
+.sp-ten{color:var(--tel);border-color:var(--tel);background:rgba(102,221,204,.06)}
+.sp-pil{color:var(--prj);border-color:var(--prj);background:rgba(200,168,255,.07)}
+.spdet{font-size:.65rem;color:var(--txt-f);line-height:1.7}
+.spdet .hi{color:var(--txt-d);font-weight:700}
 
-/* ── GOLDEN EYE RADAR ───────────────────── */
-.eye-box { padding:16px 16px 15px; border-bottom:1px solid var(--frm-deep); }
-.eye-hdr { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+/* Fitness tracker */
+.ftrack{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg-r);border:1px dashed var(--frm-dp);margin-bottom:8px}
+.flbl{font-size:.6rem;letter-spacing:3px;color:var(--txt-f);text-transform:uppercase;margin-bottom:4px}
+.fcnt{font-size:1.5rem;font-weight:900;color:var(--txt);line-height:1}
+.fcnt .den{font-size:.85rem;color:var(--txt-f);font-weight:400}
+.fpips{display:flex;gap:6px;align-items:center}
+.pip{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--frm-d);background:transparent;transition:background .3s,border-color .3s,box-shadow .3s}
+.pip.on{background:var(--acc);border-color:var(--acc);box-shadow:0 0 6px rgba(244,194,194,.4)}
+.fr{display:flex;align-items:center;gap:8px}
+.btn-fit{border:1.5px solid var(--frm-d);background:none;color:var(--frm);font-size:1rem;font-weight:700;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+.btn-fit:hover{border-color:var(--acc);color:var(--acc)}
+.btn-fit.sm{font-size:.6rem;letter-spacing:1.5px;font-weight:700;padding:0 8px;min-width:auto}
+.btn-extra{width:100%;background:none;border:1.5px dashed var(--tel);color:var(--tel);font-size:.65rem;letter-spacing:3px;font-weight:700;padding:0;min-height:40px;text-transform:uppercase;margin-top:8px;transition:background .2s,border-style .2s,transform .1s}
+.btn-extra:hover{background:rgba(102,221,204,.06);border-style:solid}
+.swbar{display:flex;gap:4px;margin-top:8px}
+.wd{flex:1;height:4px;background:var(--frm-dp)}
+.wd.dn{background:var(--acc)}
+.wd.td{background:var(--frm-d)}
 
-.eye-panel {
-  border:var(--ba); padding:14px 16px; position:relative; overflow:hidden;
-  background:rgba(244,194,194,.03);
-}
-/* Sweep glow when active */
-.eye-panel.active-sync::before {
-  content:''; position:absolute; top:0; left:-60%; width:40%; height:100%;
-  background:linear-gradient(90deg,transparent,rgba(244,194,194,.07),transparent);
-  animation:eye-sweep 2.5s ease-in-out infinite;
-}
-@keyframes eye-sweep { 0%{left:-60%} 100%{left:120%} }
-
-/* Tennis pulse — teal border override */
-.eye-panel.tennis-pulse {
-  border-color:var(--tel);
-  animation:tennis-border 1.8s ease-in-out infinite;
-}
-@keyframes tennis-border {
-  0%,100%{ box-shadow:0 0 0 0 rgba(102,221,204,0); }
-  50%    { box-shadow:0 0 0 5px rgba(102,221,204,.12); }
-}
-
-.eye-status {
-  font-weight:900; font-size:.65rem; letter-spacing:4px;
-  text-transform:uppercase; margin-bottom:6px;
-  transition:color .3s;
-}
-.eye-status.sync-on  { color:var(--acc); }
-.eye-status.sync-off { color:var(--txt-f); }
-.eye-status.tennis   { color:var(--tel); }
-
-.eye-window {
-  font-weight:900; font-size:1.8rem; letter-spacing:2px; line-height:1;
-  margin-bottom:6px; color:var(--acc);
-  text-shadow:0 0 14px rgba(244,194,194,.45);
-}
-.eye-window.off { color:var(--txt-f); font-size:1rem; letter-spacing:1px; font-weight:700; text-shadow:none; }
-.eye-window.tennis-win { color:var(--tel); text-shadow:0 0 14px rgba(102,221,204,.45); }
-
-.eye-dur  { font-size:.72rem; color:var(--txt-d); }
-.eye-dur .hi { font-weight:700; color:var(--gld); }
-.eye-reason { font-size:.68rem; color:var(--txt-f); margin-top:8px; letter-spacing:1px; }
-
-/* ── GASTRONOMY ──────────────────────────── */
-.gas-box { padding:16px 16px 17px; border-bottom:1px solid var(--frm-deep); }
-.gas-hdr { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
-.gas-panel { border:var(--ba); padding:14px 16px; }
-.gas-pri { font-size:.6rem; letter-spacing:3px; font-weight:700; color:var(--txt-f); margin-bottom:5px; text-transform:uppercase; }
-.gas-rec { font-weight:900; font-size:1.15rem; letter-spacing:2px; text-transform:uppercase; color:var(--acc); line-height:1.15; margin-bottom:6px; }
-.gas-rsn { font-size:.7rem; font-weight:400; color:var(--txt-d); line-height:1.6; }
-
-/* ── KITCHEN MODULE ──────────────────────── */
-.kitchen-box { padding:16px 16px 18px; border-bottom:1px solid var(--frm-deep); background:var(--kbg); display:none; }
-.kitchen-box.visible { display:block; }
-.kitchen-hdr { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
-.recipe-grid { display:flex; flex-direction:column; gap:0; }
-.recipe-card { border:1px dashed var(--frm-dim); padding:12px 14px; margin-bottom:1px; position:relative; transition:border-color .2s; }
-.recipe-card:hover { border-color:var(--acc); background:rgba(244,194,194,.03); }
-.r-tag { position:absolute; top:8px; right:10px; font-size:.55rem; letter-spacing:2px; font-weight:700; text-transform:uppercase; padding:2px 6px; border:1px solid; }
-.tag-p { color:var(--grn); border-color:var(--grn); }
-.tag-g { color:var(--gld); border-color:var(--gld); }
-.tag-e { color:var(--tel); border-color:var(--tel); }
-.r-name { font-weight:700; font-size:.95rem; letter-spacing:1px; color:var(--txt); margin-bottom:4px; text-transform:uppercase; }
-.r-meta { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-.r-desc { font-size:.68rem; color:var(--txt-d); }
-.r-sep  { color:var(--frm-deep); font-size:.65rem; }
-.r-badge{ font-size:.58rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:1px 5px; background:rgba(244,194,194,.08); color:var(--acc-dim); }
-
-/* ── SPORT ENGINE ────────────────────────── */
-.sport-box { padding:16px 16px 18px; border-bottom:1px solid var(--frm-deep); }
-.sport-hdr { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
-
-.tennis-alert { display:none; align-items:center; gap:8px; padding:9px 12px; margin-bottom:12px; border:1.5px solid var(--tel); background:rgba(102,221,204,.07); }
-.tennis-alert.visible { display:flex; }
-.tennis-txt { font-size:.7rem; font-weight:900; letter-spacing:3px; text-transform:uppercase; color:var(--tel); }
-.tennis-sub { font-size:.6rem; letter-spacing:1px; color:var(--txt-f); margin-top:2px; }
-
-.sport-duo { display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--frm-deep); margin-bottom:12px; }
-.sport-col { padding:12px; }
-.sport-col:first-child { border-right:1px solid var(--frm-deep); }
-.sport-who { font-size:.58rem; letter-spacing:3px; font-weight:900; text-transform:uppercase; color:var(--txt-f); margin-bottom:7px; }
-.sp-badge  { display:inline-block; font-size:.65rem; font-weight:700; letter-spacing:1.5px; padding:3px 8px; border:1px solid; text-transform:uppercase; margin-bottom:6px; }
-.sp-rest   { color:var(--off); border-color:var(--off); }
-.sp-tennis { color:var(--tel); border-color:var(--tel); background:rgba(102,221,204,.06); }
-.sp-pilates{ color:var(--prj); border-color:var(--prj); background:rgba(200,168,255,.07); }
-.sp-det    { font-size:.65rem; color:var(--txt-f); line-height:1.7; }
-.sp-det .hi{ color:var(--txt-d); font-weight:700; }
-
-.fit-tracker { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:var(--bg-r); border:1px dashed var(--frm-deep); margin-bottom:10px; }
-.fit-lbl     { font-size:.6rem; letter-spacing:3px; font-weight:400; color:var(--txt-f); text-transform:uppercase; margin-bottom:4px; }
-.fit-count   { font-size:1.5rem; font-weight:900; color:var(--txt); line-height:1; }
-.fit-count .den { font-size:.85rem; color:var(--txt-f); font-weight:400; }
-.fit-pips    { display:flex; gap:6px; align-items:center; }
-.pip         { width:10px; height:10px; border-radius:50%; border:1.5px solid var(--frm-dim); background:transparent; transition:background .3s,border-color .3s,box-shadow .3s; }
-.pip.on      { background:var(--acc); border-color:var(--acc); box-shadow:0 0 6px rgba(244,194,194,.4); }
-.fit-r       { display:flex; align-items:center; gap:8px; }
-.btn-fit     { border:1.5px solid var(--frm-dim); background:none; color:var(--frm); font-family:var(--font); font-size:1rem; font-weight:700; min-width:44px; min-height:44px; cursor:pointer; touch-action:manipulation; display:flex; align-items:center; justify-content:center; }
-.btn-fit:hover { border-color:var(--acc); color:var(--acc); }
-.btn-fit.sm { font-size:.6rem; letter-spacing:1.5px; font-weight:700; padding:0 8px; min-width:auto; }
-
-.sport-week-bar { display:flex; gap:4px; }
-.wd { flex:1; height:4px; background:var(--frm-deep); }
-.wd.done   { background:var(--acc); }
-.wd.today  { background:var(--frm-dim); }
-
-/* ── VAULT ───────────────────────────────── */
-.vault-box { padding:16px 16px 18px; border-bottom:1px solid var(--frm-deep); }
-.vault-hdr { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
-.vault-hl  { display:flex; align-items:center; gap:10px; }
-.btn-add   { width:28px; height:28px; border:1.5px solid var(--frm-dim); background:none; color:var(--frm); font-size:1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; touch-action:manipulation; }
-.btn-add:hover { border-color:var(--acc); color:var(--acc); }
+/* ── VAULT ───────────────────────────────────────── */
+.vbox{padding:16px;border-bottom:1px solid var(--frm-dp)}
+.vhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.vhl{display:flex;align-items:center;gap:10px}
+.btn-add{width:28px;height:28px;border:1.5px solid var(--frm-d);background:none;color:var(--frm);font-size:1rem;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+.btn-add:hover{border-color:var(--acc);color:var(--acc)}
 
 /* Budget overview */
-.bov { background:var(--bg-r); border:1.5px solid var(--frm-dim); padding:14px 14px 12px; margin-bottom:14px; position:relative; overflow:hidden; }
-.bov::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--frm); }
-.bov-title { font-size:.58rem; letter-spacing:4px; font-weight:900; text-transform:uppercase; color:var(--frm-dim); margin-bottom:12px; padding-left:4px; }
-.b-line    { display:flex; justify-content:space-between; align-items:baseline; padding:5px 4px; border-bottom:1px dashed var(--frm-deep); }
-.b-line:last-child { border-bottom:none; }
-.b-lbl     { font-size:.65rem; font-weight:400; letter-spacing:2px; text-transform:uppercase; color:var(--txt-d); }
-.b-val     { font-weight:700; font-size:1.15rem; color:var(--txt); }
-.b-val.sal { color:var(--grn); }
-.b-val.inv { color:var(--prj); }
-.b-val.avl { color:var(--acc); }
-.b-val.wrn { color:var(--wrn); }
-.b-val.zero{ color:var(--txt-f); }
+.bov{background:var(--bg-r);border:1.5px solid var(--frm-d);padding:14px;margin-bottom:14px;position:relative;overflow:hidden}
+.bov::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--frm)}
+.bovt{font-size:.58rem;letter-spacing:4px;font-weight:900;text-transform:uppercase;color:var(--frm-d);margin-bottom:12px;padding-left:4px}
+.bline{display:flex;justify-content:space-between;align-items:baseline;padding:5px 4px;border-bottom:1px dashed var(--frm-dp)}
+.bline:last-child{border-bottom:none}
+.blbl{font-size:.65rem;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--txt-d)}
+.bval{font-weight:700;font-size:1.15rem;color:var(--txt)}
+.bval.sal{color:var(--grn)}.bval.inv{color:var(--prj)}.bval.avl{color:var(--acc)}.bval.wneg{color:var(--wrn)}.bval.zero{color:var(--txt-f)}
 
-/* Allowance strip */
-.allowance { display:flex; justify-content:space-between; align-items:center; padding:9px 12px; background:var(--bg-r); border:1px dashed var(--frm-deep); margin-bottom:14px; }
-.alw-lbl   { font-size:.62rem; letter-spacing:2px; font-weight:400; color:var(--txt-f); text-transform:uppercase; }
-.alw-val   { font-weight:700; font-size:1.4rem; color:var(--gld); line-height:1; }
-.alw-sub   { font-size:.6rem; color:var(--txt-f); font-weight:400; letter-spacing:1px; margin-top:2px; }
+/* Allowance */
+.alw{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--bg-r);border:1px dashed var(--frm-dp);margin-bottom:14px}
+.alwl{font-size:.62rem;letter-spacing:2px;color:var(--txt-f);text-transform:uppercase}
+.alwv{font-weight:700;font-size:1.4rem;color:var(--gld);line-height:1}
+.alws{font-size:.6rem;color:var(--txt-f);letter-spacing:1px;margin-top:2px}
 
 /* Category bars */
-.v-cat { padding:12px 0; border-top:1px dashed var(--frm-deep); }
-.v-cat:first-child { border-top:none; padding-top:0; }
-.v-cat-row { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; }
-.v-cat-name { font-size:.68rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--txt-d); }
-.v-cat-r    { text-align:right; }
-.v-spent    { font-weight:700; font-size:1.4rem; color:var(--txt); line-height:1; }
-.v-goal     { font-size:.65rem; font-weight:400; color:var(--txt-f); display:block; margin-top:1px; }
-.v-bar-track{ height:5px; background:var(--frm-deep); border:1.5px solid var(--frm-dim); overflow:hidden; }
-.v-bar-fill { height:100%; background:var(--acc); transition:width .7s cubic-bezier(.4,0,.2,1),background .4s; }
-.v-bar-fill.w { background:var(--wrn); }
-.v-bar-fill.o { background:var(--red); }
-.v-pct      { font-size:.6rem; font-weight:700; color:var(--txt-f); text-align:right; margin-top:4px; letter-spacing:1px; }
-.v-pct.w    { color:var(--wrn); }
-.v-pct.o    { color:var(--red); }
+.vcat{padding:12px 0;border-top:1px dashed var(--frm-dp)}
+.vcat:first-child{border-top:none;padding-top:0}
+.vcr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.vcn{font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--txt-d)}
+.vcri{text-align:right}
+.vsp{font-weight:700;font-size:1.4rem;color:var(--txt);line-height:1}
+.vgl{font-size:.65rem;color:var(--txt-f);display:block;margin-top:1px}
+.vbt{height:5px;background:var(--frm-dp);border:1.5px solid var(--frm-d);overflow:hidden}
+.vbf{height:100%;background:var(--acc);transition:width .7s cubic-bezier(.4,0,.2,1),background .4s}
+.vbf.w{background:var(--wrn)}.vbf.o{background:var(--red)}
+.vpct{font-size:.6rem;font-weight:700;color:var(--txt-f);text-align:right;margin-top:4px;letter-spacing:1px}
+.vpct.w{color:var(--wrn)}.vpct.o{color:var(--red)}
 
-.v-total    { display:flex; justify-content:space-between; align-items:baseline; padding:10px 0 0; border-top:1px solid var(--frm-deep); margin-top:4px; }
-.v-t-lbl    { font-size:.62rem; letter-spacing:3px; font-weight:700; color:var(--txt-f); text-transform:uppercase; }
-.v-t-val    { font-weight:700; font-size:1.4rem; color:var(--txt); }
+.vtot{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0 0;border-top:1px solid var(--frm-dp);margin-top:4px}
+.vtl{font-size:.62rem;letter-spacing:3px;font-weight:700;color:var(--txt-f);text-transform:uppercase}
+.vtv{font-weight:700;font-size:1.4rem;color:var(--txt)}
 
-/* Surplus block */
-.surplus-block { margin-top:12px; border-top:1px dashed var(--frm-dim); padding-top:12px; display:grid; grid-template-columns:1fr 1fr; }
-.s-cell { padding:0 10px 0 0; }
-.s-cell:last-child { padding:0 0 0 10px; border-left:1px dashed var(--frm-deep); }
-.s-lbl { font-size:.6rem; letter-spacing:3px; font-weight:400; color:var(--txt-f); margin-bottom:4px; text-transform:uppercase; }
-.s-val { font-weight:700; font-size:1.5rem; line-height:1; color:var(--txt); transition:color .3s; }
-.s-val.neg { color:var(--acc); }
-.s-val.crit{ color:var(--red); }
-.s-sub { font-size:.62rem; color:var(--txt-f); margin-top:3px; letter-spacing:1px; }
+/* Surplus */
+.surp{display:grid;grid-template-columns:1fr 1fr;margin-top:12px;border-top:1px dashed var(--frm-d);padding-top:12px}
+.sc{padding:0 10px 0 0}
+.sc:last-child{padding:0 0 0 10px;border-left:1px dashed var(--frm-dp)}
+.sl{font-size:.6rem;letter-spacing:3px;color:var(--txt-f);margin-bottom:4px;text-transform:uppercase}
+.sv{font-weight:700;font-size:1.5rem;line-height:1;color:var(--txt);transition:color .3s}
+.sv.neg{color:var(--acc)}.sv.crit{color:var(--red)}
+.ss{font-size:.62rem;color:var(--txt-f);margin-top:3px;letter-spacing:1px}
 
 /* Burn badge */
-.burn-badge { display:flex; align-items:center; gap:6px; margin-top:10px; padding:6px 10px; border:1px dashed var(--frm-dim); background:var(--bg-r); transition:border-color .3s,background .3s; }
-.burn-badge.hot  { border-color:var(--gld); background:rgba(255,217,122,.05); }
-.burn-badge.crit { border-color:var(--red); background:rgba(255,102,102,.05); }
-.burn-dot  { width:6px; height:6px; border-radius:50%; background:var(--frm-dim); flex-shrink:0; }
-.burn-badge.hot  .burn-dot { background:var(--gld); box-shadow:0 0 5px var(--gld); }
-.burn-badge.crit .burn-dot { background:var(--red); box-shadow:0 0 5px var(--red); }
-.burn-lbl  { font-size:.6rem; letter-spacing:3px; color:var(--txt-f); text-transform:uppercase; }
-.burn-val  { font-size:.9rem; font-weight:700; color:var(--txt); margin-left:auto; }
-.burn-badge.hot  .burn-val { color:var(--gld); }
-.burn-badge.crit .burn-val { color:var(--red); }
+.burn{display:flex;align-items:center;gap:6px;margin-top:10px;padding:6px 10px;border:1px dashed var(--frm-d);background:var(--bg-r);transition:border-color .3s,background .3s}
+.burn.hot{border-color:var(--gld);background:rgba(255,217,122,.05)}
+.burn.crit{border-color:var(--red);background:rgba(255,102,102,.05)}
+.bdot{width:6px;height:6px;border-radius:50%;background:var(--frm-d);flex-shrink:0}
+.burn.hot .bdot{background:var(--gld);box-shadow:0 0 5px var(--gld)}
+.burn.crit .bdot{background:var(--red);box-shadow:0 0 5px var(--red)}
+.blbl{font-size:.6rem;letter-spacing:3px;color:var(--txt-f);text-transform:uppercase}
+.bvl{font-size:.9rem;font-weight:700;color:var(--txt);margin-left:auto}
+.burn.hot .bvl{color:var(--gld)}.burn.crit .bvl{color:var(--red)}
 
-/* ── PROJECTION ──────────────────────────── */
-.proj-box  { padding:16px 16px 18px; border-bottom:1px solid var(--frm-deep); }
-.proj-hdr  { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
-.proj-panel{ border:var(--bp); padding:14px 16px; position:relative; overflow:hidden; }
-.proj-panel::before { content:''; position:absolute; top:0; left:-60%; width:40%; height:100%; background:linear-gradient(90deg,transparent,rgba(200,168,255,.04),transparent); animation:psweep 3.5s ease-in-out infinite; }
-@keyframes psweep { 0%{left:-60%} 100%{left:120%} }
-.proj-ro   { font-weight:900; font-size:1.1rem; letter-spacing:1px; color:var(--prj); line-height:1.3; margin-bottom:10px; }
-.proj-ro .months { font-size:2rem; letter-spacing:2px; }
-.proj-ro.nd { color:var(--txt-f); font-size:.85rem; }
-.proj-sub  { font-size:.68rem; color:var(--txt-f); margin-bottom:12px; line-height:1.6; }
-.proj-sub .hi { color:var(--prj); font-weight:700; }
-.proj-bar-wrap { margin-top:4px; }
-.proj-bar-hdr  { display:flex; justify-content:space-between; margin-bottom:6px; }
-.proj-bar-lbl  { font-size:.62rem; letter-spacing:2px; color:var(--txt-f); text-transform:uppercase; }
-.proj-bar-pct  { font-size:.62rem; letter-spacing:2px; font-weight:700; color:var(--prj); }
-.proj-bar-t    { height:7px; background:var(--prj-deep); border:1.5px solid var(--prj); overflow:hidden; }
-.proj-bar-f    { height:100%; background:var(--acc); transition:width .9s cubic-bezier(.4,0,.2,1); }
-.proj-stats    { display:grid; grid-template-columns:1fr 1fr; margin-top:12px; border-top:1px dashed var(--frm-deep); padding-top:10px; }
-.ps { padding:0 8px 0 0; }
-.ps:last-child { padding:0 0 0 8px; border-left:1px dashed var(--frm-deep); }
-.ps-lbl { font-size:.6rem; letter-spacing:2px; color:var(--txt-f); margin-bottom:3px; text-transform:uppercase; }
-.ps-val { font-weight:700; font-size:1.4rem; color:var(--prj); line-height:1; }
+/* ── VITALITY SCORE ──────────────────────────────── */
+.vit-strip{margin-top:14px;padding-top:14px;border-top:1px solid var(--frm-dp)}
+.vit-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.vit-title{font-size:.6rem;letter-spacing:4px;font-weight:900;text-transform:uppercase;color:var(--acc);text-shadow:0 0 8px rgba(244,194,194,.2)}
+.vit-pct{font-weight:900;font-size:1.6rem;line-height:1;color:var(--acc);text-shadow:0 0 12px rgba(244,194,194,.3);transition:color .3s}
+.vit-pct.med{color:var(--gld);text-shadow:none}
+.vit-pct.low{color:var(--wrn);text-shadow:none}
+.vit-pct.z{color:var(--txt-f);text-shadow:none}
+.vit-track{height:6px;background:var(--acc-deep);border:1.5px solid var(--acc-dim);overflow:hidden;margin-bottom:7px}
+.vit-fill{height:100%;background:var(--acc);transition:width .9s cubic-bezier(.4,0,.2,1)}
+.vit-bd{display:grid;grid-template-columns:repeat(3,1fr);font-size:.6rem;letter-spacing:1px;color:var(--txt-f);text-align:center}
+.vbseg{padding:0 4px;border-right:1px dashed var(--frm-dp)}
+.vbseg:last-child{border-right:none}
+.vbsv{display:block;font-weight:700;color:var(--txt-d);font-size:.75rem;margin-bottom:2px}
+.vbsv.earn{color:var(--acc)}
 
-/* ── TIMELINE ────────────────────────────── */
-.tl-box { padding:14px 16px 15px; border-bottom:1px solid var(--frm-deep); }
-.tl-row { display:flex; gap:5px; margin-top:10px; }
-.tl-cell { flex:1; border:1px solid var(--frm-deep); padding:9px 4px 8px; text-align:center; position:relative; background:var(--bg-r); }
-.tl-cell.today { border-color:var(--acc); }
-.tl-cell.today::before { content:'TODAY'; position:absolute; top:-7px; left:50%; transform:translateX(-50%); background:var(--bg); padding:0 4px; font-size:.52rem; letter-spacing:2px; font-weight:900; color:var(--acc); }
-.tl-dow  { font-size:.6rem; letter-spacing:2px; color:var(--txt-f); margin-bottom:4px; display:block; }
-.tl-icon { font-size:1.1rem; display:block; margin-bottom:3px; line-height:1; }
-.tl-abbr { font-size:.65rem; letter-spacing:1px; display:block; font-weight:700; }
-.tl-date { font-size:.6rem; color:var(--txt-f); display:block; margin-top:4px; }
-.tl-icon.mrn,.tl-abbr.mrn { color:var(--acc); }
-.tl-icon.ngt,.tl-abbr.ngt { color:var(--blu); }
-.tl-icon.aft,.tl-abbr.aft { color:var(--gld); }
-.tl-icon.off,.tl-abbr.off { color:var(--off); }
+/* SUCCESS RATE */
+.scr-strip{margin-top:12px;padding-top:12px;border-top:1px dashed var(--frm-dp)}
+.scr-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.scr-title{font-size:.6rem;letter-spacing:4px;font-weight:900;text-transform:uppercase;color:var(--txt-d)}
+.scr-pct{font-weight:900;font-size:1.4rem;line-height:1;color:var(--txt-d);transition:color .3s}
+.scr-pct.ok{color:var(--grn)}.scr-pct.lo{color:var(--wrn)}
+.scr-track{height:4px;background:var(--frm-dp);border:1px solid var(--frm-d);overflow:hidden;margin-bottom:5px}
+.scr-fill{height:100%;background:var(--grn);transition:width .8s cubic-bezier(.4,0,.2,1)}
+.scr-st{display:flex;justify-content:space-between;font-size:.6rem;letter-spacing:1px;color:var(--txt-f)}
 
-/* ── EPOCH ───────────────────────────────── */
-.epoch-box { padding:13px 16px 15px; border-bottom:1px solid var(--frm-deep); }
-.epoch-row { display:flex; align-items:center; gap:8px; margin-top:10px; }
-.epoch-lbl { font-size:.65rem; letter-spacing:2px; color:var(--txt-d); white-space:nowrap; min-width:70px; }
-input[type="date"] { flex:1; background:var(--bg-r); border:1px solid var(--frm-dim); border-left:3px solid var(--frm-dim); color:var(--txt); font-family:var(--font); font-size:.85rem; font-weight:700; padding:8px 10px; outline:none; min-height:44px; color-scheme:dark; transition:border-color .2s,border-left-color .2s; }
-input[type="date"]:focus { border-color:var(--acc); border-left-color:var(--acc); }
-.btn-set { background:var(--acc); color:var(--bg); border:none; font-family:var(--font); font-size:.72rem; letter-spacing:3px; font-weight:900; padding:0 14px; min-height:44px; cursor:pointer; touch-action:manipulation; text-transform:uppercase; transition:opacity .15s; }
-.btn-set:active { opacity:.7; }
-.epoch-stored { font-size:.65rem; letter-spacing:2px; color:var(--txt-f); margin-top:9px; }
+/* ── PROJECTION ──────────────────────────────────── */
+.prbox{padding:16px;border-bottom:1px solid var(--frm-dp)}
+.prhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.prpanel{border:1.5px solid var(--prj);padding:14px 16px;position:relative;overflow:hidden}
+.prpanel::before{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(200,168,255,.04),transparent);animation:ps 3.5s ease-in-out infinite}
+@keyframes ps{0%{left:-60%}100%{left:120%}}
+.prro{font-weight:900;font-size:1.1rem;letter-spacing:1px;color:var(--prj);line-height:1.3;margin-bottom:10px}
+.prro .mos{font-size:2rem;letter-spacing:2px}
+.prro.nd{color:var(--txt-f);font-size:.85rem}
+.prsub{font-size:.68rem;color:var(--txt-f);margin-bottom:12px;line-height:1.6}
+.prsub .hi{color:var(--prj);font-weight:700}
+.prbt{height:7px;background:var(--prj-d);border:1.5px solid var(--prj);overflow:hidden}
+.prbf{height:100%;background:var(--acc);transition:width .9s cubic-bezier(.4,0,.2,1)}
+.prhh{display:flex;justify-content:space-between;margin-bottom:6px}
+.prl{font-size:.62rem;letter-spacing:2px;color:var(--txt-f);text-transform:uppercase}
+.prp{font-size:.62rem;letter-spacing:2px;font-weight:700;color:var(--prj)}
+.prstats{display:grid;grid-template-columns:1fr 1fr;margin-top:12px;border-top:1px dashed var(--frm-dp);padding-top:10px}
+.prs{padding:0 8px 0 0}
+.prs:last-child{padding:0 0 0 8px;border-left:1px dashed var(--frm-dp)}
+.prl2{font-size:.6rem;letter-spacing:2px;color:var(--txt-f);margin-bottom:3px;text-transform:uppercase}
+.prv{font-weight:700;font-size:1.4rem;color:var(--prj);line-height:1}
 
-/* ── REFLECTION ──────────────────────────── */
-.reflect-box { padding:16px 16px 18px; background:var(--bg-r); }
-.reflect-hdr { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
-.reflect-date{ font-size:.6rem; letter-spacing:2px; color:var(--txt-f); }
-.reflect-row { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px dashed var(--frm-deep); }
-.reflect-row:last-of-type { border-bottom:none; padding-bottom:0; }
-.reflect-q   { font-size:.68rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--txt-d); flex:1; padding-right:10px; }
-.reflect-toggle { display:flex; gap:6px; }
-.btn-ref { border:1.5px solid var(--frm-dim); background:none; color:var(--txt-f); font-family:var(--font); font-size:.65rem; font-weight:700; letter-spacing:2px; padding:0 12px; min-height:38px; min-width:52px; cursor:pointer; touch-action:manipulation; text-transform:uppercase; }
-.btn-ref.y { border-color:var(--grn); color:var(--grn); background:rgba(136,255,187,.07); }
-.btn-ref.n { border-color:var(--red); color:var(--red); background:rgba(255,102,102,.07); }
-.reflect-score { margin-top:12px; padding:8px 12px; background:var(--bg-c); border:1px dashed var(--frm-deep); font-size:.62rem; letter-spacing:2px; font-weight:700; text-transform:uppercase; color:var(--txt-f); text-align:center; transition:color .3s,border-color .3s; }
-.reflect-score.opt  { color:var(--grn); border-color:var(--grn); }
-.reflect-score.part { color:var(--gld); border-color:var(--frm-dim); }
+/* ── TIMELINE ────────────────────────────────────── */
+.tlbox{padding:14px 16px;border-bottom:1px solid var(--frm-dp)}
+.tlrow{display:flex;gap:5px;margin-top:10px}
+.tlc{flex:1;border:1px solid var(--frm-dp);padding:9px 4px 8px;text-align:center;position:relative;background:var(--bg-r)}
+.tlc.td{border-color:var(--acc)}
+.tlc.td::before{content:'TODAY';position:absolute;top:-7px;left:50%;transform:translateX(-50%);background:var(--bg);padding:0 4px;font-size:.52rem;letter-spacing:2px;font-weight:900;color:var(--acc)}
+.tldw{font-size:.6rem;letter-spacing:2px;color:var(--txt-f);margin-bottom:4px;display:block}
+.tlic{font-size:1.1rem;display:block;margin-bottom:3px;line-height:1}
+.tlab{font-size:.65rem;letter-spacing:1px;display:block;font-weight:700}
+.tldt{font-size:.6rem;color:var(--txt-f);display:block;margin-top:4px}
+.tlic.mrn,.tlab.mrn{color:var(--acc)}
+.tlic.ngt,.tlab.ngt{color:var(--blu)}
+.tlic.aft,.tlab.aft{color:var(--gld)}
+.tlic.off,.tlab.off{color:var(--off)}
 
-/* ── L3 LOG ──────────────────────────────── */
-.l3-wrap  { border:var(--b1); background:var(--bg-c); position:relative; }
-.l3-hdr   { display:flex; justify-content:space-between; align-items:center; padding:6px 12px; border-bottom:1px solid var(--frm-deep); background:rgba(0,0,0,.2); }
-.l3-title { font-size:.62rem; letter-spacing:4px; font-weight:900; text-transform:uppercase; color:var(--frm); }
-.btn-clr  { background:none; border:1px solid var(--frm-deep); color:var(--txt-f); font-family:var(--font); font-size:.6rem; letter-spacing:2px; font-weight:700; padding:3px 9px; cursor:pointer; min-height:28px; text-transform:uppercase; }
-.log-term { height:150px; overflow-y:auto; padding:8px 12px; scroll-behavior:smooth; -webkit-overflow-scrolling:touch; }
-.log-term::-webkit-scrollbar { width:3px; }
-.log-term::-webkit-scrollbar-thumb { background:var(--frm-deep); }
-.log-e    { display:flex; gap:8px; font-family:var(--mono); font-size:.68rem; line-height:1.8; animation:fade-in .1s ease; }
-@keyframes fade-in { from{opacity:0} to{opacity:1} }
-.log-ts   { color:var(--txt-f); white-space:nowrap; flex-shrink:0; }
-.log-msg  { color:var(--txt-f); flex:1; word-break:break-word; }
-.log-msg.ok     { color:var(--grn); }
-.log-msg.warn   { color:var(--gld); }
-.log-msg.err    { color:var(--red); }
-.log-msg.sync   { color:var(--acc); }
-.log-msg.road   { color:var(--tel); }
-.log-msg.vault  { color:var(--wrn); }
-.log-msg.proj   { color:var(--prj); }
-.log-msg.sport  { color:var(--tel); }
-.log-msg.kitchen{ color:#A8D8A8; }
+/* ── EPOCH ───────────────────────────────────────── */
+.epbox{padding:13px 16px 15px;border-bottom:1px solid var(--frm-dp)}
+.eprow{display:flex;align-items:center;gap:8px;margin-top:10px}
+.eplbl{font-size:.65rem;letter-spacing:2px;color:var(--txt-d);white-space:nowrap;min-width:70px}
+input[type="date"]{flex:1;background:var(--bg-r);border:1px solid var(--frm-d);border-left:3px solid var(--frm-d);color:var(--txt);font-family:var(--font);font-size:.85rem;font-weight:700;padding:8px 10px;outline:none;min-height:44px;color-scheme:dark;transition:border-color .2s,border-left-color .2s}
+input[type="date"]:focus{border-color:var(--acc);border-left-color:var(--acc)}
+.btn-set{background:var(--acc);color:var(--bg);border:none;font-family:var(--font);font-size:.72rem;letter-spacing:3px;font-weight:900;padding:0 14px;min-height:44px;text-transform:uppercase}
+.btn-set:active{opacity:.7}
+.epst{font-size:.65rem;letter-spacing:2px;color:var(--txt-f);margin-top:9px}
 
-/* ── MODAL FORM ELEMENTS ─────────────────── */
-.m-field { margin-bottom:12px; }
-.m-lbl   { display:block; font-size:.62rem; letter-spacing:2px; color:var(--txt-f); margin-bottom:5px; text-transform:uppercase; }
-.m-sel,.m-inp { width:100%; background:var(--bg-r); border:1px solid var(--frm-dim); border-left:3px solid var(--frm-dim); color:var(--txt); font-family:var(--font); font-size:.9rem; font-weight:700; padding:9px 10px; outline:none; min-height:44px; transition:border-color .2s,border-left-color .2s; }
-.m-sel:focus,.m-inp:focus { border-color:var(--acc); border-left-color:var(--acc); }
-.m-inp-lg { font-size:1.4rem; letter-spacing:1px; }
-.m-inp-lg::placeholder { color:var(--txt-f); font-weight:400; font-size:1rem; }
-.m-err { font-size:.65rem; color:var(--red); font-weight:700; margin-top:6px; display:none; letter-spacing:1px; }
-.btn-sub { width:100%; background:var(--acc); color:var(--bg); border:none; font-family:var(--font); font-size:.72rem; letter-spacing:3px; font-weight:900; height:46px; cursor:pointer; touch-action:manipulation; text-transform:uppercase; margin-top:6px; }
-.m-div   { border:none; border-top:1px dashed var(--frm-deep); margin:14px 0; }
-.m-sect  { font-size:.6rem; letter-spacing:3px; font-weight:700; color:var(--txt-f); text-transform:uppercase; margin-bottom:10px; }
-.m-gr    { display:flex; align-items:center; gap:6px; margin-bottom:8px; }
-.m-gr-lbl{ font-size:.62rem; letter-spacing:1px; color:var(--txt-f); min-width:100px; text-transform:uppercase; }
-.m-gr-inp{ flex:1; background:transparent; border:none; border-bottom:1.5px solid var(--frm); color:var(--txt); font-family:var(--font); font-size:.9rem; font-weight:700; padding:6px 4px; outline:none; min-height:38px; border-radius:0; transition:border-bottom-color .2s; }
-.m-gr-inp:focus { border-bottom-color:var(--acc); }
-.m-gr-btn{ background:none; border:1px solid var(--frm-dim); color:var(--frm); font-family:var(--font); font-size:.6rem; letter-spacing:2px; font-weight:700; padding:0 10px; min-height:38px; cursor:pointer; text-transform:uppercase; transition:border-color .2s,color .2s; }
-.m-gr-btn:hover { border-color:var(--acc); color:var(--acc); }
+/* ── CHECK-IN ────────────────────────────────────── */
+.chkbox{padding:16px;background:var(--bg-r)}
+.chkhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.chkdt{font-size:.6rem;letter-spacing:2px;color:var(--txt-f)}
+.chkrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed var(--frm-dp)}
+.chkrow:last-of-type{border-bottom:none;padding-bottom:0}
+.chkq{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt-d);flex:1;padding-right:10px}
+.chktog{display:flex;gap:6px}
+.btn-ck{border:1.5px solid var(--frm-d);background:none;color:var(--txt-f);font-family:var(--font);font-size:.65rem;font-weight:700;letter-spacing:2px;padding:0 12px;min-height:38px;min-width:52px;text-transform:uppercase}
+.btn-ck.y{border-color:var(--grn);color:var(--grn);background:rgba(136,255,187,.07)}
+.btn-ck.n{border-color:var(--red);color:var(--red);background:rgba(255,102,102,.07)}
+.chksc{margin-top:12px;padding:8px 12px;background:var(--bg-c);border:1px dashed var(--frm-dp);font-size:.62rem;letter-spacing:2px;font-weight:700;text-transform:uppercase;color:var(--txt-f);text-align:center;transition:color .3s,border-color .3s}
+.chksc.opt{color:var(--grn);border-color:var(--grn)}.chksc.part{color:var(--gld)}
 
-/* ── SUCCESS SCORE PANEL ─────────────────────────── */
-.score-strip {
-  margin-top: 14px;
-  border-top: 1px solid var(--frm-deep);
-  padding-top: 12px;
-}
-.score-strip-hdr {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.score-strip-title {
-  font-size: .6rem;
-  letter-spacing: 4px;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: var(--acc);
-  text-shadow: 0 0 8px rgba(244,194,194,.25);
-}
-.score-pct {
-  font-weight: 900;
-  font-size: 1.6rem;
-  line-height: 1;
-  color: var(--acc);
-  text-shadow: 0 0 12px rgba(244,194,194,.35);
-  transition: color .3s;
-}
-.score-pct.low  { color: var(--wrn); text-shadow: none; }
-.score-pct.zero { color: var(--txt-f); text-shadow: none; }
+/* ── L3 LOG ──────────────────────────────────────── */
+.l3w{border:1.5px solid var(--frm-d);background:var(--bg-c);position:relative}
+.l3h{display:flex;justify-content:space-between;align-items:center;padding:6px 12px;border-bottom:1px solid var(--frm-dp);background:rgba(0,0,0,.2)}
+.l3t{font-size:.62rem;letter-spacing:4px;font-weight:900;text-transform:uppercase;color:var(--frm)}
+.btn-clr{background:none;border:1px solid var(--frm-dp);color:var(--txt-f);font-family:var(--font);font-size:.6rem;letter-spacing:2px;font-weight:700;padding:3px 9px;min-height:28px;text-transform:uppercase}
+.log-t{height:150px;overflow-y:auto;padding:8px 12px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.log-t::-webkit-scrollbar{width:3px}
+.log-t::-webkit-scrollbar-thumb{background:var(--frm-dp)}
+.le{display:flex;gap:8px;font-family:var(--mono);font-size:.68rem;line-height:1.8;animation:fi .1s ease}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+.lts{color:var(--txt-f);white-space:nowrap;flex-shrink:0}
+.lm{color:var(--txt-f);flex:1;word-break:break-word}
+.lm.ok{color:var(--grn)}.lm.warn{color:var(--gld)}.lm.err{color:var(--red)}
+.lm.sync{color:var(--acc)}.lm.road{color:var(--tel)}.lm.vault{color:var(--wrn)}
+.lm.proj{color:var(--prj)}.lm.sport{color:var(--tel)}.lm.kit{color:#A8D8A8}
 
-.score-bar-track { height: 5px; background: var(--frm-deep); border: 1.5px solid var(--acc-deep); margin-bottom: 6px; overflow: hidden; }
-.score-bar-fill  { height: 100%; background: var(--acc); transition: width .8s cubic-bezier(.4,0,.2,1); }
-
-.score-stats {
-  display: flex;
-  justify-content: space-between;
-  font-size: .62rem;
-  letter-spacing: 1.5px;
-  color: var(--txt-f);
-}
-.score-stats .hi { color: var(--txt-d); font-weight: 700; }
-
-.foot { font-size:.55rem; letter-spacing:4px; color:var(--frm-deep); text-align:center; padding-top:8px; text-transform:uppercase; }
+.foot{font-size:.55rem;letter-spacing:4px;color:var(--frm-dp);text-align:center;padding-top:8px;text-transform:uppercase}
 </style>
 </head>
 <body>
 
-<!-- ════ MODAL ════════════════════════════════════ -->
-<div class="modal-overlay" id="txModal" onclick="if(event.target===this)closeTxModal()">
-  <div class="modal-box">
-    <div class="modal-hdr">
-      <span class="modal-title" id="modalTitle">◈ VAULT ENTRY</span>
-      <button class="btn-mc" onclick="closeTxModal()">✕</button>
+<!-- MODAL -->
+<div class="ov" id="txModal" onclick="if(event.target===this)closeMod()">
+  <div class="mbox">
+    <div class="mhdr">
+      <span class="mtitle" id="modTitle">◈ VAULT ENTRY</span>
+      <button class="btn-mc" onclick="closeMod()">✕</button>
     </div>
-    <div class="modal-body">
-      <div class="tab-row">
-        <button class="tab-btn active" onclick="switchTab('log')"    id="tab-log">Log TX</button>
-        <button class="tab-btn"        onclick="switchTab('budget')" id="tab-budget">Budget</button>
-        <button class="tab-btn"        onclick="switchTab('proj')"   id="tab-proj">Projection</button>
+    <div class="mbody">
+      <div class="tabs">
+        <button class="tab on" onclick="swTab('log')"    id="tab-log">Log TX</button>
+        <button class="tab"    onclick="swTab('budget')" id="tab-budget">Budget</button>
+        <button class="tab"    onclick="swTab('proj')"   id="tab-proj">Projection</button>
       </div>
-
-      <!-- LOG TX -->
-      <div class="m-pane active" id="pane-log">
-        <div class="m-field"><label class="m-lbl">Target Month</label><select class="m-sel" id="txMonth"></select></div>
-        <div class="m-field"><label class="m-lbl">Category</label>
-          <select class="m-sel" id="txCat">
+      <!-- LOG -->
+      <div class="pane on" id="pane-log">
+        <div class="mf"><label class="ml">Target Month</label><select class="ms" id="txMonth"></select></div>
+        <div class="mf"><label class="ml">Category</label>
+          <select class="ms" id="txCat">
             <option value="dining">Dining Out</option>
             <option value="groceries">Groceries</option>
             <option value="misc">Misc</option>
           </select>
         </div>
-        <div class="m-field"><label class="m-lbl">Amount (₺)</label>
-          <input class="m-inp m-inp-lg" type="number" id="txAmt" min="0.01" step="0.01" placeholder="0.00">
-        </div>
-        <div class="m-err" id="txError">INVALID AMOUNT</div>
-        <button class="btn-sub" onclick="submitTx()">CONFIRM LOG</button>
+        <div class="mf"><label class="ml">Amount (₺)</label><input class="mi mi-lg" type="number" id="txAmt" min="0.01" step="0.01" placeholder="0.00"></div>
+        <div class="merr" id="txErr">INVALID AMOUNT</div>
+        <button class="msub" onclick="submitTx()">CONFIRM LOG</button>
       </div>
-
       <!-- BUDGET -->
-      <div class="m-pane" id="pane-budget">
-        <div class="m-sect" id="budgetSect">Monthly Settings</div>
-        <div class="m-gr"><span class="m-gr-lbl">Monthly Salary ₺</span><input class="m-gr-inp" type="number" id="goalMonthlyIncome" placeholder="e.g. 25000"><button class="m-gr-btn" onclick="saveGoal('monthlyIncome')">SAVE</button></div>
-        <div class="m-gr"><span class="m-gr-lbl">Investment Goal ₺</span><input class="m-gr-inp" type="number" id="goalInvTarget" placeholder="e.g. 50000"><button class="m-gr-btn" onclick="saveGoal('invTarget')">SAVE</button></div>
-        <div class="m-gr"><span class="m-gr-lbl">Savings Plan ₺</span><input class="m-gr-inp" type="number" id="goalMonthlySaving" placeholder="e.g. 5000"><button class="m-gr-btn" onclick="saveGoal('monthlySaving')">SAVE</button></div>
-        <div class="m-gr"><span class="m-gr-lbl">Current Savings ₺</span><input class="m-gr-inp" type="number" id="goalCurrentSavings" placeholder="e.g. 12000"><button class="m-gr-btn" onclick="saveGoal('currentSavings')">SAVE</button></div>
-        <hr class="m-div">
-        <div class="m-sect">Spending Limits</div>
-        <div class="m-gr"><span class="m-gr-lbl">Dining Out ₺</span><input class="m-gr-inp" type="number" id="goalDining" placeholder="e.g. 1500"><button class="m-gr-btn" onclick="saveGoal('dining')">SAVE</button></div>
-        <div class="m-gr"><span class="m-gr-lbl">Groceries ₺</span><input class="m-gr-inp" type="number" id="goalGroceries" placeholder="e.g. 2000"><button class="m-gr-btn" onclick="saveGoal('groceries')">SAVE</button></div>
-        <div class="m-gr"><span class="m-gr-lbl">Misc ₺</span><input class="m-gr-inp" type="number" id="goalMisc" placeholder="e.g. 800"><button class="m-gr-btn" onclick="saveGoal('misc')">SAVE</button></div>
-        <div id="budgetPreview" style="margin-top:14px;padding:10px 12px;background:var(--bg-r);border:1px dashed var(--frm-deep);font-size:.7rem;line-height:2;color:var(--txt-d)"></div>
+      <div class="pane" id="pane-budget">
+        <div class="msect" id="budgSect">Monthly Settings</div>
+        <div class="mgr"><span class="mgrl">Monthly Salary ₺</span><input class="mgri" type="number" id="gInc" placeholder="e.g. 25000"><button class="mgrb" onclick="saveGoal('monthlyIncome')">SAVE</button></div>
+        <div class="mgr"><span class="mgrl">Investment Goal ₺</span><input class="mgri" type="number" id="gInv" placeholder="e.g. 50000"><button class="mgrb" onclick="saveGoal('invTarget')">SAVE</button></div>
+        <div class="mgr"><span class="mgrl">Savings Plan ₺</span><input class="mgri" type="number" id="gSav" placeholder="e.g. 5000"><button class="mgrb" onclick="saveGoal('monthlySaving')">SAVE</button></div>
+        <div class="mgr"><span class="mgrl">Current Savings ₺</span><input class="mgri" type="number" id="gCurSav" placeholder="e.g. 12000"><button class="mgrb" onclick="saveGoal('currentSavings')">SAVE</button></div>
+        <hr class="mdiv">
+        <div class="msect">Spending Limits</div>
+        <div class="mgr"><span class="mgrl">Dining Out ₺</span><input class="mgri" type="number" id="gDin" placeholder="e.g. 1500"><button class="mgrb" onclick="saveGoal('dining')">SAVE</button></div>
+        <div class="mgr"><span class="mgrl">Groceries ₺</span><input class="mgri" type="number" id="gGro" placeholder="e.g. 2000"><button class="mgrb" onclick="saveGoal('groceries')">SAVE</button></div>
+        <div class="mgr"><span class="mgrl">Misc ₺</span><input class="mgri" type="number" id="gMisc" placeholder="e.g. 800"><button class="mgrb" onclick="saveGoal('misc')">SAVE</button></div>
+        <div id="budgPrev" style="margin-top:14px;padding:10px 12px;background:var(--bg-r);border:1px dashed var(--frm-dp);font-size:.7rem;line-height:2;color:var(--txt-d)"></div>
       </div>
-
       <!-- PROJECTION -->
-      <div class="m-pane" id="pane-proj">
-        <div class="m-sect">Work-to-Goal Analysis</div>
-        <div id="projModalReadout" style="font-size:.75rem;line-height:1.8;color:var(--txt-d);padding:4px 0"></div>
+      <div class="pane" id="pane-proj">
+        <div class="msect">Work-to-Goal Analysis</div>
+        <div id="projMod" style="font-size:.75rem;line-height:1.8;color:var(--txt-d);padding:4px 0"></div>
       </div>
     </div>
   </div>
@@ -602,1154 +517,967 @@ input[type="date"]:focus { border-color:var(--acc); border-left-color:var(--acc)
 
 <!-- HEADER -->
 <div class="hdr">
-  <div class="hdr-brand"><div class="hdr-logo">ORACLE</div><div class="hdr-sub">GOLDEN EYE v5.0</div></div>
-  <div class="hdr-meta">
-    <div class="hdr-row"><span class="hdr-key">CYCLE</span><span class="hdr-val">24-DAY</span></div>
-    <div class="hdr-row"><span class="hdr-key">STRUCT</span><span class="hdr-val">6+2 × 3</span></div>
-    <div class="hdr-row"><span class="hdr-key">REV</span><span class="hdr-val">5.1.0</span></div>
+  <div class="hbr"><div class="hlogo">ORACLE</div><div class="hsub">PHASE 7 — FINAL CALIBRATION</div></div>
+  <div class="hmeta">
+    <div class="hmr"><span class="hmk">CYCLE</span><span class="hmv">24-DAY</span></div>
+    <div class="hmr"><span class="hmk">STRUCT</span><span class="hmv">6+2×3</span></div>
+    <div class="hmr"><span class="hmk">REV</span><span class="hmv">7.0.0</span></div>
   </div>
-  <div class="hdr-live"><div class="pulse"></div><div class="t-lbl" style="font-size:.55rem;letter-spacing:2px">LIVE</div></div>
+  <div class="hlv"><div class="pulse"></div><div class="t-l" style="font-size:.55rem;letter-spacing:2px">LIVE</div></div>
 </div>
 
 <!-- L1 STATUS -->
 <div class="card card-a">
-  <span class="c-tab acc">L1 // SYSTEM STATUS</span>
-  <div class="duo-row" style="padding-top:18px">
-    <div class="duo-col">
-      <div class="duo-who">◈ OZAN</div>
+  <span class="ctab a">L1 // SYSTEM STATUS</span>
+  <div class="duo" style="padding-top:18px">
+    <div class="dc">
+      <div class="dwho">◈ OZAN</div>
       <div class="t-xl" id="shiftName">——</div>
-      <div class="shift-sub" id="shiftSub" style="margin-top:6px">AWAITING EPOCH</div>
-      <div class="shift-sub" id="shiftDay" style="margin-top:3px"></div>
+      <div class="ssub" id="shiftSub" style="margin-top:6px">AWAITING EPOCH</div>
+      <div class="ssub" id="shiftDay" style="margin-top:3px"></div>
+      <div class="adj-row">
+        <button class="btn-adj" id="btnAdj" onclick="toggleSMenu()">⚙ ADJUST</button>
+      </div>
     </div>
-    <div class="duo-col">
-      <div class="duo-who">◈ NADYA</div>
-      <div class="n-badge n-off" id="nadyaBadge">——</div>
-      <div class="n-det" id="nadyaDet">—</div>
-    </div>
-  </div>
-  <!-- CLOCK — heartbeat IDs: clockHM, clockS, clockDay, clockDate -->
-  <div class="clock-row hdiv">
-    <div class="clock-main">
-      <div class="clock-hm" id="clockHM">00:00</div>
-      <div class="clock-s"  id="clockS">:00</div>
-    </div>
-    <div class="clock-meta">
-      <div class="clock-day"  id="clockDay">———</div>
-      <div class="clock-date" id="clockDate">-- --- ----</div>
+    <div class="dc">
+      <div class="dwho">◈ NADYA</div>
+      <div class="nb n-off" id="nadyaBadge">——</div>
+      <div class="ndet" id="nadyaDet">—</div>
     </div>
   </div>
-  <div class="meta-strip hdiv">
-    <div class="mc"><div class="t-lbl">CYCLE DAY</div><div class="t-val" style="color:var(--acc)" id="metaCyc">—</div></div>
-    <div class="mc"><div class="t-lbl">BLOCK</div><div class="t-val" id="metaBlk">—</div></div>
-    <div class="mc"><div class="t-lbl">NEXT</div><div class="t-val" id="metaNxt">—</div></div>
-    <div class="mc"><div class="t-lbl">DAYS LEFT</div><div class="t-val" style="color:var(--acc)" id="metaDL">—</div></div>
+
+  <!-- Shift override mini-menu -->
+  <div class="smenu" id="smenu">
+    <button class="btn-sopt" onclick="applyOvr('MORNING')">GÜNDÜZ</button>
+    <button class="btn-sopt" onclick="applyOvr('NIGHT')">GECE</button>
+    <button class="btn-sopt" onclick="applyOvr('AFTERNOON')">ARA</button>
+    <button class="btn-sopt sel-off" onclick="applyOvr('OFF')">OFF</button>
+    <button class="btn-sopt sel-vac" onclick="applyOvr('VACATION')">✈ TATİL</button>
+    <button class="btn-sopt" onclick="clearOvr()" style="border-color:var(--frm-dp);color:var(--txt-f)">✕ SIFIRLA</button>
   </div>
-  <div class="prog-wrap hdash">
-    <div class="prog-hdr"><span class="t-lbl">24-DAY CYCLE</span><span class="t-lbl" id="progPct">0%</span></div>
-    <div class="prog-track" style="position:relative"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="ovr-banner" id="ovrBanner">⚠ MANUEL OVERRIDE AKTİF — GECEYARİSI SONA ERER</div>
+
+  <!-- Clock — IDs: clockHM, clockS, clockDay, clockDate -->
+  <div class="crow hdiv">
+    <div class="cmain">
+      <div class="chm" id="clockHM">00:00</div>
+      <div class="cs"  id="clockS">:00</div>
+    </div>
+    <div class="cmeta">
+      <div class="cday"  id="clockDay">———</div>
+      <div class="cdate" id="clockDate">-- --- ----</div>
+    </div>
   </div>
+
+  <div class="mstrip hdiv">
+    <div class="mc"><div class="t-l">CYCLE DAY</div><div class="t-v" style="color:var(--acc)" id="mCyc">—</div></div>
+    <div class="mc"><div class="t-l">BLOCK</div><div class="t-v" id="mBlk">—</div></div>
+    <div class="mc"><div class="t-l">NEXT</div><div class="t-v" id="mNxt">—</div></div>
+    <div class="mc"><div class="t-l">DAYS LEFT</div><div class="t-v" style="color:var(--acc)" id="mDL">—</div></div>
+  </div>
+
+  <div class="pw hdsh">
+    <div class="ph"><span class="t-l">24-DAY CYCLE</span><span class="t-l" id="pgPct">0%</span></div>
+    <div class="pt" style="position:relative"><div class="pf" id="pgFill" style="width:0%"></div></div>
+  </div>
+
   <div class="bpills">
-    <div class="bp" id="bp-0"><span class="bp-n">Morning</span><span class="bp-t">B1</span></div>
-    <div class="bp" id="bp-1"><span class="bp-n">Night</span><span class="bp-t">B2</span></div>
-    <div class="bp" id="bp-2"><span class="bp-n">Afternoon</span><span class="bp-t">B3</span></div>
+    <div class="bp" id="bp-0"><span class="bpn">Morning</span><span class="bpt">B1</span></div>
+    <div class="bp" id="bp-1"><span class="bpn">Night</span><span class="bpt">B2</span></div>
+    <div class="bp" id="bp-2"><span class="bpn">Afternoon</span><span class="bpt">B3</span></div>
   </div>
 </div>
 
 <!-- L2 STRATEGIC -->
-<div class="l2-wrap card">
-  <span class="c-tab">L2 // STRATEGIC</span>
-  <button class="l2-btn" onclick="toggleL2()">
-    <span class="l2-lbl">⬡ GOLDEN EYE · VAULT · SPORT</span>
-    <span class="l2-chev" id="l2Chev">▼</span>
+<div class="l2w card">
+  <span class="ctab">L2 // STRATEGIC</span>
+  <button class="l2b" onclick="toggleL2()">
+    <span class="l2bl">⬡ GOLDEN EYE · VAULT · SPORT</span>
+    <span class="l2cv" id="l2chev">▼</span>
   </button>
 
-  <div class="l2-body" id="l2Body">
+  <div class="l2body" id="l2body">
 
-    <!-- GOLDEN EYE RADAR -->
-    <div class="eye-box">
-      <div class="eye-hdr">
-        <span class="t-hdr" style="color:var(--acc)">◉ Golden Eye Radar</span>
-        <span class="t-lbl" id="eyeDateLbl"></span>
-      </div>
-      <div class="eye-panel" id="eyePanel">
-        <div class="eye-status sync-off" id="eyeStatus">CALCULATING...</div>
-        <div class="eye-window off" id="eyeWindow">——:—— – ——:——</div>
-        <div class="eye-dur" id="eyeDur"></div>
-        <div class="eye-reason" id="eyeReason"></div>
+    <!-- GOLDEN EYE -->
+    <div class="eyebox">
+      <div class="eyehdr"><span class="t-h" style="color:var(--acc)">◉ Golden Eye Radar</span><span class="t-l" id="eyeDate"></span></div>
+      <div class="eyepanel" id="eyePanel">
+        <div class="eyest off" id="eyeSt">CALCULATING...</div>
+        <div class="eyewin off" id="eyeWin">——:—— – ——:——</div>
+        <div class="eyedur" id="eyeDur"></div>
+        <div class="eyersn" id="eyeRsn"></div>
       </div>
     </div>
 
     <!-- GASTRONOMY -->
-    <div class="gas-box">
-      <div class="gas-hdr"><span class="t-hdr">◉ Gastronomy Strategy</span><span class="t-lbl" id="gasPriLbl"></span></div>
-      <div class="gas-panel">
-        <div class="gas-pri" id="gasPriority">PRIORITY —</div>
-        <div class="gas-rec" id="gasRec">——</div>
-        <div class="gas-rsn" id="gasReason">—</div>
+    <div class="gasbox">
+      <div class="gashdr"><span class="t-h">◉ Gastronomy Strategy</span><span class="t-l" id="gasPriLbl"></span></div>
+      <div class="gaspnl">
+        <div class="gaspri" id="gasPri">PRIORITY —</div>
+        <div class="gasrec" id="gasRec">——</div>
+        <div class="gasrsn" id="gasRsn">—</div>
       </div>
     </div>
 
     <!-- KITCHEN -->
-    <div class="kitchen-box" id="kitchenBox">
-      <div class="kitchen-hdr">
-        <span class="t-hdr" style="color:var(--txt-d);text-shadow:none">◫ Recipe Box — Home Cooking</span>
-        <span class="t-lbl" id="kitchenMode">STANDARD</span>
+    <div class="kitbox" id="kitBox">
+      <div class="kithdr">
+        <span class="t-h" style="color:var(--txt-d);text-shadow:none">◫ Recipe Box</span>
+        <span class="t-l" id="kitMode">STANDARD</span>
       </div>
-      <div class="recipe-grid" id="recipeGrid">
-        <div class="recipe-card" data-name="Tuna Melt">
-          <div class="r-tag tag-p">High Protein</div>
-          <div class="r-name">Tuna Melt</div>
-          <div class="r-meta"><span class="r-desc">Prep: 10m</span><span class="r-sep">·</span><span class="r-desc">Low Cost</span><span class="r-sep">·</span><span class="r-badge">Quick</span></div>
+      <div class="rgrid" id="rgrid">
+        <div class="rcard" data-n="Tuna Melt">
+          <div class="rtag tp">High Protein</div>
+          <div class="rname">Tuna Melt</div>
+          <div class="rmeta"><span class="rdesc">Prep: 10m</span><span class="rsep">·</span><span class="rdesc">Low Cost</span><span class="rsep">·</span><span class="rbadge">Quick</span></div>
         </div>
-        <div class="recipe-card" data-name="Rosemary Steak">
-          <div class="r-tag tag-g">Gourmet</div>
-          <div class="r-name">Rosemary Steak</div>
-          <div class="r-meta"><span class="r-desc">Prep: 20m</span><span class="r-sep">·</span><span class="r-desc">Essential Fats</span><span class="r-sep">·</span><span class="r-badge">Premium</span></div>
+        <div class="rcard" data-n="Rosemary Steak">
+          <div class="rtag tg">Gourmet</div>
+          <div class="rname">Rosemary Steak</div>
+          <div class="rmeta"><span class="rdesc">Prep: 20m</span><span class="rsep">·</span><span class="rdesc">Essential Fats</span><span class="rsep">·</span><span class="rbadge">Premium</span></div>
         </div>
-        <div class="recipe-card" data-name="Thai Red Curry">
-          <div class="r-tag tag-e">Exotic</div>
-          <div class="r-name">Thai Red Curry</div>
-          <div class="r-meta"><span class="r-desc">Prep: 15m</span><span class="r-sep">·</span><span class="r-desc">Fast</span><span class="r-sep">·</span><span class="r-badge">Wildcard</span></div>
+        <div class="rcard" data-n="Thai Red Curry">
+          <div class="rtag te">Exotic</div>
+          <div class="rname">Thai Red Curry</div>
+          <div class="rmeta"><span class="rdesc">Prep: 15m</span><span class="rsep">·</span><span class="rdesc">Fast</span><span class="rsep">·</span><span class="rbadge">Wildcard</span></div>
         </div>
       </div>
+      <!-- Cheat Meal Toggle -->
+      <div class="cheat-row">
+        <span class="cheat-lbl">🍕 Cheat Meal / Social</span>
+        <label class="csw"><input type="checkbox" id="cheatTgl" onchange="onCheat()"><span class="csl"></span></label>
+      </div>
+      <div class="cheat-msg" id="cheatMsg">✦ SOCIAL MODE: ENJOY YOUR NIGHT — BALANCE AKTİF</div>
     </div>
 
     <!-- SPORT ENGINE -->
-    <div class="sport-box">
-      <div class="sport-hdr"><span class="t-hdr" style="color:var(--tel)">◎ Athletic Sync</span><span class="t-lbl" id="sportWeekLbl"></span></div>
-      <div class="tennis-alert" id="tennisAlert">
+    <div class="spbox">
+      <div class="sphdr"><span class="t-h" style="color:var(--tel)">◎ Athletic Sync</span><span class="t-l" id="spWeek"></span></div>
+      <div class="talert" id="tAlert">
         <span style="font-size:1.1rem">🎾</span>
-        <div><div class="tennis-txt">Tennis Window Open</div><div class="tennis-sub" id="tennisSub">Golden time &gt; 90min · No night shift</div></div>
+        <div><div class="ttxt">Tennis Window Open</div><div class="tsub" id="tSub">Golden time &gt; 90min · No night shift</div></div>
       </div>
-      <div class="sport-duo">
-        <div class="sport-col"><div class="sport-who">◈ OZAN</div><div class="sp-badge sp-rest" id="ozSportBadge">REST</div><div class="sp-det" id="ozSportDet">No sport window today.</div></div>
-        <div class="sport-col"><div class="sport-who">◈ NADYA</div><div class="sp-badge sp-rest" id="naSportBadge">REST</div><div class="sp-det" id="naSportDet">No sport scheduled today.</div></div>
+      <div class="spduo">
+        <div class="spcol"><div class="spwho">◈ OZAN</div><div class="spbdg sp-rst" id="ozBdg">REST</div><div class="spdet" id="ozDet">No sport window today.</div></div>
+        <div class="spcol"><div class="spwho">◈ NADYA</div><div class="spbdg sp-rst" id="naBdg">REST</div><div class="spdet" id="naDet">No sport scheduled today.</div></div>
       </div>
-      <div class="fit-tracker">
-        <div><div class="fit-lbl">Fitness Goal — This Week</div><div class="fit-count" id="fitCount">0<span class="den"> / 3</span></div></div>
-        <div class="fit-r">
-          <div class="fit-pips"><div class="pip" id="pip0"></div><div class="pip" id="pip1"></div><div class="pip" id="pip2"></div></div>
-          <button class="btn-fit" onclick="incFitness()">+</button>
-          <button class="btn-fit sm" onclick="rstFitness()">RST</button>
+      <div class="ftrack">
+        <div><div class="flbl">Fitness Goal — This Week</div><div class="fcnt" id="fitCnt">0<span class="den"> / 3</span></div></div>
+        <div class="fr">
+          <div class="fpips"><div class="pip" id="pip0"></div><div class="pip" id="pip1"></div><div class="pip" id="pip2"></div></div>
+          <button class="btn-fit" onclick="incFit()">+</button>
+          <button class="btn-fit sm" onclick="rstFit()">RST</button>
         </div>
       </div>
-      <div class="sport-week-bar" id="swBar"></div>
+      <button class="btn-extra" onclick="logExtra()">＋ LOG EXTRA SESSION</button>
+      <div class="swbar" id="swBar"></div>
     </div>
 
     <!-- VAULT -->
-    <div class="vault-box">
-      <div class="vault-hdr">
-        <div class="vault-hl"><span class="t-hdr" style="color:var(--wrn)">◈ Financial Vault</span><button class="btn-add" onclick="openTxModal()">+</button></div>
-        <span class="t-lbl" id="vaultMonthLbl"></span>
+    <div class="vbox">
+      <div class="vhdr">
+        <div class="vhl"><span class="t-h" style="color:var(--wrn)">◈ Financial Vault</span><button class="btn-add" onclick="openMod()">+</button></div>
+        <span class="t-l" id="vMonthLbl"></span>
       </div>
+      <!-- Budget overview — updates on every salary save -->
       <div class="bov">
-        <div class="bov-title" id="bovTitle">Monthly Budget Overview</div>
-        <div class="b-line"><span class="b-lbl">Total Monthly Budget</span><span class="b-val sal" id="ovSal">₺—</span></div>
-        <div class="b-line"><span class="b-lbl">Allocated to Investment</span><span class="b-val inv" id="ovInv">₺—</span></div>
-        <div class="b-line"><span class="b-lbl">Available for Life</span><span class="b-val avl" id="ovAvl">₺—</span></div>
+        <div class="bovt" id="bovTitle">Monthly Budget Overview</div>
+        <div class="bline"><span class="blbl">Total Monthly Budget</span><span class="bval sal" id="ovSal">₺—</span></div>
+        <div class="bline"><span class="blbl">Allocated to Investment</span><span class="bval inv" id="ovInv">₺—</span></div>
+        <div class="bline"><span class="blbl">Available for Life</span><span class="bval avl" id="ovAvl">₺—</span></div>
       </div>
-      <div class="allowance">
-        <div><div class="alw-lbl">Daily Allowance</div><div class="alw-sub" id="alwDays">— days left</div></div>
-        <div style="text-align:right"><div class="alw-val" id="alwVal">₺—</div><div class="alw-sub">per day remaining</div></div>
+      <div class="alw">
+        <div><div class="alwl">Daily Allowance</div><div class="alws" id="alwDays">— days left</div></div>
+        <div style="text-align:right"><div class="alwv" id="alwVal">₺—</div><div class="alws">per day remaining</div></div>
       </div>
-      <div class="v-cat">
-        <div class="v-cat-row"><span class="v-cat-name">Dining Out</span><div class="v-cat-r"><span class="v-spent" id="cs-dining">₺0</span><span class="v-goal" id="cg-dining">/ ₺0 limit</span></div></div>
-        <div class="v-bar-track"><div class="v-bar-fill" id="cb-dining" style="width:0%"></div></div>
-        <div class="v-pct" id="cp-dining">0%</div>
+      <div class="vcat">
+        <div class="vcr"><span class="vcn">Dining Out</span><div class="vcri"><span class="vsp" id="cs-d">₺0</span><span class="vgl" id="cg-d">/ ₺0</span></div></div>
+        <div class="vbt"><div class="vbf" id="cb-d" style="width:0%"></div></div><div class="vpct" id="cp-d">0%</div>
       </div>
-      <div class="v-cat">
-        <div class="v-cat-row"><span class="v-cat-name">Groceries</span><div class="v-cat-r"><span class="v-spent" id="cs-groceries">₺0</span><span class="v-goal" id="cg-groceries">/ ₺0 limit</span></div></div>
-        <div class="v-bar-track"><div class="v-bar-fill" id="cb-groceries" style="width:0%"></div></div>
-        <div class="v-pct" id="cp-groceries">0%</div>
+      <div class="vcat">
+        <div class="vcr"><span class="vcn">Groceries</span><div class="vcri"><span class="vsp" id="cs-g">₺0</span><span class="vgl" id="cg-g">/ ₺0</span></div></div>
+        <div class="vbt"><div class="vbf" id="cb-g" style="width:0%"></div></div><div class="vpct" id="cp-g">0%</div>
       </div>
-      <div class="v-cat">
-        <div class="v-cat-row"><span class="v-cat-name">Misc</span><div class="v-cat-r"><span class="v-spent" id="cs-misc">₺0</span><span class="v-goal" id="cg-misc">/ ₺0 limit</span></div></div>
-        <div class="v-bar-track"><div class="v-bar-fill" id="cb-misc" style="width:0%"></div></div>
-        <div class="v-pct" id="cp-misc">0%</div>
+      <div class="vcat">
+        <div class="vcr"><span class="vcn">Misc</span><div class="vcri"><span class="vsp" id="cs-m">₺0</span><span class="vgl" id="cg-m">/ ₺0</span></div></div>
+        <div class="vbt"><div class="vbf" id="cb-m" style="width:0%"></div></div><div class="vpct" id="cp-m">0%</div>
       </div>
-      <div class="v-total"><span class="v-t-lbl">Total Spent</span><span class="v-t-val" id="vaultTotal">₺0 / ₺0</span></div>
-      <div class="surplus-block">
-        <div class="s-cell"><div class="s-lbl">Net Surplus</div><div class="s-val" id="surplusVal">₺—</div><div class="s-sub" id="surplusSub">salary − invest − spent</div></div>
-        <div class="s-cell"><div class="s-lbl">Disposable</div><div class="s-val" id="dispVal">₺—</div><div class="s-sub">salary − savings plan</div></div>
+      <div class="vtot"><span class="vtl">Total Spent</span><span class="vtv" id="vTot">₺0/₺0</span></div>
+      <!-- Surplus -->
+      <div class="surp">
+        <div class="sc"><div class="sl">Net Surplus</div><div class="sv" id="surpV">₺—</div><div class="ss" id="surpS">set salary to activate</div></div>
+        <div class="sc"><div class="sl">Disposable</div><div class="sv" id="dispV">₺—</div><div class="ss">salary − savings plan</div></div>
       </div>
-      <div class="burn-badge" id="burnBadge"><div class="burn-dot"></div><span class="burn-lbl">Daily Burn Rate</span><span class="burn-val" id="burnVal">₺—/day</span></div>
-
-      <!-- SUCCESS SCORE -->
-      <div class="score-strip">
-        <div class="score-strip-hdr">
-          <span class="score-strip-title">Monthly Success Rate</span>
-          <span class="score-pct" id="scorePct">—%</span>
+      <div class="burn" id="burnBdg"><div class="bdot"></div><span class="blbl">Daily Burn Rate</span><span class="bvl" id="burnV">₺—/day</span></div>
+      <!-- Vitality -->
+      <div class="vit-strip">
+        <div class="vit-hdr"><span class="vit-title">Monthly Vitality</span><span class="vit-pct z" id="vitPct">—%</span></div>
+        <div class="vit-track"><div class="vit-fill" id="vitFill" style="width:0%"></div></div>
+        <div class="vit-bd">
+          <div class="vbseg"><span class="vbsv" id="vit-s">+0%</span>Shift</div>
+          <div class="vbseg"><span class="vbsv" id="vit-w">+0%</span>Window</div>
+          <div class="vbseg"><span class="vbsv" id="vit-g">+0%</span>Goals</div>
         </div>
-        <div class="score-bar-track"><div class="score-bar-fill" id="scoreBarFill" style="width:0%"></div></div>
-        <div class="score-stats">
-          <span><span class="hi" id="scoreHits">0</span> hits / <span id="scoreDays">0</span> days logged</span>
-          <span id="scoreLabel">NO DATA</span>
-        </div>
+      </div>
+      <!-- Success Rate -->
+      <div class="scr-strip">
+        <div class="scr-hdr"><span class="scr-title">Monthly Success Rate</span><span class="scr-pct" id="scrPct">—%</span></div>
+        <div class="scr-track"><div class="scr-fill" id="scrFill" style="width:0%"></div></div>
+        <div class="scr-st"><span><span id="scrHits" style="font-weight:700;color:var(--txt-d)">0</span> hits / <span id="scrDays">0</span> days</span><span id="scrLbl">NO DATA</span></div>
       </div>
     </div>
 
     <!-- PROJECTION -->
-    <div class="proj-box">
-      <div class="proj-hdr"><span class="t-hdr" style="color:var(--prj)">◎ Work-to-Goal Projection</span><span class="t-lbl" id="projDtLbl"></span></div>
-      <div class="card-p proj-panel">
-        <div class="proj-ro" id="projRo"><span class="months" id="projMonths">—</span> MONTHS TO TARGET</div>
-        <div class="proj-sub" id="projSub">Set goals in Budget tab to activate.</div>
-        <div class="proj-bar-wrap">
-          <div class="proj-bar-hdr"><span class="proj-bar-lbl">Goal Progress</span><span class="proj-bar-pct" id="projPct">—%</span></div>
-          <div class="proj-bar-t"><div class="proj-bar-f" id="projBarF" style="width:0%"></div></div>
-        </div>
-        <div class="proj-stats">
-          <div class="ps"><div class="ps-lbl">Current Savings</div><div class="ps-val" id="projCurSav">₺—</div></div>
-          <div class="ps"><div class="ps-lbl">Monthly Saving</div><div class="ps-val" id="projMonSav">₺—</div></div>
+    <div class="prbox">
+      <div class="prhdr"><span class="t-h" style="color:var(--prj)">◎ Work-to-Goal Projection</span><span class="t-l" id="prDate"></span></div>
+      <div class="card-p prpanel">
+        <div class="prro" id="prRo"><span class="mos" id="prMos">—</span> MONTHS TO TARGET</div>
+        <div class="prsub" id="prSub">Set goals in Budget tab to activate.</div>
+        <div class="prhh"><span class="prl">Goal Progress</span><span class="prp" id="prPct">—%</span></div>
+        <div class="prbt"><div class="prbf" id="prFill" style="width:0%"></div></div>
+        <div class="prstats">
+          <div class="prs"><div class="prl2">Current Savings</div><div class="prv" id="prCS">₺—</div></div>
+          <div class="prs"><div class="prl2">Monthly Saving</div><div class="prv" id="prMS">₺—</div></div>
         </div>
       </div>
     </div>
 
     <!-- TIMELINE -->
-    <div class="tl-box">
-      <span class="t-lbl">⧖ Next 3 Days — Ozan</span>
-      <div class="tl-row" id="tlRow"></div>
-    </div>
+    <div class="tlbox"><span class="t-l">⧖ Next 3 Days — Ozan</span><div class="tlrow" id="tlRow"></div></div>
 
     <!-- EPOCH -->
-    <div class="epoch-box">
-      <span class="t-lbl">◎ Epoch Calibration</span>
-      <div class="epoch-row">
-        <span class="epoch-lbl">EPOCH DATE</span>
+    <div class="epbox">
+      <span class="t-l">◎ Epoch Calibration</span>
+      <div class="eprow">
+        <span class="eplbl">EPOCH DATE</span>
         <input type="date" id="epochInput">
         <button class="btn-set" onclick="setEpoch()">SET</button>
       </div>
-      <div class="epoch-stored" id="epochStored">EPOCH: NOT SET</div>
+      <div class="epst" id="epSt">EPOCH: NOT SET</div>
     </div>
 
-    <!-- REFLECTION / DAILY CHECK-IN -->
-    <div class="reflect-box">
-      <div class="reflect-hdr">
-        <span class="t-hdr" style="color:var(--txt-d);text-shadow:none;letter-spacing:4px">◎ Daily Check-In</span>
-        <span class="reflect-date" id="reflDate"></span>
+    <!-- DAILY CHECK-IN -->
+    <div class="chkbox">
+      <div class="chkhdr">
+        <span class="t-h" style="color:var(--txt-d);text-shadow:none;letter-spacing:4px">◎ Daily Check-In</span>
+        <span class="chkdt" id="chkDate"></span>
       </div>
-      <div class="reflect-row">
-        <span class="reflect-q">Gastronomy Goal Hit?</span>
-        <div class="reflect-toggle">
-          <button class="btn-ref" id="rGY" onclick="setReflect('gastro','yes')">YES</button>
-          <button class="btn-ref" id="rGN" onclick="setReflect('gastro','no')">NO</button>
-        </div>
+      <div class="chkrow">
+        <span class="chkq">Gastronomy Goal Hit?</span>
+        <div class="chktog"><button class="btn-ck" id="rGY" onclick="setRef('gastro','yes')">YES</button><button class="btn-ck" id="rGN" onclick="setRef('gastro','no')">NO</button></div>
       </div>
-      <div class="reflect-row">
-        <span class="reflect-q">Sport Routine Completed?</span>
-        <div class="reflect-toggle">
-          <button class="btn-ref" id="rSY" onclick="setReflect('sport','yes')">YES</button>
-          <button class="btn-ref" id="rSN" onclick="setReflect('sport','no')">NO</button>
-        </div>
+      <div class="chkrow">
+        <span class="chkq">Sport Routine Completed?</span>
+        <div class="chktog"><button class="btn-ck" id="rSY" onclick="setRef('sport','yes')">YES</button><button class="btn-ck" id="rSN" onclick="setRef('sport','no')">NO</button></div>
       </div>
-      <div class="reflect-score" id="reflScore">AWAITING INPUT</div>
+      <div class="chksc" id="chkSc">AWAITING INPUT</div>
     </div>
 
-  </div><!-- /l2-body -->
+  </div><!-- /l2body -->
 </div>
 
 <!-- L3 LOG -->
-<div class="l3-wrap card"><span class="c-tab">L3 // SYSTEM LOG</span>
-  <div class="l3-hdr"><span class="l3-title">// Terminal Output</span><button class="btn-clr" onclick="clearLog()">CLR</button></div>
-  <div class="log-term" id="logTerm"></div>
+<div class="l3w card"><span class="ctab">L3 // SYSTEM LOG</span>
+  <div class="l3h"><span class="l3t">// Terminal Output</span><button class="btn-clr" onclick="clrLog()">CLR</button></div>
+  <div class="log-t" id="logT"></div>
 </div>
 
-<div class="foot">ORACLE v5.1 // SUCCESS SCORE · SPORT SYNC · HEARTBEAT FIXED</div>
-</div><!-- /wrap -->
+<div class="foot">ORACLE v7.0 // FINAL CALIBRATION · NADYA UPDATE · VITALITY SCORE</div>
+</div>
 
 <script>
-/* ══════════════════════════════════════════════════════
-   ORACLE ENGINE v5.0 — GOLDEN EYE
-   Storage keys preserved:
-     oracle_epoch          — shift epoch date
-     oracle_vault_YYYY_MM  — per-month vault
-     oracle_current_savings — global savings carry
-══════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   ORACLE ENGINE v7.0 — FINAL CALIBRATION
+   Storage keys (preserved across all versions):
+     oracle_epoch            — shift epoch date
+     oracle_vault_YYYY_MM    — per-month vault
+     oracle_current_savings  — global savings carry
+     oracle_override_YYYY-MM-DD — daily shift override
+═══════════════════════════════════════════════════════════ */
 
-/* ── CONSTANTS ──────────────────────────────────── */
-const CYCLE    = 24, BLOCK = 8, WORK = 6, OFF = 2;
-const EPOCH_KEY = 'oracle_epoch';
-const VAULT_PFX = 'oracle_vault_';
-const SAV_KEY   = 'oracle_current_savings';
+/* ── CONSTANTS ──────────────────────────────────────── */
+const CYCLE=24,BLOCK=8,WORK=6,OFF_D=2;
+const EPOCH_KEY='oracle_epoch', VAULT_PFX='oracle_vault_', SAV_KEY='oracle_current_savings', OVR_PFX='oracle_override_';
 
-const DAYS_S   = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-const MONTHS_S = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+const DS=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+const MS=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 
-/* Shift blocks — work/sleep/road windows (decimal hours) */
-const BLOCKS = [
-  { name:'MORNING',   short:'MRN', abbr:'M', cls:'mrn', icon:'◐',
-    wS:7,  wE:15,  rPre:[6.5,7],   rPst:[15,15.5],  slS:22.5, slE:30.5 },
-  { name:'NIGHT',     short:'NGT', abbr:'N', cls:'ngt', icon:'●',
-    wS:23, wE:31,  rPre:[22.5,23], rPst:[31,31.5],  slS:8.5,  slE:16.5 },
-  { name:'AFTERNOON', short:'AFT', abbr:'A', cls:'aft', icon:'◑',
-    wS:15, wE:23,  rPre:[14.5,15], rPst:[23,23.5],  slS:25,   slE:33   },
+/* Shift blocks */
+const BLK=[
+  {n:'MORNING',  s:'MRN',a:'M',c:'mrn',i:'◐', wS:7, wE:15,rPre:[6.5,7],  rPst:[15,15.5], slS:22.5,slE:30.5},
+  {n:'NIGHT',    s:'NGT',a:'N',c:'ngt',i:'●', wS:23,wE:31,rPre:[22.5,23],rPst:[31,31.5], slS:8.5, slE:16.5},
+  {n:'AFTERNOON',s:'AFT',a:'A',c:'aft',i:'◑', wS:15,wE:23,rPre:[14.5,15],rPst:[23,23.5], slS:25,  slE:33  },
 ];
 
-/* Nadya schedule */
-const NADYA_SLP = [23.5, 31.5];
-const NADYA_SCH = [
-  { type:'OFF',    label:'SUNDAY',    wS:null, wE:null, rPre:null,   rPst:null   },
-  { type:'OFFICE', label:'MONDAY',    wS:9,    wE:18,   rPre:[7,9],  rPst:[18,20] },
-  { type:'OFFICE', label:'TUESDAY',   wS:9,    wE:18,   rPre:[7,9],  rPst:[18,20] },
-  { type:'OFFICE', label:'WEDNESDAY', wS:9,    wE:18,   rPre:[7,9],  rPst:[18,20] },
-  { type:'REMOTE', label:'THURSDAY',  wS:9,    wE:18,   rPre:null,   rPst:null   },
-  { type:'REMOTE', label:'FRIDAY',    wS:9,    wE:18,   rPre:null,   rPst:null   },
-  { type:'OFF',    label:'SATURDAY',  wS:null, wE:null, rPre:null,   rPst:null   },
+/* ── NADYA SCHEDULE v7.0 ────────────────────────────────
+   Phase 7 update:
+   Mon=1, Tue=2, Thu=4 → OFFICE (2h commute buffer)
+   Wed=3, Fri=5        → HOME (local only, no commute)
+   Sat=6, Sun=0        → OFF
+   Pilates: Wed=3, Fri=5 @ 18:30–19:30
+─────────────────────────────────────────────────────────*/
+const NADYA=[
+  {t:'OFF',   l:'SUNDAY',    wS:null,wE:null,rPre:null,  rPst:null  }, // 0
+  {t:'OFFICE',l:'MONDAY',    wS:9,   wE:18,  rPre:[7,9], rPst:[18,20]}, // 1 — 2h commute
+  {t:'OFFICE',l:'TUESDAY',   wS:9,   wE:18,  rPre:[7,9], rPst:[18,20]}, // 2 — 2h commute
+  {t:'HOME',  l:'WEDNESDAY', wS:9,   wE:18,  rPre:null,  rPst:null  }, // 3 — home, no commute
+  {t:'OFFICE',l:'THURSDAY',  wS:9,   wE:18,  rPre:[7,9], rPst:[18,20]}, // 4 — 2h commute (high fatigue)
+  {t:'HOME',  l:'FRIDAY',    wS:9,   wE:18,  rPre:null,  rPst:null  }, // 5 — home, no commute
+  {t:'OFF',   l:'SATURDAY',  wS:null,wE:null,rPre:null,  rPst:null  }, // 6
 ];
+const NADYA_SLP=[23.5,31.5];
+const PIL_DAYS=new Set([3,5]); // Wed, Fri
+const PIL_S=18.5, PIL_E=19.5; // 18:30–19:30
+const BURN_THR=500;
 
-/* Pilates: Wed=3, Fri=5 → added to Nadya's blocked map */
-const PILATES_DAYS = new Set([3, 5]);
-const PILATES_START = 18.5, PILATES_END = 19.5; // 18:30–19:30
+/* ── VAULT DATA ─────────────────────────────────────── */
+const DEF_GOALS={dining:1500,groceries:2000,misc:800};
 
-const BURN_THRESH = 500; // ₺/day → restaurant trigger
-
-/* ── VAULT DATA LAYER ───────────────────────────── */
-const DEFAULT_GOALS = { dining:1500, groceries:2000, misc:800 };
-
-function vaultKey(ym) { return `${VAULT_PFX}${ym.replace('-','_')}`; }
-
-function freshVault(ym) {
-  return { month:ym, goals:{...DEFAULT_GOALS}, spent:{dining:0,groceries:0,misc:0},
-           monthlyIncome:0, invTarget:0, monthlySaving:0, reflect:{}, fitness:{weekKey:'',sessions:0} };
+function freshVault(ym){
+  return{month:ym,goals:{...DEF_GOALS},spent:{dining:0,groceries:0,misc:0},
+         monthlyIncome:0,invTarget:0,monthlySaving:0,reflect:{},fitness:{weekKey:'',sessions:0}};
 }
 
-let vault = null;
+let vault=null;
 
-function loadVault(ym) {
-  try {
-    const raw = localStorage.getItem(vaultKey(ym));
-    if (raw) {
-      const p = JSON.parse(raw);
-      if (!p.monthlyIncome)  p.monthlyIncome  = 0;
-      if (!p.invTarget)      p.invTarget      = 0;
-      if (!p.monthlySaving)  p.monthlySaving  = 0;
-      if (!p.reflect)        p.reflect        = {};
-      if (!p.fitness)        p.fitness        = { weekKey:'', sessions:0 };
+function vKey(ym){return`${VAULT_PFX}${ym.replace('-','_')}`;}
+
+function loadVault(ym){
+  try{
+    const r=localStorage.getItem(vKey(ym));
+    if(r){
+      const p=JSON.parse(r);
+      if(p.monthlyIncome===undefined)p.monthlyIncome=0;
+      if(p.invTarget===undefined)p.invTarget=0;
+      if(p.monthlySaving===undefined)p.monthlySaving=0;
+      if(!p.reflect)p.reflect={};
+      if(!p.fitness)p.fitness={weekKey:'',sessions:0};
       return p;
     }
-  } catch {}
+  }catch{}
   return freshVault(ym);
 }
 
-function saveVault() {
-  const [y,m] = vault.month.split('-');
-  localStorage.setItem(`${VAULT_PFX}${y}_${m}`, JSON.stringify(vault));
+function saveV(){
+  const[y,m]=vault.month.split('-');
+  localStorage.setItem(`${VAULT_PFX}${y}_${m}`,JSON.stringify(vault));
 }
 
-function loadSavings() { try { return parseFloat(localStorage.getItem(SAV_KEY)) || 0; } catch { return 0; } }
-function saveSavings(v) { localStorage.setItem(SAV_KEY, String(v)); }
+function loadSav(){try{return parseFloat(localStorage.getItem(SAV_KEY))||0;}catch{return 0;}}
+function saveSav(v){localStorage.setItem(SAV_KEY,String(v));}
 
-/* ── VAULT COMPUTED ─────────────────────────────── */
-const tl = x => `₺${(+x).toLocaleString('tr-TR',{minimumFractionDigits:0,maximumFractionDigits:0})}`;
-const dp = () => vault.goals.dining > 0 ? vault.spent.dining / vault.goals.dining : 0;
-const totalSpent = () => vault.spent.dining + vault.spent.groceries + vault.spent.misc;
-const totalGoal  = () => vault.goals.dining + vault.goals.groceries + vault.goals.misc;
-const remaining  = () => Math.max(0, totalGoal() - totalSpent());
-const daysLeft   = () => { const n=new Date(); return Math.max(1, new Date(n.getFullYear(),n.getMonth()+1,0).getDate() - n.getDate() + 1); };
-const dailyAllw  = () => remaining() / daysLeft();
-const disposable = () => (vault.monthlyIncome||0) - (vault.monthlySaving||0);
-const netSurplus = () => disposable() - totalSpent();
-const burnRate   = () => netSurplus() / daysLeft();
+/* ── COMPUTED FINANCIALS ─────────────────────────────── */
+const tl=x=>`₺${(+x).toLocaleString('tr-TR',{minimumFractionDigits:0,maximumFractionDigits:0})}`;
+const dp=()=>vault.goals.dining>0?vault.spent.dining/vault.goals.dining:0;
+const totSp=()=>vault.spent.dining+vault.spent.groceries+vault.spent.misc;
+const totGl=()=>vault.goals.dining+vault.goals.groceries+vault.goals.misc;
+const remBg=()=>Math.max(0,totGl()-totSp());
+const dLeft=()=>{const n=new Date();return Math.max(1,new Date(n.getFullYear(),n.getMonth()+1,0).getDate()-n.getDate()+1);};
+const dailyAlw=()=>remBg()/dLeft();
+const disp=()=>(vault.monthlyIncome||0)-(vault.monthlySaving||0);
+const netSurp=()=>disp()-totSp();
+const bRate=()=>netSurp()/dLeft();
 
-/* ── MINUTE MAP (half-hour precision) ──────────── */
-const hToM = h => Math.round(h * 60);
-function markRange(arr, s, e) {
-  const sm = hToM(s) % 1440;
-  const em = hToM(e);
-  if (em <= 1440) { for (let m=sm; m<Math.min(em,1440); m++) arr[m]=true; }
-  else { for (let m=sm; m<1440; m++) arr[m]=true; const w=em%1440; for (let m=0; m<w; m++) arr[m]=true; }
+/* ── MINUTE MAP ─────────────────────────────────────── */
+const hToM=h=>Math.round(h*60);
+function markR(a,s,e){
+  const sm=hToM(s)%1440,em=hToM(e);
+  if(em<=1440){for(let m=sm;m<Math.min(em,1440);m++)a[m]=true;}
+  else{for(let m=sm;m<1440;m++)a[m]=true;const w=em%1440;for(let m=0;m<w;m++)a[m]=true;}
 }
-function buildMap(ranges) { const a=new Array(1440).fill(false); for (const r of ranges) markRange(a,r[0],r[1]); return a; }
+function bldMap(rr){const a=new Array(1440).fill(false);for(const r of rr)markR(a,r[0],r[1]);return a;}
 
-/* ── GOLDEN TIME CALCULATOR ─────────────────────
-   Returns { startM, endM, durationM } or null.
-   Nadya's Pilates window is subtracted on Pilates days.
-────────────────────────────────────────────────── */
-function calcGoldenTime(shift, dow) {
-  const nadya = NADYA_SCH[dow];
-  const b     = BLOCKS[shift.blockIndex];
-
-  // Ozan blocked
-  const ozR = [[b.slS, b.slE]];
-  if (!shift.isOff) { ozR.push([b.wS,b.wE]); if(b.rPre)ozR.push(b.rPre); if(b.rPst)ozR.push(b.rPst); }
-
-  // Nadya blocked (incl. pilates)
-  const ndR = [[NADYA_SLP[0], NADYA_SLP[1]]];
-  if (nadya.type !== 'OFF') {
-    ndR.push([nadya.wS, nadya.wE]);
-    if (nadya.rPre) ndR.push(nadya.rPre);
-    if (nadya.rPst) ndR.push(nadya.rPst);
-  }
-  if (PILATES_DAYS.has(dow)) ndR.push([PILATES_START, PILATES_END]);
-
-  const ozM = buildMap(ozR), ndM = buildMap(ndR);
-  const free = ozM.map((o,i) => !o && !ndM[i]);
-
+/* ── GOLDEN TIME ─────────────────────────────────────── */
+function calcGT(sh,dow){
+  const na=NADYA[dow],b=BLK[sh.blockIndex];
+  const oz=[[b.slS,b.slE]];
+  if(!sh.isOff){oz.push([b.wS,b.wE]);if(b.rPre)oz.push(b.rPre);if(b.rPst)oz.push(b.rPst);}
+  const nd=[[NADYA_SLP[0],NADYA_SLP[1]]];
+  if(na.t!=='OFF'){nd.push([na.wS,na.wE]);if(na.rPre)nd.push(na.rPre);if(na.rPst)nd.push(na.rPst);}
+  if(PIL_DAYS.has(dow))nd.push([PIL_S,PIL_E]);
+  const ozM=bldMap(oz),ndM=bldMap(nd);
+  const free=ozM.map((o,i)=>!o&&!ndM[i]);
   let bS=-1,bL=0,cS=-1,cL=0;
-  for (let m=0; m<=1440; m++) {
-    if (m<1440 && free[m]) { if(cS===-1){cS=m;cL=0;} cL++; }
-    else { if(cL>bL){bL=cL;bS=cS;} cS=-1;cL=0; }
+  for(let m=0;m<=1440;m++){
+    if(m<1440&&free[m]){if(cS===-1){cS=m;cL=0;}cL++;}
+    else{if(cL>bL){bL=cL;bS=cS;}cS=-1;cL=0;}
   }
-  return (bS<0||bL===0) ? null : { startM:bS, endM:bS+bL, durationM:bL };
+  return(bS<0||bL===0)?null:{startM:bS,endM:bS+bL,durationM:bL};
 }
 
-/* Build unavailability reason for Golden Eye */
-function syncReason(shift, dow) {
-  const n = NADYA_SCH[dow];
-  if (shift.isOff) return null; // Ozan free
-  const bname = BLOCKS[shift.blockIndex].name;
-  if (shift.blockIndex === 1) return `Ozan on Night Shift (${bname})`;
-  return null;
+/* ── 24-DAY CYCLE ────────────────────────────────────── */
+function getShift(ep){
+  const n=new Date();
+  const tU=Date.UTC(n.getFullYear(),n.getMonth(),n.getDate());
+  const eU=Date.UTC(ep.getFullYear(),ep.getMonth(),ep.getDate());
+  const el=Math.floor((tU-eU)/86400000);
+  const cy=((el%CYCLE)+CYCLE)%CYCLE;
+  const bi=Math.floor(cy/BLOCK),di=cy%BLOCK;
+  const isOff=di>=WORK;
+  return{cycleDay:cy,blockIndex:bi,dayInBlock:di,isOff,workDay:isOff?null:di+1,offDay:isOff?di-WORK+1:null,dLeft:isOff?(OFF_D-(di-WORK+1)):(WORK-(di+1))};
 }
 
-/* ── 24-DAY CYCLE ENGINE ────────────────────────── */
-function getShift(epoch) {
-  const now = new Date();
-  const tUTC = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
-  const eUTC = Date.UTC(epoch.getFullYear(), epoch.getMonth(), epoch.getDate());
-  const elapsed   = Math.floor((tUTC - eUTC) / 86400000);
-  const cycleDay  = ((elapsed % CYCLE) + CYCLE) % CYCLE;
-  const blockIndex= Math.floor(cycleDay / BLOCK);
-  const dayInBlock= cycleDay % BLOCK;
-  const isOff     = dayInBlock >= WORK;
-  const workDay   = isOff ? null : dayInBlock + 1;
-  const offDay    = isOff ? dayInBlock - WORK + 1 : null;
-  const dLeft     = isOff ? (OFF - offDay) : (WORK - workDay);
-  return { cycleDay, blockIndex, dayInBlock, isOff, workDay, offDay, dLeft };
+function getShiftOff(ep,off){
+  const b=new Date();
+  const bU=Date.UTC(b.getFullYear(),b.getMonth(),b.getDate());
+  const tU=bU+off*86400000;
+  const tg=new Date(tU);
+  const eU=Date.UTC(ep.getFullYear(),ep.getMonth(),ep.getDate());
+  const el=Math.floor((tU-eU)/86400000);
+  const cy=((el%CYCLE)+CYCLE)%CYCLE;
+  const bi=Math.floor(cy/BLOCK);
+  const isOff=(cy%BLOCK)>=WORK;
+  return{blockIdx:bi,isOff,target:tg};
 }
 
-function getShiftOffset(epoch, offset) {
-  const base  = new Date();
-  const bUTC  = Date.UTC(base.getFullYear(), base.getMonth(), base.getDate());
-  const tUTC  = bUTC + offset * 86400000;
-  const target= new Date(tUTC);
-  const eUTC  = Date.UTC(epoch.getFullYear(), epoch.getMonth(), epoch.getDate());
-  const elapsed  = Math.floor((tUTC - eUTC) / 86400000);
-  const cycleDay = ((elapsed % CYCLE) + CYCLE) % CYCLE;
-  const blockIdx = Math.floor(cycleDay / BLOCK);
-  const isOff    = (cycleDay % BLOCK) >= WORK;
-  return { blockIdx, isOff, target };
+/* ── SHIFT OVERRIDE ─────────────────────────────────── */
+function todayDK(){const n=new Date();return`${n.getFullYear()}-${pad(n.getMonth()+1)}-${pad(n.getDate())}`;}
+function getOvr(){return localStorage.getItem(`${OVR_PFX}${todayDK()}`)||null;}
+function toggleSMenu(){g('smenu').classList.toggle('open');}
+function applyOvr(type){
+  localStorage.setItem(`${OVR_PFX}${todayDK()}`,type);
+  for(let i=1;i<=7;i++){const d=new Date();d.setDate(d.getDate()-i);localStorage.removeItem(`${OVR_PFX}${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`);}
+  g('smenu').classList.remove('open');
+  upStatus();
+  log(`[SYSTEM] OVERRIDE: ${type} — GECEYARİSI SONA ERER`,'warn');
+  log('[SYSTEM] Manual override recorded. Vitality score recalculated.','warn');
+}
+function clearOvr(){
+  localStorage.removeItem(`${OVR_PFX}${todayDK()}`);
+  g('smenu').classList.remove('open');
+  upStatus();
+  log('[SYSTEM] OVERRIDE CLEARED — MASTER ROTATION RESTORED','ok');
 }
 
-/* ── SPORT ENGINE ────────────────────────────────── */
-function weekKey(d) {
-  const u = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-  const day = u.getUTCDay() || 7;
-  u.setUTCDate(u.getUTCDate() + 4 - day);
-  const y = new Date(Date.UTC(u.getUTCFullYear(), 0, 1));
-  const wk = Math.ceil((((u-y)/86400000)+1)/7);
-  return `${u.getUTCFullYear()}-W${String(wk).padStart(2,'0')}`;
+function applyOvrToShift(s){
+  const o=getOvr();if(!o)return s;
+  const nm={MORNING:0,NIGHT:1,AFTERNOON:2};
+  const special=o==='OFF'||o==='VACATION';
+  return{...s,isOff:special?true:(nm[o]!==undefined?false:s.isOff),blockIndex:nm[o]!==undefined?nm[o]:s.blockIndex,_ovr:o,workDay:special?null:s.workDay,offDay:special?1:s.offDay};
 }
 
-function getFitData() {
-  if (!vault.fitness) vault.fitness = { weekKey:'', sessions:0 };
-  const wk = weekKey(new Date());
-  if (vault.fitness.weekKey !== wk) { vault.fitness = { weekKey:wk, sessions:0 }; saveVault(); }
+/* ── CHEAT MODE ─────────────────────────────────────── */
+let cheatOn=false;
+function onCheat(){
+  cheatOn=document.getElementById('cheatTgl').checked;
+  g('cheatMsg').classList.toggle('vis',cheatOn);
+  if(cheatOn){
+    log('[KITCHEN] SOCIAL MODE AKTİF — LIFESTYLE BALANCE ENGAGED','kit');
+    g('gasRec').textContent='SOCIAL MODE: ENJOY YOUR NIGHT';
+    g('gasRsn').textContent='Cheat meal / social mode aktif. Sistem bütçe uyarılarını geçici olarak askıya aldı.';
+    g('gasPriLbl').textContent='SOCIAL MODE';
+  }else{
+    log('[KITCHEN] SOCIAL MODE DEACTIVATED','kit');
+    if(epochDate){const s=applyOvrToShift(getShift(epochDate));renderGas(calcGT(s,new Date().getDay()),s);}
+  }
+}
+
+/* ── SPORT ENGINE ────────────────────────────────────── */
+function wkKey(d){
+  const u=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  const day=u.getUTCDay()||7;u.setUTCDate(u.getUTCDate()+4-day);
+  const y0=new Date(Date.UTC(u.getUTCFullYear(),0,1));
+  const wk=Math.ceil((((u-y0)/86400000)+1)/7);
+  return`${u.getUTCFullYear()}-W${String(wk).padStart(2,'0')}`;
+}
+
+function getFit(){
+  if(!vault.fitness)vault.fitness={weekKey:'',sessions:0};
+  const wk=wkKey(new Date());
+  if(vault.fitness.weekKey!==wk){vault.fitness={weekKey:wk,sessions:0};saveV();}
   return vault.fitness;
 }
 
-let _cachedGT = null, _cachedShift = null;
+let _gt=null,_sh=null;
 
-function incFitness() {
-  const f = getFitData();
-  if (f.sessions >= 3) return;
-  f.sessions++;
-  vault.fitness = f;
-  saveVault();
-  renderSport(_cachedGT, _cachedShift);
-  log(`[SPORT] OZAN SESSION LOGGED — ${f.sessions}/3 THIS WEEK`, 'sport');
-  if (f.sessions >= 3) log('[SPORT] WEEKLY GOAL ACHIEVED ★', 'ok');
+function incFit(){
+  const f=getFit();if(f.sessions>=3)return;
+  f.sessions++;vault.fitness=f;saveV();
+  renderSport(_gt,_sh);
+  log(`[SPORT] SESSION LOGGED — ${f.sessions}/3`,'sport');
+  if(f.sessions>=3)log('[SPORT] WEEKLY GOAL ACHIEVED ★','ok');
+}
+function rstFit(){
+  vault.fitness={weekKey:wkKey(new Date()),sessions:0};saveV();
+  renderSport(_gt,_sh);log('[SPORT] COUNTER RESET','warn');
+}
+function logExtra(){
+  const f=getFit();const atMax=f.sessions>=3;
+  f.sessions=Math.min(f.sessions+1,3);vault.fitness=f;saveV();
+  renderSport(_gt,_sh);
+  log(atMax?'[SPORT] BONUS SESSION — WEEKLY GOAL ALREADY COMPLETE ★':`[SPORT] EXTRA SESSION — ${f.sessions}/3`,'sport');
+  renderVit();
+  log('[SYSTEM] Manual override recorded. Vitality score recalculated.','ok');
 }
 
-function rstFitness() {
-  vault.fitness = { weekKey: weekKey(new Date()), sessions:0 };
-  saveVault();
-  renderSport(_cachedGT, _cachedShift);
-  log('[SPORT] FITNESS COUNTER RESET', 'warn');
+const isPilates=()=>PIL_DAYS.has(new Date().getDay());
+const isNightShift=s=>s&&!s.isOff&&s.blockIndex===1;
+const tennisOpen=(gt,s)=>gt&&gt.durationM>90&&!isNightShift(s);
+const sportToday=s=>isPilates()||tennisOpen(_gt,s);
+
+function renderSport(gt,sh){
+  _gt=gt;_sh=sh;
+  const dow=new Date().getDay(),ten=tennisOpen(gt,sh),pil=isPilates();
+  const spW=g('spWeek');if(spW)spW.textContent=wkKey(new Date());
+  const ta=g('tAlert');if(ta)ta.classList.toggle('vis',ten);
+  if(ten&&gt&&g('tSub')){const dH=Math.floor(gt.durationM/60),dM=gt.durationM%60;g('tSub').textContent=`Window: ${dH}h ${dM>0?dM+'min':''} · No night shift`;}
+
+  const ob=g('ozBdg'),od=g('ozDet');
+  if(ten){if(ob){ob.className='spbdg sp-ten';ob.textContent='TENNIS';}if(od)od.innerHTML=`<span class="hi">WINDOW OPEN</span><br>Önerilen bugün`;}
+  else{if(ob){ob.className='spbdg sp-rst';ob.textContent='REST';}if(od)od.textContent='Bugün spor penceresi yok.';}
+
+  const nb=g('naBdg'),nd=g('naDet'),na=NADYA[dow];
+  if(pil){if(nb){nb.className='spbdg sp-pil';nb.textContent='PILATES';}if(nd)nd.innerHTML=`<span class="hi">18:30–19:30</span><br>${DS[dow]} seansı`;}
+  else if(na.t!=='OFF'){if(nb){nb.className='spbdg';nb.style.color='var(--blu)';nb.style.borderColor='var(--blu)';nb.textContent=na.t==='OFFICE'?'OFFICE':'HOME';}if(nd)nd.textContent=`${DS[dow]} — ${na.t}`;}
+  else{if(nb){nb.className='spbdg sp-rst';nb.textContent='FREE';}if(nd)nd.textContent='Hafta sonu.';}
+
+  const f=getFit();
+  const fc=g('fitCnt');if(fc)fc.innerHTML=`${f.sessions}<span class="den"> / 3</span>`;
+  for(let i=0;i<3;i++){const p=g(`pip${i}`);if(p)p.className='pip'+(i<f.sessions?' on':'');}
+
+  const bar=g('swBar');
+  if(bar){bar.innerHTML='';const ti=(dow+6)%7;for(let i=0;i<7;i++){const d=document.createElement('div');d.className='wd'+(i<ti?' dn':i===ti?' td':'');bar.appendChild(d);}}
+
+  if(ten)log('[SPORT] TENNIS WINDOW OPEN — KOŞULLAR UYGUN','sport');
+  if(pil)log('[SPORT] NADYA PİLATES BUGÜN — 18:30–19:30','sport');
 }
 
-const nadyaPilatesDay  = () => PILATES_DAYS.has(new Date().getDay());
-const ozNightShift     = (s) => s && !s.isOff && s.blockIndex === 1;
-const tennisWindowOpen = (gt, s) => gt && gt.durationM > 90 && !ozNightShift(s);
-const sportActiveToday = (s) => nadyaPilatesDay() || tennisWindowOpen(_cachedGT, s);
-
-function renderSport(gt, shift) {
-  _cachedGT = gt; _cachedShift = shift;
-  const dow     = new Date().getDay();
-  const wk      = weekKey(new Date());
-  const tennis  = tennisWindowOpen(gt, shift);
-  const pilates = nadyaPilatesDay();
-
-  // Week label
-  const wlbl = document.getElementById('sportWeekLbl');
-  if (wlbl) wlbl.textContent = wk;
-
-  // Tennis alert
-  const alert = document.getElementById('tennisAlert');
-  const tsub  = document.getElementById('tennisSub');
-  if (alert) alert.classList.toggle('visible', tennis);
-  if (tsub && tennis && gt) {
-    const dH = Math.floor(gt.durationM/60), dM = gt.durationM%60;
-    tsub.textContent = `Window: ${dH}h ${dM > 0 ? dM+'min' : ''} · No night shift active`;
-  }
-
-  // Nadya sport
-  const nb = document.getElementById('naSportBadge');
-  const nd = document.getElementById('naSportDet');
-  if (pilates) {
-    if(nb){ nb.className='sp-badge sp-pilates'; nb.textContent='PILATES'; }
-    if(nd) nd.innerHTML=`<span class="hi">18:30–19:30</span><br>${DAYS_S[dow]} session`;
-  } else {
-    if(nb){ nb.className='sp-badge sp-rest'; nb.textContent='REST'; }
-    if(nd) nd.textContent='No sport scheduled today.';
-  }
-
-  // Ozan sport
-  const ob = document.getElementById('ozSportBadge');
-  const od = document.getElementById('ozSportDet');
-  if (tennis) {
-    if(ob){ ob.className='sp-badge sp-tennis'; ob.textContent='TENNIS'; }
-    if(od) od.innerHTML=`<span class="hi">WINDOW OPEN</span><br>Recommended today`;
-  } else {
-    if(ob){ ob.className='sp-badge sp-rest'; ob.textContent='REST'; }
-    if(od) od.textContent='No sport window today.';
-  }
-
-  // Fitness pips
-  const f = getFitData();
-  const fc = document.getElementById('fitCount');
-  if (fc) fc.innerHTML = `${f.sessions}<span class="den"> / 3</span>`;
-  for (let i=0; i<3; i++) {
-    const p = document.getElementById(`pip${i}`);
-    if (p) p.className = 'pip' + (i < f.sessions ? ' on' : '');
-  }
-
-  // Week bar (Mon–Sun)
-  const bar = document.getElementById('swBar');
-  if (bar) {
-    bar.innerHTML = '';
-    const todayIdx = (dow + 6) % 7;
-    for (let i=0; i<7; i++) {
-      const d = document.createElement('div');
-      d.className = 'wd' + (i < todayIdx ? ' done' : i === todayIdx ? ' today' : '');
-      bar.appendChild(d);
-    }
-  }
-
-  if (tennis) log('[SPORT] TENNIS WINDOW OPEN — CONDITIONS OPTIMAL', 'sport');
-  if (pilates) log('[SPORT] NADYA PILATES TODAY — 18:30–19:30', 'sport');
+/* ── GASTRONOMY ─────────────────────────────────────── */
+function gastro(gt,sh){
+  const d=dp()*100,dm=gt?gt.durationM:0,isOff=sh?sh.isOff:false;
+  const inc=vault.monthlyIncome||0,surp=netSurp(),burn=bRate(),sport=sportToday(sh),ten=tennisOpen(gt,sh);
+  if(inc>0&&surp<0)return{p:'EMERGENCY — DEFİSİT',r:'STRICT HOME COOKING',hc:true,hp:sport,rsn:`Net artı ${tl(surp)} — yatırım rezervinize giriyorsunuz.`};
+  if(d>90)return{p:'OVERRIDE — BÜTÇE KRİTİK',r:'HOME COOKING',hc:true,hp:sport,rsn:`Dışarıda yemek %${d.toFixed(0)} — bütçe kilidi devrede.`};
+  if(inc>0&&burn>BURN_THR&&!ten)return{p:'SURPLUS — BURN RATE YÜKSEK',r:'RESTAURANT (SURPLUS)',hc:false,hp:false,rsn:`Burn rate ${tl(burn)}/gün, ₺${BURN_THR} eşiğini aştı.`};
+  if(d<30&&isOff&&!ten)return{p:'PRİORİTE 1 — SURPLUS + İZİN',r:'RESTAURANT NIGHT',hc:false,hp:false,rsn:`Yemek %${d.toFixed(0)} ve Ozan bugün izinli.`};
+  if(!gt||dm<90)return{p:'PRİORİTE 2 — ZAMAN KRİTİK',r:'ORDERING',hc:false,hp:false,rsn:gt?`Pencere ${dm}dak — çok kısa.`:'Bugün senkron yok.'};
+  if(d>80)return{p:'PRİORİTE 3 — BÜTÇE DİKKAT',r:'HOME COOKING',hc:true,hp:sport,rsn:`Dışarıda yemek %${d.toFixed(0)} — limite yaklaşıyor.`};
+  if(sport)return{p:'SPOR GÜNÜ — YÜKSEK PROTEİN',r:'HOME COOKING (HIGH PROTEIN)',hc:true,hp:true,rsn:(ten?'Tenis penceresi açık. ':'Pilates bugün. ')+'Rosemary Steak & Tuna Melt öncelikli.'};
+  return{p:'DEFAULT — OPTIMAL',r:'HOME COOKING',hc:true,hp:false,rsn:`Pencere: ${Math.floor(dm/60)}s ${dm%60}d. Bütçe normal.`};
 }
 
-/* ── GASTRONOMY STRATEGY ────────────────────────── */
-function gastro(gt, shift) {
-  const dpct  = dp() * 100;
-  const durM  = gt ? gt.durationM : 0;
-  const isOff = shift ? shift.isOff : false;
-  const inc   = vault.monthlyIncome || 0;
-  const surp  = netSurplus();
-  const burn  = burnRate();
-  const sport = sportActiveToday(shift);
-  const tennis= tennisWindowOpen(gt, shift);
+/* ── GOLDEN EYE RENDER ───────────────────────────────── */
+const mmHHMM=m=>`${String(Math.floor(m/60)%24).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`;
 
-  if (inc > 0 && surp < 0) return { pri:'EMERGENCY — DEFICIT', rec:'STRICT HOME COOKING', isHC:true, hp:sport, reason:`Net surplus ${tl(surp)} — spending into investment reserve.` };
-  if (dpct > 90)            return { pri:'OVERRIDE — BUDGET CRITICAL', rec:'HOME COOKING', isHC:true, hp:sport, reason:`Dining at ${dpct.toFixed(0)}% — budget lock engaged.` };
-  if (inc > 0 && burn > BURN_THRESH && !tennis) return { pri:'SURPLUS — BURN RATE HIGH', rec:'RESTAURANT (SURPLUS)', isHC:false, hp:false, reason:`Burn rate ${tl(burn)}/day exceeds ₺${BURN_THRESH}.` };
-  if (dpct < 30 && isOff && !tennis) return { pri:'PRIORITY 1 — SURPLUS + OFF DAY', rec:'RESTAURANT NIGHT', isHC:false, hp:false, reason:`Dining at ${dpct.toFixed(0)}% and Ozan is off today.` };
-  if (!gt || durM < 90) return { pri:'PRIORITY 2 — TIME CRITICAL', rec:'ORDERING', isHC:false, hp:false, reason: gt ? `Window is ${durM}min — too short.` : 'No sync window today.' };
-  if (dpct > 80) return { pri:'PRIORITY 3 — BUDGET CAUTION', rec:'HOME COOKING', isHC:true, hp:sport, reason:`Dining at ${dpct.toFixed(0)}% — approaching limit.` };
-  if (sport) return { pri:'SPORT DAY — HIGH PROTEIN', rec:'HOME COOKING (HIGH PROTEIN)', isHC:true, hp:true, reason:(tennis?'Tennis window open. ':'Pilates today. ')+'Prioritising Rosemary Steak & Tuna Melt.' };
-  return { pri:'DEFAULT — OPTIMAL', rec:'HOME COOKING', isHC:true, hp:false, reason:`Window: ${Math.floor(durM/60)}h ${durM%60}min. Budget nominal.` };
+function renderEye(gt,sh){
+  const panel=g('eyePanel'),st=g('eyeSt'),win=g('eyeWin'),dur=g('eyeDur'),rsn=g('eyeRsn');
+  const ten=tennisOpen(gt,sh);
+  if(!gt){
+    panel.className='eyepanel';st.className='eyest off';st.textContent='SYNC YOK';
+    win.className='eyewin off';win.textContent='ORTAK PENCERE BULUNAMADI';
+    dur.textContent='';rsn.textContent='Programlar örtüşmüyor.';return;
+  }
+  const dH=Math.floor(gt.durationM/60),dM=gt.durationM%60;
+  const ds=dH>0?(dM>0?`${dH}S ${dM}D`:`${dH}S`):`${dM}D`;
+  if(ten){
+    panel.className='eyepanel tpulse';st.className='eyest ten';st.textContent='TENİS PENCERESİ AÇIK';
+    win.className='eyewin ten';win.textContent=`${mmHHMM(gt.startM)} – ${mmHHMM(gt.endM)}`;
+  }else{
+    panel.className='eyepanel asyn';st.className='eyest on';st.textContent='SYNC AKTİF';
+    win.className='eyewin';win.textContent=`${mmHHMM(gt.startM)} – ${mmHHMM(gt.endM)}`;
+  }
+  dur.innerHTML=`SÜRE: <span class="hi">${ds}</span>`;
+  rsn.textContent='ALTIN PENCERE ONAYLANDI';
 }
 
-/* ── GOLDEN EYE RENDER ──────────────────────────── */
-function minHHMM(m) { return `${String(Math.floor(m/60)%24).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`; }
-
-function renderGoldenEye(gt, shift) {
-  const panel   = document.getElementById('eyePanel');
-  const status  = document.getElementById('eyeStatus');
-  const window_ = document.getElementById('eyeWindow');
-  const dur     = document.getElementById('eyeDur');
-  const reason  = document.getElementById('eyeReason');
-
-  const tennis = tennisWindowOpen(gt, shift);
-
-  if (!gt) {
-    panel.className = 'eye-panel';
-    status.className  = 'eye-status sync-off'; status.textContent = 'SYNC UNAVAILABLE';
-    window_.className = 'eye-window off'; window_.textContent = 'NO FREE WINDOW';
-    dur.textContent   = '';
-    reason.textContent= shift ? `Reason: ${syncReason(shift, new Date().getDay()) || 'Schedules do not overlap today'}` : 'Epoch not set.';
-    return;
+/* ── KITCHEN RENDER ──────────────────────────────────── */
+function setKit(show,hp){
+  g('kitBox').classList.toggle('vis',show);
+  if(!show)return;
+  const grid=g('rgrid'),cards=Array.from(grid.querySelectorAll('.rcard'));
+  const km=g('kitMode');
+  if(hp){
+    ['Thai Red Curry','Rosemary Steak','Tuna Melt'].forEach(n=>{const c=cards.find(x=>x.dataset.n===n);if(c)grid.prepend(c);});
+    if(km)km.textContent='HIGH PROTEIN ★';
+    log('[KITCHEN] HIGH PROTEIN MODE — Rosemary Steak & Tuna Melt öncelikli','kit');
+  }else{
+    ['Thai Red Curry','Rosemary Steak','Tuna Melt'].forEach(n=>{const c=cards.find(x=>x.dataset.n===n);if(c)grid.appendChild(c);});
+    if(km)km.textContent='STANDARD';
+    log('[KITCHEN] HOME COOKING MODE AKTİF','kit');
   }
-
-  const dH  = Math.floor(gt.durationM / 60);
-  const dM  = gt.durationM % 60;
-  const durS= dH > 0 ? (dM > 0 ? `${dH}H ${dM}MIN` : `${dH}H`) : `${dM}MIN`;
-
-  if (tennis) {
-    panel.className   = 'eye-panel tennis-pulse';
-    status.className  = 'eye-status tennis'; status.textContent = 'TENNIS WINDOW DETECTED';
-    window_.className = 'eye-window tennis-win'; window_.textContent = `${minHHMM(gt.startM)} – ${minHHMM(gt.endM)}`;
-  } else {
-    panel.className   = 'eye-panel active-sync';
-    status.className  = 'eye-status sync-on'; status.textContent = 'SYNC ACTIVE';
-    window_.className = 'eye-window'; window_.textContent = `${minHHMM(gt.startM)} – ${minHHMM(gt.endM)}`;
-  }
-  dur.innerHTML = `DURATION: <span class="hi">${durS}</span>`;
-  reason.textContent = 'SYNC WINDOW CONFIRMED — GOLDEN TIME';
 }
 
-/* ── KITCHEN RENDER ──────────────────────────────── */
-function setKitchen(show, hp) {
-  const box = document.getElementById('kitchenBox');
-  box.classList.toggle('visible', show);
-  if (!show) return;
-  const grid  = document.getElementById('recipeGrid');
-  const cards = Array.from(grid.querySelectorAll('.recipe-card'));
-  const lbl   = document.getElementById('kitchenMode');
-
-  if (hp) {
-    // Float high-protein cards to top
-    ['Thai Red Curry','Rosemary Steak','Tuna Melt'].forEach(name => {
-      const c = cards.find(x => x.dataset.name === name);
-      if (c) grid.prepend(c);
-    });
-    if (lbl) lbl.textContent = 'HIGH PROTEIN ★';
-    log('[KITCHEN] HIGH PROTEIN MODE — Rosemary Steak & Tuna Melt prioritised', 'kitchen');
-  } else {
-    // Default order
-    ['Thai Red Curry','Rosemary Steak','Tuna Melt'].forEach(name => {
-      const c = cards.find(x => x.dataset.name === name);
-      if (c) grid.appendChild(c);
-    });
-    if (lbl) lbl.textContent = 'STANDARD';
-    log('[KITCHEN] HOME COOKING MODE ACTIVE', 'kitchen');
+/* ── GAS RENDER ──────────────────────────────────────── */
+function renderGas(gt,sh){
+  const gas=gastro(gt,sh);
+  g('gasPri').textContent=gas.p;
+  g('gasRec').textContent=gas.r;
+  g('gasRsn').textContent=gas.rsn;
+  g('gasPriLbl').textContent=dp()*100>90?'DINING KİLİTLİ':dp()*100>80?'BÜTÇE DİKKAT':'BÜTÇE OK';
+  setKit(gas.hc,gas.hp);
+  if(cheatOn){
+    g('gasRec').textContent='SOCIAL MODE: ENJOY YOUR NIGHT';
+    g('gasRsn').textContent='Social mode aktif. Bütçe uyarıları geçici olarak askıya alındı.';
+    g('gasPriLbl').textContent='SOCIAL MODE';
   }
-  log('[KITCHEN] RECOMMENDATION SYNCED WITH VAULT BALANCE', 'kitchen');
 }
 
-/* ── VAULT UI ────────────────────────────────────── */
-function renderVault() {
-  const cats = [
-    { k:'dining',    cs:'cs-dining',    cg:'cg-dining',    cb:'cb-dining',    cp:'cp-dining'    },
-    { k:'groceries', cs:'cs-groceries', cg:'cg-groceries', cb:'cb-groceries', cp:'cp-groceries' },
-    { k:'misc',      cs:'cs-misc',      cg:'cg-misc',      cb:'cb-misc',      cp:'cp-misc'      },
+/* ── VAULT RENDER ────────────────────────────────────── */
+function renderVault(){
+  const cats=[
+    {k:'dining', cs:'cs-d',cg:'cg-d',cb:'cb-d',cp:'cp-d'},
+    {k:'groceries',cs:'cs-g',cg:'cg-g',cb:'cb-g',cp:'cp-g'},
+    {k:'misc',   cs:'cs-m',cg:'cg-m',cb:'cb-m',cp:'cp-m'},
   ];
-  cats.forEach(c => {
-    const spent = vault.spent[c.k], goal = vault.goals[c.k];
-    const pct   = goal > 0 ? (spent/goal)*100 : 0;
-    const cap   = Math.min(pct, 100);
-    g(c.cs).textContent = tl(spent);
-    g(c.cg).textContent = `/ ${tl(goal)} limit`;
-    const bar = g(c.cb);
-    bar.style.width = `${cap.toFixed(1)}%`;
-    bar.className   = 'v-bar-fill' + (pct>=100?' o':pct>=80?' w':'');
-    const pe = g(c.cp);
-    pe.textContent = `${pct.toFixed(1)}%`;
-    pe.className   = 'v-pct' + (pct>=100?' o':pct>=80?' w':'');
+  cats.forEach(c=>{
+    const sp=vault.spent[c.k],gl=vault.goals[c.k];
+    const pct=gl>0?(sp/gl)*100:0,cap=Math.min(pct,100);
+    g(c.cs).textContent=tl(sp);g(c.cg).textContent=`/ ${tl(gl)}`;
+    const bar=g(c.cb);bar.style.width=`${cap.toFixed(1)}%`;
+    bar.className='vbf'+(pct>=100?' o':pct>=80?' w':'');
+    const pe=g(c.cp);pe.textContent=`${pct.toFixed(1)}%`;
+    pe.className='vpct'+(pct>=100?' o':pct>=80?' w':'');
   });
+  g('vTot').textContent=`${tl(totSp())} / ${tl(totGl())}`;
+  g('alwVal').textContent=tl(dailyAlw());
+  g('alwDays').textContent=`${dLeft()} gün kaldı`;
+  const n=new Date(),mo=`${MS[n.getMonth()]} ${n.getFullYear()}`;
+  g('vMonthLbl').textContent=mo;
 
-  g('vaultTotal').textContent   = `${tl(totalSpent())} / ${tl(totalGoal())}`;
-  g('alwVal').textContent       = tl(dailyAllw());
-  g('alwDays').textContent      = `${daysLeft()} days left this month`;
-  const n  = new Date();
-  const mo = `${MONTHS_S[n.getMonth()]} ${n.getFullYear()}`;
-  g('vaultMonthLbl').textContent = mo;
+  /* Budget overview — updates immediately on salary save */
+  const sal=vault.monthlyIncome||0,inv=vault.monthlySaving||0,avl=sal-inv;
+  g('bovTitle').textContent=`BÜTÇE — ${mo.toUpperCase()}`;
+  g('ovSal').textContent=sal>0?tl(sal):'AYARLANMADI';g('ovSal').className='bval'+(sal>0?' sal':' zero');
+  g('ovInv').textContent=tl(inv);
+  g('ovAvl').textContent=sal>0?tl(Math.max(0,avl)):'—';g('ovAvl').className='bval'+(avl<=0?' wneg':' avl');
 
-  // Budget overview
-  const sal = vault.monthlyIncome || 0;
-  const inv = vault.monthlySaving || 0;
-  const avl = sal - inv;
-  g('bovTitle').textContent = `BUDGET — ${mo.toUpperCase()}`;
-  g('ovSal').textContent = sal > 0 ? tl(sal) : 'NOT SET';
-  g('ovSal').className   = sal > 0 ? 'b-val sal' : 'b-val zero';
-  g('ovInv').textContent = tl(inv);
-  g('ovAvl').textContent = sal > 0 ? tl(Math.max(0,avl)) : '—';
-  g('ovAvl').className   = avl <= 0 ? 'b-val wrn' : 'b-val avl';
-
-  // Surplus
-  const surp = netSurplus();
-  const disp = disposable();
-  const burn = burnRate();
-  if (sal > 0) {
-    const sv = g('surplusVal');
-    sv.textContent = tl(Math.abs(surp));
-    sv.className   = surp < -500 ? 's-val crit' : surp < 0 ? 's-val neg' : 's-val';
-    g('surplusSub').textContent = surp < 0 ? 'DIPPING INTO SAVINGS' : 'after invest + spend';
-    g('dispVal').textContent    = tl(Math.max(0, disp));
-    g('burnVal').textContent    = `${tl(Math.abs(burn))}/day`;
-    const bb = g('burnBadge');
-    bb.className = 'burn-badge' + (burn<0?' crit':burn>BURN_THRESH?' hot':'');
-  } else {
-    ['surplusVal','dispVal'].forEach(id => { g(id).textContent='₺—'; g(id).className='s-val'; });
-    g('surplusSub').textContent = 'set monthly salary to activate';
-    g('burnVal').textContent    = '₺—/day';
-    g('burnBadge').className    = 'burn-badge';
+  /* Surplus */
+  const surp=netSurp(),dis=disp(),burn=bRate();
+  if(sal>0){
+    const sv=g('surpV');sv.textContent=tl(Math.abs(surp));sv.className='sv'+(surp<-500?' crit':surp<0?' neg':'');
+    g('surpS').textContent=surp<0?'TASARRUFLARA GİRİYOR':'invest + harcama sonrası';
+    g('dispV').textContent=tl(Math.max(0,dis));
+    g('burnV').textContent=`${tl(Math.abs(burn))}/gün`;
+    const bb=g('burnBdg');bb.className='burn'+(burn<0?' crit':burn>BURN_THR?' hot':'');
+  }else{
+    ['surpV','dispV'].forEach(id=>{g(id).textContent='₺—';g(id).className='sv';});
+    g('surpS').textContent='aylık maaş ayarlayın';g('burnV').textContent='₺—/gün';g('burnBdg').className='burn';
   }
 
-  syncGoalInputs();
-  renderProjection();
-  renderSuccessScore();
+  syncInputs();renderProj();renderVit();renderScr();
 }
 
-/* ── PROJECTION ──────────────────────────────────── */
-function calcProjection() {
-  const { invTarget, monthlySaving } = vault;
-  const curSav = loadSavings();
-  if (!invTarget || !monthlySaving || invTarget<=0 || monthlySaving<=0) return null;
-  const dist   = Math.max(0, invTarget - curSav);
-  const months = Math.ceil(dist / monthlySaving);
-  const pct    = Math.min(100, (curSav / invTarget) * 100);
-  return { dist, months, pct, invTarget, monthlySaving, curSav };
+/* ── VITALITY ────────────────────────────────────────── */
+function calcVit(){
+  if(!vault.reflect)return{pct:0,s:0,w:0,g:0,days:0};
+  const logged=Object.values(vault.reflect).filter(e=>e.gastro!==null||e.sport!==null);
+  if(!logged.length)return{pct:0,s:0,w:0,g:0,days:0};
+  let ts=0,tw=0,tg=0;
+  logged.forEach(e=>{
+    if(e.gastro==='yes'){ts+=40;tw+=30;} // gastro = shift + window used
+    if(e.sport==='yes')tg+=30;
+  });
+  const N=logged.length;
+  const s=Math.round(ts/N),w=Math.round(tw/N),gg=Math.round(tg/N);
+  return{pct:Math.min(100,s+w+gg),s,w,g:gg,days:N};
 }
 
-function renderProjection() {
-  const p = calcProjection();
-  const n = new Date();
-  g('projDtLbl').textContent  = `${MONTHS_S[n.getMonth()]} ${n.getFullYear()}`;
-  g('projCurSav').textContent = tl(loadSavings());
-  g('projMonSav').textContent = tl(vault.monthlySaving || 0);
-  if (!p) {
-    g('projRo').className = 'proj-ro nd'; g('projRo').innerHTML = 'SET MONTHLY GOALS TO ACTIVATE';
-    g('projSub').textContent = 'Enter Investment Goal and Savings Plan in Budget tab.';
-    g('projBarF').style.width = '0%'; g('projPct').textContent = '—%';
-    return;
+function renderVit(){
+  const{pct,s,w,g:gg,days}=calcVit();
+  const pe=g('vitPct'),bf=g('vitFill'),ss=g('vit-s'),sw=g('vit-w'),sg=g('vit-g');
+  if(!pe)return;
+  pe.textContent=days>0?`${pct}%`:'—%';
+  pe.className='vit-pct'+(days===0?' z':pct<40?' low':pct<70?' med':'');
+  if(bf)bf.style.width=`${pct}%`;
+  if(ss){ss.textContent=`+${s}%`;ss.className='vbsv'+(s>0?' earn':'');}
+  if(sw){sw.textContent=`+${w}%`;sw.className='vbsv'+(w>0?' earn':'');}
+  if(sg){sg.textContent=`+${gg}%`;sg.className='vbsv'+(gg>0?' earn':'');}
+}
+
+function renderScr(){
+  if(!vault.reflect)return;
+  const logged=Object.values(vault.reflect).filter(e=>e.gastro!==null||e.sport!==null);
+  const hits=logged.filter(e=>e.gastro==='yes'&&e.sport==='yes').length;
+  const pct=logged.length>0?Math.round(hits/logged.length*100):0;
+  const pe=g('scrPct'),bf=g('scrFill'),hi=g('scrHits'),dy=g('scrDays'),lb=g('scrLbl');
+  if(!pe)return;
+  pe.textContent=logged.length>0?`${pct}%`:'—%';
+  pe.className='scr-pct'+(logged.length===0?'':pct>=70?' ok':' lo');
+  if(bf)bf.style.width=`${pct}%`;
+  if(hi)hi.textContent=hits;if(dy)dy.textContent=logged.length;
+  if(lb)lb.textContent=logged.length===0?'NO DATA':pct>=80?'EXCELLENT ★':pct>=50?'ON TRACK':'NEEDS WORK';
+}
+
+/* ── PROJECTION ──────────────────────────────────────── */
+function calcProj(){
+  const{invTarget,monthlySaving}=vault,cur=loadSav();
+  if(!invTarget||!monthlySaving||invTarget<=0||monthlySaving<=0)return null;
+  const dist=Math.max(0,invTarget-cur),mos=Math.ceil(dist/monthlySaving),pct=Math.min(100,(cur/invTarget)*100);
+  return{dist,mos,pct,invTarget,monthlySaving,cur};
+}
+
+function renderProj(){
+  const p=calcProj(),n=new Date();
+  g('prDate').textContent=`${MS[n.getMonth()]} ${n.getFullYear()}`;
+  g('prCS').textContent=tl(loadSav());g('prMS').textContent=tl(vault.monthlySaving||0);
+  if(!p){g('prRo').className='prro nd';g('prRo').innerHTML='HEDEF AYARLAYIN';g('prSub').textContent='Budget sekmesinde Yatırım Hedefi ve Tasarruf Planı girin.';g('prFill').style.width='0%';g('prPct').textContent='—%';return;}
+  g('prRo').className='prro';
+  g('prRo').innerHTML=p.mos<=0?`<span class="mos" style="color:var(--grn)">HEDEFE ULAŞILDI</span>`:`TAHMİN: <span class="mos">${p.mos}</span> AY`;
+  g('prSub').innerHTML=`Mesafe: <span class="hi">${tl(p.dist)}</span>, <span class="hi">${tl(p.monthlySaving)}/ay</span>`;
+  g('prFill').style.width=`${p.pct.toFixed(1)}%`;g('prPct').textContent=`${p.pct.toFixed(1)}%`;
+}
+
+function updProjMod(){
+  const p=calcProj(),el=g('projMod'),cur=loadSav();
+  if(!p){el.innerHTML=`<span style="color:var(--txt-f)">Budget sekmesinde Yatırım Hedefi ve Tasarruf Planı girin.</span>`;return;}
+  el.innerHTML=`<div style="margin-bottom:8px"><span style="color:var(--prj);font-weight:700">YATIRIM HEDEFİ</span><br><span style="color:var(--txt);font-size:1.4rem;font-weight:700">${tl(p.invTarget)}</span></div><div style="margin-bottom:8px"><span style="color:var(--prj);font-weight:700">MEVCUT BIRIKIM</span><br><span style="color:var(--txt);font-size:1.4rem;font-weight:700">${tl(cur)}</span></div><div style="margin-bottom:8px"><span style="color:var(--prj);font-weight:700">HEDEFE MESAFE</span><br><span style="color:var(--acc);font-size:1.4rem;font-weight:700">${tl(p.dist)}</span></div><div style="padding:10px 0;border-top:1px dashed var(--frm-dp);margin-top:6px"><span style="color:var(--prj);font-size:1.1rem;font-weight:900">= ${p.mos} AY (${p.pct.toFixed(1)}% TAMAMLANDI)</span></div>`;
+}
+
+/* ── L1 RENDER ───────────────────────────────────────── */
+function renderL1(s){
+  const sn=g('shiftName'),ss=g('shiftSub'),sd=g('shiftDay'),ba=g('btnAdj'),ob=g('ovrBanner');
+  const ovr=s._ovr||getOvr();
+  if(ob)ob.classList.toggle('vis',!!ovr);
+  if(ba)ba.classList.toggle('ov-active',!!ovr);
+
+  if(!epochDate){
+    sn.textContent='——';sn.className='t-xl';ss.textContent='EPOCH BEKLENİYOR';sd.textContent='';
+  }else if(s._ovr==='VACATION'){
+    sn.textContent='TATİL';sn.className='t-xl vac';ss.innerHTML='<span class="hi">TATİL MODU AKTİF</span>';sd.textContent='';
+  }else if(s.isOff){
+    sn.textContent='OFF';sn.className='t-xl off';
+    ss.innerHTML=`DİNLENME — <span class="hi">${BLK[s.blockIndex].n}</span> DÖNGÜSÜ`;
+    sd.innerHTML=s.offDay?`GÜN <span class="hi">${s.offDay}</span>/2 DİNLENME`:'';
+  }else{
+    const b=BLK[s.blockIndex];
+    sn.textContent=s._ovr||b.n;sn.className='t-xl';
+    ss.innerHTML=`VARDIYA <span class="hi">${pad(b.wS)}:00–${pad(b.wE%24)}:00</span>`;
+    sd.innerHTML=`GÜN <span class="hi">${s.workDay}</span>/${WORK}`;
   }
-  g('projRo').className = 'proj-ro';
-  g('projRo').innerHTML = p.months <= 0
-    ? `<span class="months" style="color:var(--grn)">TARGET REACHED</span>`
-    : `ESTIMATED: <span class="months">${p.months}</span> MONTHS`;
-  g('projSub').innerHTML = `Distance: <span class="hi">${tl(p.dist)}</span> at <span class="hi">${tl(p.monthlySaving)}/mo</span>`;
-  g('projBarF').style.width = `${p.pct.toFixed(1)}%`;
-  g('projPct').textContent  = `${p.pct.toFixed(1)}%`;
-}
 
-function updateProjModal() {
-  const p   = calcProjection();
-  const el  = g('projModalReadout');
-  const cur = loadSavings();
-  if (!p) { el.innerHTML = `<span style="color:var(--txt-f)">Set Investment Goal and Savings Plan in Budget tab.</span>`; return; }
-  el.innerHTML = `
-    <div style="margin-bottom:8px"><span style="color:var(--prj);font-weight:700">INVESTMENT GOAL</span><br><span style="color:var(--txt);font-size:1.4rem;font-weight:700">${tl(p.invTarget)}</span></div>
-    <div style="margin-bottom:8px"><span style="color:var(--prj);font-weight:700">CURRENT SAVINGS</span><br><span style="color:var(--txt);font-size:1.4rem;font-weight:700">${tl(cur)}</span></div>
-    <div style="margin-bottom:8px"><span style="color:var(--prj);font-weight:700">DISTANCE</span><br><span style="color:var(--acc);font-size:1.4rem;font-weight:700">${tl(p.dist)}</span></div>
-    <div style="margin-bottom:8px"><span style="color:var(--prj);font-weight:700">MONTHLY SAVING</span><br><span style="color:var(--txt);font-size:1.4rem;font-weight:700">${tl(p.monthlySaving)}</span></div>
-    <div style="padding:10px 0;border-top:1px dashed var(--frm-deep);margin-top:6px">
-      <span style="color:var(--prj);font-size:1.1rem;font-weight:900">${p.months} MONTHS TO TARGET (${p.pct.toFixed(1)}% COMPLETE)</span>
-    </div>`;
-}
-
-/* ── L1 UI ───────────────────────────────────────── */
-function renderL1(s) {
-  const nameEl = g('shiftName'), subEl = g('shiftSub'), dayEl = g('shiftDay');
-  const nb = g('nadyaBadge'), nd = g('nadyaDet');
-  if (!epochDate) {
-    nameEl.textContent = '——'; nameEl.className = 't-xl';
-    subEl.textContent  = 'AWAITING EPOCH CALIBRATION'; dayEl.textContent = '';
-  } else if (s.isOff) {
-    const b = BLOCKS[s.blockIndex];
-    nameEl.textContent = 'OFF'; nameEl.className = 't-xl is-off';
-    subEl.innerHTML    = `REST DAY — <span class="hi">${b.name}</span> CYCLE`;
-    dayEl.innerHTML    = `DAY <span class="hi">${s.offDay}</span>/2 OF REST`;
-  } else {
-    const b = BLOCKS[s.blockIndex];
-    nameEl.textContent = b.name; nameEl.className = 't-xl';
-    subEl.innerHTML    = `SHIFT <span class="hi">${pad(b.wS)}:00–${pad(b.wE%24)}:00</span>`;
-    dayEl.innerHTML    = `DAY <span class="hi">${s.workDay}</span>/${WORK} OF BLOCK`;
-  }
-  const dow   = new Date().getDay();
-  const nadya = NADYA_SCH[dow];
-  if (nadya.type==='OFF') { nb.className='n-badge n-off'; nb.textContent='FREE'; nd.innerHTML=`<span class="hi">WEEKEND</span><br>${nadya.label}`; }
-  else if (nadya.type==='OFFICE') { nb.className='n-badge n-office'; nb.textContent='OFFICE'; nd.innerHTML=`<span class="hi">09:00–18:00</span><br><span class="road">Road: 07:00–09:00 / 18:00–20:00</span>`; }
-  else { nb.className='n-badge n-remote'; nb.textContent='REMOTE'; nd.innerHTML=`<span class="hi">09:00–18:00</span><br>${nadya.label} — no commute`; }
-}
-
-function renderMeta(s) {
-  if (!epochDate) {
-    ['metaCyc','metaBlk','metaNxt','metaDL'].forEach(id=>g(id).textContent='—');
-    g('progPct').textContent='0%'; g('progFill').style.width='0%'; return;
-  }
-  g('metaCyc').textContent = `${s.cycleDay+1}/${CYCLE}`;
-  g('metaBlk').textContent = `B${s.blockIndex+1}/3`;
-  g('metaNxt').textContent = BLOCKS[(s.blockIndex+1)%3].short;
-  g('metaDL').textContent  = s.dLeft;
-  const pct = ((s.cycleDay+1)/CYCLE*100).toFixed(1);
-  g('progPct').textContent  = `${pct}%`;
-  g('progFill').style.width = `${pct}%`;
-  for (let i=0; i<3; i++) g(`bp-${i}`).className = 'bp'+(i===s.blockIndex?' active':i<s.blockIndex?' done':'');
-}
-
-/* ── FULL L2 UPDATE ──────────────────────────────── */
-function updateL2(s) {
-  renderTimeline(epochDate);
-  if (!epochDate) { renderGoldenEye(null, null); setGastroUI(null, null); return; }
-
-  const dow   = new Date().getDay();
-  const nadya = NADYA_SCH[dow];
-  const b     = BLOCKS[s.blockIndex];
-
-  if (!s.isOff) {
-    log(`[ROAD] OZAN pre-shift: ${minHHMM(hToM(b.rPre[0]))}–${minHHMM(hToM(b.rPre[1]))}`, 'road');
-    log(`[ROAD] OZAN post-shift: ${minHHMM(hToM(b.rPst[0]%24))}–${minHHMM(hToM(b.rPst[1]%24))}`, 'road');
-  }
-  if (nadya.type==='OFFICE') log('[ROAD] NADYA commute: 07:00–09:00 / 18:00–20:00', 'road');
-
-  const gt  = calcGoldenTime(s, dow);
-  const now = new Date();
-  g('eyeDateLbl').textContent = `${pad(now.getDate())} ${MONTHS_S[now.getMonth()]}`;
-
-  renderGoldenEye(gt, s);
-  setGastroUI(gt, s);
-  renderSport(gt, s);
-
-  if (gt) log(`[SYNC] WINDOW ${minHHMM(gt.startM)}–${minHHMM(gt.endM)} (${gt.durationM}min)`, 'sync');
-  else    log('[SYNC] NO OVERLAP TODAY', 'warn');
-
-  if ((vault.monthlyIncome||0) > 0) {
-    const br = burnRate();
-    log(`[STRATEGY] BURN RATE: ${tl(br)}/DAY`, br<0?'warn':'vault');
+  const dow=new Date().getDay(),na=NADYA[dow];
+  const nb=g('nadyaBadge'),nd=g('nadyaDet');
+  if(na.t==='OFF'){
+    nb.className='nb n-off';nb.textContent='FREE';nd.innerHTML=`<span class="hi">HAFTA SONU</span><br>${na.l}`;
+  }else if(na.t==='OFFICE'){
+    const fatigue=dow===4?'<br><span class="road">⚡ Yüksek yorgunluk günü</span>':'';
+    nb.className='nb n-office';nb.textContent='OFFICE';
+    nd.innerHTML=`<span class="hi">09:00–18:00</span><br><span class="road">Yol: 07:00–09:00 / 18:00–20:00</span>${fatigue}`;
+  }else{
+    nb.className='nb n-home';nb.textContent='HOME';
+    nd.innerHTML=`<span class="hi">09:00–18:00</span><br>${na.l} — ev çalışma`;
   }
 }
 
-function setGastroUI(gt, shift) {
-  const g_ = gastro(gt, shift);
-  g('gasPriority').textContent = g_.pri;
-  g('gasRec').textContent      = g_.rec;
-  g('gasReason').textContent   = g_.reason;
-  g('gasPriLbl').textContent   = dp()*100>90?'DINING LOCKED':dp()*100>80?'DINING CAUTION':'BUDGET OK';
-  setKitchen(g_.isHC, g_.hp);
+function renderMeta(s){
+  if(!epochDate){['mCyc','mBlk','mNxt','mDL'].forEach(id=>g(id).textContent='—');g('pgPct').textContent='0%';g('pgFill').style.width='0%';return;}
+  g('mCyc').textContent=`${s.cycleDay+1}/${CYCLE}`;
+  g('mBlk').textContent=`B${s.blockIndex+1}/3`;
+  g('mNxt').textContent=BLK[(s.blockIndex+1)%3].s;
+  g('mDL').textContent=s.dLeft;
+  const pct=((s.cycleDay+1)/CYCLE*100).toFixed(1);
+  g('pgPct').textContent=`${pct}%`;g('pgFill').style.width=`${pct}%`;
+  for(let i=0;i<3;i++)g(`bp-${i}`).className='bp'+(i===s.blockIndex?' on':i<s.blockIndex?' dn':'');
 }
 
-/* ── TIMELINE ────────────────────────────────────── */
-function renderTimeline(epoch) {
-  const row = g('tlRow'); row.innerHTML = '';
-  for (let i=0; i<3; i++) {
-    const cell = document.createElement('div');
-    cell.className = 'tl-cell' + (i===0?' today':'');
-    if (!epoch) {
-      cell.innerHTML = `<span class="tl-dow">———</span><span class="tl-icon off">○</span><span class="tl-abbr off">?</span><span class="tl-date">——</span>`;
-    } else {
-      const { blockIdx, isOff, target } = getShiftOffset(epoch, i);
-      const dw=DAYS_S[target.getUTCDay()], dd=pad(target.getUTCDate()), mm=MONTHS_S[target.getUTCMonth()];
-      if (isOff) {
-        cell.innerHTML=`<span class="tl-dow">${dw}</span><span class="tl-icon off">○</span><span class="tl-abbr off">OFF</span><span class="tl-date">${dd} ${mm}</span>`;
-      } else {
-        const bl=BLOCKS[blockIdx];
-        cell.innerHTML=`<span class="tl-dow">${dw}</span><span class="tl-icon ${bl.cls}">${bl.icon}</span><span class="tl-abbr ${bl.cls}">${bl.abbr}</span><span class="tl-date">${dd} ${mm}</span>`;
-      }
+/* ── FULL L2 UPDATE ───────────────────────────────────── */
+function upL2(s){
+  renderTL(epochDate);
+  if(!epochDate){renderEye(null,null);renderGas(null,null);return;}
+  const dow=new Date().getDay(),na=NADYA[dow],b=BLK[s.blockIndex],n=new Date();
+  if(!s.isOff){
+    log(`[ROAD] OZAN ön-vardiya: ${mmHHMM(hToM(b.rPre[0]))}–${mmHHMM(hToM(b.rPre[1]))}`, 'road');
+    log(`[ROAD] OZAN son-vardiya: ${mmHHMM(hToM(b.rPst[0]%24))}–${mmHHMM(hToM(b.rPst[1]%24))}`, 'road');
+  }
+  if(na.t==='OFFICE')log('[ROAD] NADYA işe gidiş-dönüş: 07:00–09:00 / 18:00–20:00','road');
+  if(PIL_DAYS.has(dow))log(`[SPORT] NADYA PİLATES ${mmHHMM(hToM(PIL_S))}–${mmHHMM(hToM(PIL_E))} pencereden çıkarıldı`,'sport');
+  const gt=calcGT(s,dow);
+  g('eyeDate').textContent=`${pad(n.getDate())} ${MS[n.getMonth()]}`;
+  renderEye(gt,s);renderGas(gt,s);renderSport(gt,s);
+  if(gt)log(`[SYNC] PENCERE ${mmHHMM(gt.startM)}–${mmHHMM(gt.endM)} (${gt.durationM}dak)`,'sync');
+  else log('[SYNC] BUGÜN ÖRTÜŞME YOK','warn');
+  if((vault.monthlyIncome||0)>0){const br=bRate();log(`[STRATEJİ] BURN RATE: ${tl(br)}/gün`,br<0?'warn':'vault');}
+}
+
+/* ── TIMELINE ─────────────────────────────────────────── */
+function renderTL(ep){
+  const row=g('tlRow');row.innerHTML='';
+  for(let i=0;i<3;i++){
+    const c=document.createElement('div');c.className='tlc'+(i===0?' td':'');
+    if(!ep){c.innerHTML=`<span class="tldw">———</span><span class="tlic off">○</span><span class="tlab off">?</span><span class="tldt">——</span>`;}
+    else{
+      const{blockIdx,isOff,target}=getShiftOff(ep,i);
+      const dw=DS[target.getUTCDay()],dd=pad(target.getUTCDate()),mm=MS[target.getUTCMonth()];
+      if(isOff){c.innerHTML=`<span class="tldw">${dw}</span><span class="tlic off">○</span><span class="tlab off">OFF</span><span class="tldt">${dd} ${mm}</span>`;}
+      else{const bl=BLK[blockIdx];c.innerHTML=`<span class="tldw">${dw}</span><span class="tlic ${bl.c}">${bl.i}</span><span class="tlab ${bl.c}">${bl.a}</span><span class="tldt">${dd} ${mm}</span>`;}
     }
-    row.appendChild(cell);
+    row.appendChild(c);
   }
 }
 
-/* ── DAILY CHECK-IN + SUCCESS SCORE ─────────────────
-   vault.reflect[YYYY-MM-DD] = { gastro: 'yes'|'no'|null, sport: 'yes'|'no'|null }
-   Monthly success rate = days where BOTH are 'yes' / days logged
-───────────────────────────────────────────────────── */
-function todayDateKey() {
-  const n = new Date();
-  return `${n.getFullYear()}-${pad(n.getMonth()+1)}-${pad(n.getDate())}`;
+/* ── CHECK-IN ─────────────────────────────────────────── */
+function todayRK(){const n=new Date();return`${n.getFullYear()}-${pad(n.getMonth()+1)}-${pad(n.getDate())}`;}
+function getRef(){if(!vault.reflect)vault.reflect={};return vault.reflect[todayRK()]||{gastro:null,sport:null};}
+function setRef(f,v){
+  if(!vault.reflect)vault.reflect={};const k=todayRK();
+  if(!vault.reflect[k])vault.reflect[k]={gastro:null,sport:null};
+  vault.reflect[k][f]=v;saveV();renderRef();renderVit();renderScr();
+  const st=vault.reflect[k];
+  if(st.gastro==='yes'&&st.sport==='yes')log('[SYSTEM] PERFORMANCE OPTIMAL. SUCCESS SCORE INCREASED.','ok');
+}
+function renderRef(){
+  const st=getRef(),n=new Date();
+  const de=g('chkDate');if(de)de.textContent=`${DS[n.getDay()]} ${pad(n.getDate())} ${MS[n.getMonth()]}`;
+  const gy=g('rGY'),gn=g('rGN'),sy=g('rSY'),sn=g('rSN');
+  if(gy)gy.className='btn-ck'+(st.gastro==='yes'?' y':'');
+  if(gn)gn.className='btn-ck'+(st.gastro==='no'?' n':'');
+  if(sy)sy.className='btn-ck'+(st.sport==='yes'?' y':'');
+  if(sn)sn.className='btn-ck'+(st.sport==='no'?' n':'');
+  const sc=g('chkSc');if(!sc)return;
+  const both=st.gastro==='yes'&&st.sport==='yes',any=st.gastro||st.sport;
+  sc.className='chksc'+(both?' opt':any?' part':'');
+  sc.textContent=!any?'GİRİŞ BEKLENİYOR':both?'★ OPTİMAL PERFORMANS — BAŞARI PUANI ARTTI':'◐ KISMI BAŞARI — OPTİMİZASYON DEVAM EDIYOR';
 }
 
-function getReflect() {
-  if (!vault.reflect) vault.reflect = {};
-  return vault.reflect[todayDateKey()] || { gastro: null, sport: null };
+/* ── MODAL ────────────────────────────────────────────── */
+function openMod(){
+  popMonths();syncInputs();updProjMod();
+  const n=new Date();g('modTitle').textContent=`◈ BÜTÇE — ${MS[n.getMonth()]} ${n.getFullYear()}`;
+  const m=g('txModal');m.classList.add('open');requestAnimationFrame(()=>m.classList.add('vis'));
+  g('txAmt').value='';g('txErr').style.display='none';
 }
-
-function setReflect(field, val) {
-  if (!vault.reflect) vault.reflect = {};
-  const k = todayDateKey();
-  if (!vault.reflect[k]) vault.reflect[k] = { gastro: null, sport: null };
-  vault.reflect[k][field] = val;
-  saveVault();
-  renderReflect();
-  renderSuccessScore();
-  const st = vault.reflect[k];
-  if (st.gastro === 'yes' && st.sport === 'yes') {
-    log('[SYSTEM] PERFORMANCE OPTIMAL. SUCCESS SCORE INCREASED.', 'ok');
+function closeMod(){const m=g('txModal');m.classList.remove('vis');setTimeout(()=>m.classList.remove('open'),200);}
+function swTab(id){
+  ['log','budget','proj'].forEach(t=>{g(`tab-${t}`).classList.toggle('on',t===id);g(`pane-${t}`).classList.toggle('on',t===id);});
+  if(id==='proj')updProjMod();
+  if(id==='budget'){syncInputs();updBudgPrev();}
+}
+function popMonths(){
+  const sel=g('txMonth');sel.innerHTML='';const now=new Date();
+  for(let i=2;i>=0;i--){
+    const d=new Date(now.getFullYear(),now.getMonth()-i,1);
+    const ym=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+    const opt=document.createElement('option');opt.value=ym;opt.textContent=`${MS[d.getMonth()]} ${d.getFullYear()}`+(i===0?' (Güncel)':'');if(i===0)opt.selected=true;sel.appendChild(opt);
   }
 }
-
-function renderReflect() {
-  const st = getReflect();
-  const n  = new Date();
-  const dateEl = g('reflDate');
-  if (dateEl) dateEl.textContent = `${DAYS_S[n.getDay()]} ${pad(n.getDate())} ${MONTHS_S[n.getMonth()]}`;
-
-  const gy = g('rGY'), gn = g('rGN'), sy = g('rSY'), sn = g('rSN');
-  if (gy) gy.className = 'btn-ref' + (st.gastro === 'yes' ? ' y' : '');
-  if (gn) gn.className = 'btn-ref' + (st.gastro === 'no'  ? ' n' : '');
-  if (sy) sy.className = 'btn-ref' + (st.sport  === 'yes' ? ' y' : '');
-  if (sn) sn.className = 'btn-ref' + (st.sport  === 'no'  ? ' n' : '');
-
-  const sc    = g('reflScore');
-  const both  = st.gastro === 'yes' && st.sport === 'yes';
-  const anySet= st.gastro !== null  || st.sport  !== null;
-  const anyY  = st.gastro === 'yes' || st.sport  === 'yes';
-  if (!sc) return;
-  sc.className = 'reflect-score' + (both ? ' opt' : anyY ? ' part' : '');
-  sc.textContent = !anySet
-    ? 'AWAITING INPUT'
-    : both  ? '★ PERFORMANCE OPTIMAL — SUCCESS SCORE INCREASED'
-    : anyY  ? '◐ PARTIAL SUCCESS — KEEP OPTIMIZING'
-    :         '○ RESET DAY — NO SCORE RECORDED';
+function submitTx(){
+  const cat=g('txCat').value,amtR=parseFloat(g('txAmt').value),ym=g('txMonth').value;
+  if(!amtR||amtR<=0||isNaN(amtR)){g('txErr').style.display='block';return;}g('txErr').style.display='none';
+  const amt=Math.round(amtR*100)/100;
+  const curYM=`${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2,'0')}`;
+  const isCur=ym===curYM,tgt=isCur?vault:(loadVault(ym)||freshVault(ym));
+  tgt.spent[cat]=Math.round((tgt.spent[cat]+amt)*100)/100;
+  const[y,m]=ym.split('-');localStorage.setItem(`${VAULT_PFX}${y}_${m}`,JSON.stringify(tgt));
+  if(isCur){vault=tgt;renderVault();}
+  const cl={dining:'Yemek Dışarı',groceries:'Market',misc:'Diğer'}[cat];
+  const[yy,mm2]=ym.split('-');log(`[VAULT] -${tl(amt)} → ${cl.toUpperCase()} (${MS[+mm2-1]} ${yy})`,'vault');
+  const pct2=tgt.goals[cat]>0?tgt.spent[cat]/tgt.goals[cat]*100:0;
+  if(pct2>=90)log(`[VAULT] UYARI: ${cl.toUpperCase()} %${pct2.toFixed(0)}`,'warn');
+  if(epochDate){const s=applyOvrToShift(getShift(epochDate));renderGas(calcGT(s,new Date().getDay()),s);}
+  g('txAmt').value='';closeMod();
 }
-
-/* Monthly success rate calculation */
-function calcSuccessScore() {
-  if (!vault.reflect) return { pct: 0, hits: 0, total: 0 };
-  const entries = Object.values(vault.reflect);
-  if (entries.length === 0) return { pct: 0, hits: 0, total: 0 };
-  const logged = entries.filter(e => e.gastro !== null || e.sport !== null);
-  const hits   = logged.filter(e => e.gastro === 'yes' && e.sport === 'yes').length;
-  const pct    = logged.length > 0 ? Math.round((hits / logged.length) * 100) : 0;
-  return { pct, hits, total: logged.length };
+function syncInputs(){
+  const cur=loadSav();
+  const fm={gInc:vault.monthlyIncome,gInv:vault.invTarget,gSav:vault.monthlySaving,gCurSav:cur,gDin:vault.goals.dining,gGro:vault.goals.groceries,gMisc:vault.goals.misc};
+  Object.entries(fm).forEach(([id,val])=>{const el=g(id);if(el&&!el.dataset.dirty)el.value=val||'';});
 }
-
-function renderSuccessScore() {
-  const { pct, hits, total } = calcSuccessScore();
-  const pctEl  = g('scorePct');
-  const barEl  = g('scoreBarFill');
-  const hitsEl = g('scoreHits');
-  const daysEl = g('scoreDays');
-  const lblEl  = g('scoreLabel');
-  if (!pctEl) return;
-
-  pctEl.textContent = total > 0 ? `${pct}%` : '—%';
-  pctEl.className   = 'score-pct' + (total === 0 ? ' zero' : pct < 50 ? ' low' : '');
-  if (barEl)  barEl.style.width = `${pct}%`;
-  if (hitsEl) hitsEl.textContent = hits;
-  if (daysEl) daysEl.textContent = total;
-  if (lblEl)  lblEl.textContent  =
-    total === 0  ? 'NO DATA'
-    : pct >= 80  ? 'EXCELLENT ★'
-    : pct >= 50  ? 'ON TRACK'
-    :              'NEEDS WORK';
+function updBudgPrev(){
+  const el=g('budgPrev');if(!el)return;
+  const sal=parseFloat(g('gInc')?.value)||vault.monthlyIncome||0;
+  const sav=parseFloat(g('gSav')?.value)||vault.monthlySaving||0;
+  const avl=sal-sav,n=new Date();
+  el.innerHTML=sal>0?`<span style="color:var(--frm);font-weight:700">BÜTÇE — ${MS[n.getMonth()]} ${n.getFullYear()}</span><br>Maaş: <span style="color:var(--grn);font-weight:700">${tl(sal)}</span> · Tasarruf: <span style="color:var(--prj);font-weight:700">${tl(sav)}</span><br>Yaşam İçin: <span style="color:var(--acc);font-weight:700">${tl(Math.max(0,avl))}</span>`:`<span style="color:var(--txt-f)">Bütçe dökümünü görmek için aylık maaş girin.</span>`;
 }
-
-/* ── MODAL ───────────────────────────────────────── */
-function openTxModal() {
-  populateMonths();
-  syncGoalInputs();
-  updateProjModal();
-  const n = new Date();
-  g('modalTitle').textContent = `◈ BUDGET — ${MONTHS_S[n.getMonth()]} ${n.getFullYear()}`;
-  const mo = g('txModal');
-  mo.classList.add('open');
-  requestAnimationFrame(() => mo.classList.add('visible'));
-  g('txAmt').value = '';
-  g('txError').style.display = 'none';
-}
-
-function closeTxModal() {
-  const mo = g('txModal');
-  mo.classList.remove('visible');
-  setTimeout(() => mo.classList.remove('open'), 200);
-}
-
-function switchTab(id) {
-  ['log','budget','proj'].forEach(t => {
-    g(`tab-${t}`).classList.toggle('active', t===id);
-    g(`pane-${t}`).classList.toggle('active', t===id);
-  });
-  if (id==='proj')   updateProjModal();
-  if (id==='budget') { syncGoalInputs(); updateBudgetPreview(); }
-}
-
-function populateMonths() {
-  const sel = g('txMonth'); sel.innerHTML = '';
-  const now = new Date();
-  for (let i=2; i>=0; i--) {
-    const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
-    const ym = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-    const opt = document.createElement('option');
-    opt.value = ym; opt.textContent = `${MONTHS_S[d.getMonth()]} ${d.getFullYear()}` + (i===0?' (Current)':'');
-    if (i===0) opt.selected = true;
-    sel.appendChild(opt);
-  }
-}
-
-function submitTx() {
-  const cat = g('txCat').value, amtR = parseFloat(g('txAmt').value), ym = g('txMonth').value;
-  if (!amtR || amtR<=0 || isNaN(amtR)) { g('txError').style.display='block'; return; }
-  g('txError').style.display = 'none';
-  const amt = Math.round(amtR*100)/100;
-  const curYM = `${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2,'0')}`;
-  const isCurrentMonth = ym === curYM;
-  const target = isCurrentMonth ? vault : (loadVault(ym) || freshVault(ym));
-  target.spent[cat] = Math.round((target.spent[cat]+amt)*100)/100;
-  const [y,m] = ym.split('-');
-  localStorage.setItem(`${VAULT_PFX}${y}_${m}`, JSON.stringify(target));
-  if (isCurrentMonth) { vault = target; renderVault(); }
-  const catLbl = {dining:'Dining Out',groceries:'Groceries',misc:'Misc'}[cat];
-  const [yy,mm2] = ym.split('-');
-  log(`[VAULT] -${tl(amt)} TO ${catLbl.toUpperCase()} (${MONTHS_S[+mm2-1]} ${yy})`, 'vault');
-  const pct2 = target.goals[cat]>0 ? target.spent[cat]/target.goals[cat]*100 : 0;
-  if (pct2>=90) log(`[VAULT] WARNING: ${catLbl.toUpperCase()} AT ${pct2.toFixed(0)}%`, 'warn');
-  if (epochDate) { const s=getShift(epochDate); const gt=calcGoldenTime(s,new Date().getDay()); setGastroUI(gt,s); }
-  g('txAmt').value = ''; closeTxModal();
-}
-
-function syncGoalInputs() {
-  const cur = loadSavings();
-  const fm  = { goalMonthlyIncome:vault.monthlyIncome, goalInvTarget:vault.invTarget, goalMonthlySaving:vault.monthlySaving, goalCurrentSavings:cur, goalDining:vault.goals.dining, goalGroceries:vault.goals.groceries, goalMisc:vault.goals.misc };
-  Object.entries(fm).forEach(([id,val]) => { const el=g(id); if(el&&!el.dataset.dirty) el.value=val||''; });
-}
-
-function updateBudgetPreview() {
-  const el = g('budgetPreview'); if (!el) return;
-  const sal  = parseFloat(g('goalMonthlyIncome')?.value) || vault.monthlyIncome || 0;
-  const sav  = parseFloat(g('goalMonthlySaving')?.value) || vault.monthlySaving || 0;
-  const avl  = sal - sav; const n = new Date();
-  el.innerHTML = sal > 0
-    ? `<span style="color:var(--frm);font-weight:700">BUDGET — ${MONTHS_S[n.getMonth()]} ${n.getFullYear()}</span><br>Salary: <span style="color:var(--grn);font-weight:700">${tl(sal)}</span> · Savings: <span style="color:var(--prj);font-weight:700">${tl(sav)}</span><br>Available for Life: <span style="color:var(--acc);font-weight:700">${tl(Math.max(0,avl))}</span>`
-    : `<span style="color:var(--txt-f)">Enter Monthly Salary above to see budget breakdown.</span>`;
-}
-
-function saveGoal(field) {
-  const idMap = { monthlyIncome:'goalMonthlyIncome', invTarget:'goalInvTarget', monthlySaving:'goalMonthlySaving', currentSavings:'goalCurrentSavings', dining:'goalDining', groceries:'goalGroceries', misc:'goalMisc' };
-  const el = g(idMap[field]); if (!el) return;
-  const val = parseFloat(el.value); if (isNaN(val)||val<0) return;
-  const r = Math.round(val*100)/100;
-  if (['dining','groceries','misc'].includes(field)) {
-    vault.goals[field]=r; saveVault();
-    log(`[VAULT] LIMIT: ${field.toUpperCase()} → ${tl(val)}/mo`, 'vault');
-  } else if (field==='currentSavings') {
-    saveSavings(r);
-    log(`[VAULT] CURRENT SAVINGS → ${tl(val)}`, 'vault');
-  } else {
-    vault[field]=r; saveVault();
-    const lbl={monthlyIncome:'MONTHLY SALARY',invTarget:'INVESTMENT GOAL',monthlySaving:'SAVINGS PLAN'};
-    log(`[VAULT] ${lbl[field]} → ${tl(val)}`, 'vault');
-    if (field==='monthlyIncome') log('[VAULT] SALARY UPDATED. RECALCULATING MONTHLY SURPLUS...', 'vault');
-  }
+function saveGoal(f){
+  const idm={monthlyIncome:'gInc',invTarget:'gInv',monthlySaving:'gSav',currentSavings:'gCurSav',dining:'gDin',groceries:'gGro',misc:'gMisc'};
+  const el=g(idm[f]);if(!el)return;const val=parseFloat(el.value);if(isNaN(val)||val<0)return;const r=Math.round(val*100)/100;
+  if(['dining','groceries','misc'].includes(f)){vault.goals[f]=r;saveV();log(`[VAULT] LİMİT: ${f.toUpperCase()} → ${tl(val)}/ay`,'vault');}
+  else if(f==='currentSavings'){saveSav(r);log(`[VAULT] MEVCUT BİRİKİM → ${tl(val)}`,'vault');}
+  else{vault[f]=r;saveV();const lb={monthlyIncome:'AYLIK MAAS',invTarget:'YATIRIM HEDEFİ',monthlySaving:'TASARRUF PLANI'};log(`[VAULT] ${lb[f]} → ${tl(val)}`,'vault');if(f==='monthlyIncome')log('[VAULT] Maaş güncellendi. Aylık surplus yeniden hesaplanıyor...','vault');}
   el.removeAttribute('data-dirty');
-  renderVault(); updateBudgetPreview(); updateProjModal();
-  const p = calcProjection();
-  if (p) log(`[PROJECTION] ${p.months} MONTHS OF SHIFTS REMAINING`, 'proj');
+  /* Immediately refresh all financial displays */
+  renderVault();updBudgPrev();updProjMod();
+  const p=calcProj();if(p)log(`[PROJEKSIYON] ${p.mos} AY KALIYOR`,'proj');
 }
 
-/* ── CLOCK — HEARTBEAT ───────────────────────────── */
-function tickClock() {
-  const n  = new Date();
-  const hm = `${pad(n.getHours())}:${pad(n.getMinutes())}`;
-  const s  = `:${pad(n.getSeconds())}`;
-  const dy = DAYS_S[n.getDay()];
-  const dt = `${pad(n.getDate())} ${MONTHS_S[n.getMonth()]} ${n.getFullYear()}`;
-  const eHM   = document.getElementById('clockHM');
-  const eS    = document.getElementById('clockS');
-  const eDay  = document.getElementById('clockDay');
-  const eDate = document.getElementById('clockDate');
-  if (eHM)   eHM.textContent   = hm;
-  if (eS)    eS.textContent    = s;
-  if (eDay)  eDay.textContent  = dy;
-  if (eDate) eDate.textContent = dt;
+/* ── CLOCK (Heartbeat) ────────────────────────────────── */
+function tickClock(){
+  const n=new Date();
+  const hm=`${pad(n.getHours())}:${pad(n.getMinutes())}`;
+  const s=`:${pad(n.getSeconds())}`;
+  const dy=DS[n.getDay()];
+  const dt=`${pad(n.getDate())} ${MS[n.getMonth()]} ${n.getFullYear()}`;
+  const a=document.getElementById('clockHM'),b=document.getElementById('clockS'),c=document.getElementById('clockDay'),d=document.getElementById('clockDate');
+  if(a)a.textContent=hm;if(b)b.textContent=s;if(c)c.textContent=dy;if(d)d.textContent=dt;
 }
 
-/* ── L2 TOGGLE ───────────────────────────────────── */
-let lastSyncDay = -1;
-function toggleL2() {
-  const body=g('l2Body'), chev=g('l2Chev');
-  const open=body.classList.toggle('open');
+/* ── L2 TOGGLE ────────────────────────────────────────── */
+let lastSD=-1;
+function toggleL2(){
+  const body=g('l2body'),chev=g('l2chev');const open=body.classList.toggle('open');
   chev.classList.toggle('open',open);
-  if (open && epochDate) { const today=new Date().getDate(); if(today!==lastSyncDay){lastSyncDay=today;updateL2(getShift(epochDate));} }
-  log(`STRATEGIC PANEL ${open?'EXPANDED':'COLLAPSED'}`);
+  if(open&&epochDate){const td=new Date().getDate();if(td!==lastSD){lastSD=td;upL2(applyOvrToShift(getShift(epochDate)));}}
+  log(`STRATEJİK PANEL ${open?'AÇILDI':'KAPANDI'}`);
 }
 
-/* ── EPOCH ───────────────────────────────────────── */
-let epochDate = null;
-
-function setEpoch() {
-  const val=g('epochInput').value; if(!val){log('ERROR: NO DATE SELECTED','err');return;}
-  const [y,m,d]=val.split('-').map(Number);
-  epochDate=new Date(y,m-1,d);
+/* ── EPOCH ────────────────────────────────────────────── */
+let epochDate=null;
+function setEpoch(){
+  const val=g('epochInput').value;if(!val){log('HATA: TARİH SEÇİLMEDİ','err');return;}
+  const[y,m,d]=val.split('-').map(Number);epochDate=new Date(y,m-1,d);
   localStorage.setItem(EPOCH_KEY,val);
-  const fmt=`${pad(epochDate.getDate())} ${MONTHS_S[epochDate.getMonth()]} ${epochDate.getFullYear()}`;
-  g('epochStored').textContent=`EPOCH: ${fmt}`;
-  lastSyncDay=-1; updateStatus();
-  log(`EPOCH CALIBRATED → ${fmt}`,'ok');
-  log('24-DAY CYCLE RECALCULATED','ok');
+  const fmt=`${pad(epochDate.getDate())} ${MS[epochDate.getMonth()]} ${epochDate.getFullYear()}`;
+  g('epSt').textContent=`EPOCH: ${fmt}`;lastSD=-1;upStatus();
+  log(`EPOCH KALİBRE EDİLDİ → ${fmt}`,'ok');log('24-GÜNLÜK DÖNGÜ YENİDEN HESAPLANDI','ok');
 }
-
-function loadEpoch() {
+function loadEpoch(){
   const stored=localStorage.getItem(EPOCH_KEY);
-  if (stored) {
-    const [y,m,d]=stored.split('-').map(Number);
-    epochDate=new Date(y,m-1,d);
+  if(stored){
+    const[y,m,d]=stored.split('-').map(Number);epochDate=new Date(y,m-1,d);
     g('epochInput').value=stored;
-    const fmt=`${pad(epochDate.getDate())} ${MONTHS_S[epochDate.getMonth()]} ${epochDate.getFullYear()}`;
-    g('epochStored').textContent=`EPOCH: ${fmt}`;
-    log(`EPOCH RESTORED → ${fmt}`,'ok');
-  } else {
-    log('NO EPOCH FOUND — OPEN L2 TO CALIBRATE','warn');
-  }
+    const fmt=`${pad(epochDate.getDate())} ${MS[epochDate.getMonth()]} ${epochDate.getFullYear()}`;
+    g('epSt').textContent=`EPOCH: ${fmt}`;log(`EPOCH YÜKLENDI → ${fmt}`,'ok');
+  }else{log('EPOCH BULUNAMADI — L2 AÇARAK KALİBRE EDİN','warn');}
 }
 
-/* ── MAIN UPDATE ─────────────────────────────────── */
-function updateStatus() {
-  const s = epochDate ? getShift(epochDate) : { cycleDay:0, blockIndex:0, isOff:true, workDay:null, offDay:null, dLeft:0 };
-  renderL1(s); renderMeta(s);
-  const today = new Date().getDate();
-  if (epochDate && today !== lastSyncDay) { lastSyncDay = today; updateL2(s); }
+/* ── MAIN UPDATE ──────────────────────────────────────── */
+function upStatus(){
+  const raw=epochDate?getShift(epochDate):{cycleDay:0,blockIndex:0,isOff:true,workDay:null,offDay:null,dLeft:0};
+  const s=applyOvrToShift(raw);
+  renderL1(s);renderMeta(s);
+  const td=new Date().getDate();
+  if(epochDate&&td!==lastSD){lastSD=td;upL2(s);}
 }
 
-/* ── UTILITY ─────────────────────────────────────── */
-function g(id) { return document.getElementById(id); }
-function pad(n) { return String(n).padStart(2,'0'); }
-function log(msg, type='') {
-  const term=g('logTerm');
-  const now=new Date();
-  const ts=`[${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}]`;
-  const el=document.createElement('div');
-  el.className='log-e';
-  el.innerHTML=`<span class="log-ts">${ts}</span><span class="log-msg ${type}">${msg}</span>`;
-  term.appendChild(el); term.scrollTop=term.scrollHeight;
-  while(term.children.length>200) term.removeChild(term.firstChild);
+/* ── UTILITY ──────────────────────────────────────────── */
+function g(id){return document.getElementById(id);}
+function pad(n){return String(n).padStart(2,'0');}
+function log(msg,type=''){
+  const t=g('logT');const n=new Date();const ts=`[${pad(n.getHours())}:${pad(n.getMinutes())}:${pad(n.getSeconds())}]`;
+  const el=document.createElement('div');el.className='le';
+  el.innerHTML=`<span class="lts">${ts}</span><span class="lm ${type}">${msg}</span>`;
+  t.appendChild(el);t.scrollTop=t.scrollHeight;
+  while(t.children.length>200)t.removeChild(t.firstChild);
 }
-function clearLog() { g('logTerm').innerHTML=''; log('LOG CLEARED','warn'); }
+function clrLog(){g('logT').innerHTML='';log('LOG TEMİZLENDİ','warn');}
 
-/* ── BOOT ────────────────────────────────────────── */
-function boot() {
-  log('ORACLE v5.1.0 FINAL MASTER INIT...');
-  log('HEARTBEAT ENGINE ARMED — clockHM/clockS/clockDay/clockDate', 'ok');
-  log('24-DAY ROTATION MATRIX LOADED');
-  log('ROAD BUFFER ENGINE ACTIVE (30m / 2h)', 'ok');
-  log('SPORT ENGINE — TENNIS + PILATES + FITNESS', 'ok');
+/* ── BOOT ─────────────────────────────────────────────── */
+function boot(){
+  log('ORACLE v7.0.0 FINAL KALİBRASYON BAŞLATILIYOR...');
+  log('HEARTBEAT AKTİF — clockHM/clockS/clockDay/clockDate','ok');
+  log('NADYA TAKVIM v7: PAZ/SALI/PER=OFİS, ÇAR/CUM=EV, PIL=ÇAR+CUM','ok');
+  log('MANUAL OVERRIDE SÜİTİ HAZIR','ok');
 
-  const n  = new Date();
-  const ym = `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`;
-  vault = loadVault(ym);
+  const n=new Date(),ym=`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`;
+  vault=loadVault(ym);renderVault();
 
-  renderVault();
-  renderProjection();
+  const mo=`${MS[n.getMonth()]} ${n.getFullYear()}`;
+  log(`[VAULT] AYLIK BÜTÇE: ${mo}`,'vault');
+  const sal=vault.monthlyIncome||0;
+  if(sal>0){log(`[VAULT] MAAŞ: ${tl(sal)}/ay — SURPLUS MOTORİ AKTİF`,'vault');const sr=netSurp();log(`[VAULT] NET SURPLUS: ${tl(sr)} (${sr>=0?'POZİTİF':'DEFİSİT'})`,sr>=0?'ok':'warn');}
+  else log('[VAULT] BU AY İÇİN MAAŞ VERİSİ YOK. LÜTFEN YAPILANDIRIN.','warn');
 
-  const mo = `${MONTHS_S[n.getMonth()]} ${n.getFullYear()}`;
-  log(`[VAULT] BUDGET PARTITIONED FOR ${mo}`, 'vault');
-  log(`[VAULT] DINING ${(dp()*100).toFixed(0)}% CONSUMED THIS MONTH`, 'vault');
+  const p=calcProj();
+  if(p)log(`[PROJEKSIYON] ${p.mos} AY KALIYOR`,'proj');
+  else log('[PROJEKSIYON] BÜTÇE SEKMESİNDE HEDEFLERİ AYARLAYIN','proj');
 
-  const sal = vault.monthlyIncome || 0;
-  if (sal > 0) {
-    log(`[VAULT] SALARY: ${tl(sal)}/mo — SURPLUS ENGINE ACTIVE`, 'vault');
-    const sr = netSurplus();
-    log(`[VAULT] NET SURPLUS: ${tl(sr)} (${sr>=0?'POSITIVE':'DEFICIT'})`, sr>=0?'ok':'warn');
-  } else {
-    log('[VAULT] NO SALARY DATA FOR THIS MONTH. PLEASE CONFIGURE.', 'warn');
-  }
-
-  const p = calcProjection();
-  if (p) log(`[PROJECTION] ${p.months} MONTHS OF SHIFTS REMAINING`, 'proj');
-  else   log('[PROJECTION] SET GOALS IN BUDGET TAB TO ACTIVATE', 'proj');
-
-  loadEpoch();
-  updateStatus();
-  tickClock();                              /* ← immediate first paint */
-  setInterval(() => tickClock(), 1000);     /* ← heartbeat every 1 second */
-  setInterval(() => updateStatus(), 60000); /* ← status refresh every minute */
-
-  renderReflect();
-  renderSuccessScore();
-  log('[SYSTEM] HEARTBEAT ACTIVE — CLOCK SYNCED', 'ok');
-  log('ALL SYSTEMS NOMINAL', 'ok');
+  loadEpoch();upStatus();
+  tickClock();                              // immediate first paint
+  setInterval(()=>tickClock(),1000);        // ← heartbeat 1000ms
+  setInterval(()=>upStatus(),60000);
+  renderRef();renderVit();renderScr();
+  log('[SYSTEM] HEARTBEAT AKTİF — SAAT SENKRONIZE','ok');
+  log('TÜM SİSTEMLER NORMAL','ok');
 }
 
 boot();
